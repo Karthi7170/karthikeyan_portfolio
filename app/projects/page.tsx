@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       description: "A responsive portfolio website for a professional photographer showcasing their work.",
       image: "/images/port.png",
       tags: ["HTML/CSS", "JavaScript", "GSAP"],
-      demoUrl: "#",
+      demoUrl: "https://karthikeyan-portfolio-six.vercel.app/",
       codeUrl: "#",
     },
     {
