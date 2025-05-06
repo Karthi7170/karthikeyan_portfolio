@@ -36,7 +36,7 @@ export default function ProjectsPage() {
       description: "A comprehensive system for tracking inventory, sales, and generating reports.",
       image: "/images/text.png",
       tags: ["Python", "Streamlit", "NLP", "ML"],
-      demoUrl: "#",
+      demoUrl: "https://textnalyzer.streamlit.app/",
       codeUrl: "#",
     },
     {
