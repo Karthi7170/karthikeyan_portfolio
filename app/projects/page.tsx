@@ -44,7 +44,7 @@ export default function ProjectsPage() {
       description: "Real-time object detection using your device's webcam to identify and highlight objects instantly",
       image: "/images/object.png",
       tags: ["Python", "ML"],
-      demoUrl: "#",
+      demoUrl: "https://object--detection.streamlit.app/",
       codeUrl: "#",
     },
     {
