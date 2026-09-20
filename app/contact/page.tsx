@@ -3,7 +3,7 @@
 import type React from "react"
 import { useRef, useState } from "react"
 import emailjs from "@emailjs/browser"
-import { Mail, MapPin, Phone, Send, Sparkles, TerminalSquare } from "lucide-react"
+import { Mail, MapPin, Phone, Send, Sparkles, SquareTerminal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -80,7 +80,7 @@ export default function ContactPage() {
         <div className="glass-panel rounded-3xl p-6 sm:p-8">
           <div className="mb-7 flex items-center gap-3 border-b border-border/60 pb-5">
             <div className="grid h-10 w-10 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
-              <TerminalSquare className="h-4 w-4" />
+              <SquareTerminal className="h-4 w-4" />
             </div>
             <div>
               <h2 className="font-bold">Project brief</h2>
