@@ -1,16 +1,14 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useRef } from "react"
-import { Mail, MapPin, Phone, Send } from "lucide-react"
+import { useRef, useState } from "react"
+import emailjs from "@emailjs/browser"
+import { Mail, MapPin, Phone, Send, Sparkles, TerminalSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import emailjs from "@emailjs/browser"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -32,7 +30,6 @@ export default function ContactPage() {
     setIsSubmitting(true)
 
     try {
-      // Using EmailJS to send the form
       const result = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_rmrfi9p",
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_z97wyye",
@@ -42,24 +39,18 @@ export default function ContactPage() {
 
       if (result.status === 200) {
         toast({
-          title: "Message sent!",
-          description: "Thank you for your message. I'll get back to you soon.",
+          title: "Message sent",
+          description: "Thanks — I will get back to you soon.",
         })
-
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        })
+        setFormData({ name: "", email: "", subject: "", message: "" })
       } else {
         throw new Error("Failed to send message")
       }
     } catch (error) {
       console.error("Error sending email:", error)
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again later.",
+        title: "Message not sent",
+        description: "Please try again or contact me directly by email.",
         variant: "destructive",
       })
     } finally {
@@ -68,148 +59,114 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="py-16 md:py-24">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Get in Touch</h1>
-            <p className="max-w-[700px] text-muted-foreground md:text-xl">
-              Have a project in mind or want to discuss how I can help you? Send me a message!
-            </p>
-          </div>
-        </div>
+    <div className="relative overflow-hidden">
+      <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[620px]" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+      <section className="container px-4 pb-12 pt-20 text-center md:px-6 md:pb-16 md:pt-28">
+        <div className="eyebrow mb-5">
+          <Sparkles className="h-3.5 w-3.5" />
+          Start a build
+        </div>
+        <h1 className="gradient-text mx-auto max-w-4xl text-5xl font-black tracking-[-0.05em] sm:text-6xl">
+          Send the idea. It does not need to be polished yet.
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+          Tell me what you want to build, what currently exists, or what is not working. I can help turn the rough
+          brief into a clearer digital product direction.
+        </p>
+      </section>
+
+      <section className="container grid gap-6 px-4 pb-20 md:px-6 md:pb-28 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="glass-panel rounded-3xl p-6 sm:p-8">
+          <div className="mb-7 flex items-center gap-3 border-b border-border/60 pb-5">
+            <div className="grid h-10 w-10 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
+              <TerminalSquare className="h-4 w-4" />
+            </div>
+            <div>
+              <h2 className="font-bold">Project brief</h2>
+              <p className="text-xs text-muted-foreground">A few useful details are enough to start.</p>
+            </div>
+          </div>
+
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
+                <Input id="name" name="name" placeholder="Your name" value={formData.name} onChange={handleChange} required className="h-12 rounded-xl bg-background/60" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
+                <Input id="email" name="email" type="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required className="h-12 rounded-xl bg-background/60" />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="Project Inquiry"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="subject">What are we building?</Label>
+              <Input id="subject" name="subject" placeholder="Portfolio, business website, automation, product idea..." value={formData.subject} onChange={handleChange} required className="h-12 rounded-xl bg-background/60" />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Brief</Label>
+              <Textarea id="message" name="message" placeholder="What should it do? Who is it for? Do you have any reference or existing site?" rows={7} value={formData.message} onChange={handleChange} required className="rounded-xl bg-background/60" />
+            </div>
+
+            <Button type="submit" className="h-12 w-full rounded-xl font-semibold" disabled={isSubmitting}>
+              {isSubmitting ? (
+                "Sending..."
+              ) : (
+                <>
+                  Send project brief
+                  <Send className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </form>
+        </div>
+
+        <div className="space-y-5">
+          <div className="tech-card p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Direct contact</p>
+            <div className="mt-6 space-y-5">
+              <a href="mailto:karthifreelancer7170@gmail.com" className="flex items-start gap-4">
+                <Mail className="mt-0.5 h-5 w-5 text-primary" />
+                <div>
+                  <div className="text-sm font-semibold">Email</div>
+                  <div className="mt-1 break-all text-sm text-muted-foreground">karthifreelancer7170@gmail.com</div>
+                </div>
+              </a>
+              <a href="tel:+919944754339" className="flex items-start gap-4">
+                <Phone className="mt-0.5 h-5 w-5 text-primary" />
+                <div>
+                  <div className="text-sm font-semibold">Phone</div>
+                  <div className="mt-1 text-sm text-muted-foreground">+91 99447 54339</div>
+                </div>
+              </a>
+              <div className="flex items-start gap-4">
+                <MapPin className="mt-0.5 h-5 w-5 text-primary" />
+                <div>
+                  <div className="text-sm font-semibold">Working mode</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Remote collaboration available</div>
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project or inquiry..."
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>Sending...</>
-                ) : (
-                  <>
-                    Send Message
-                    <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            </form>
+            </div>
           </div>
-          <div className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <Mail className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <h3 className="font-medium">Email</h3>
-                      <p className="text-muted-foreground">karthifreelancer7170@gmail.com</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <Phone className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <h3 className="font-medium">Phone</h3>
-                      <p className="text-muted-foreground">+91 9944754339</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <h3 className="font-medium">Location</h3>
-                      <p className="text-muted-foreground">Remote - Available Worldwide</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
-            <Card>
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold mb-4">Working Hours</h2>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Closed</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="tech-card p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Good first message</p>
+            <div className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              <p>1. What are you trying to build?</p>
+              <p>2. Who needs to use it?</p>
+              <p>3. Is there an existing website, design, or reference?</p>
+              <p>4. What would make the first version successful?</p>
+            </div>
+          </div>
 
-            <Card>
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold mb-4">FAQ</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium">What is your typical response time?</h3>
-                    <p className="text-muted-foreground">I usually respond to inquiries within 24 hours.</p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium">What is your project process?</h3>
-                    <p className="text-muted-foreground">
-                      I follow a structured approach: consultation, proposal, development, testing, and delivery.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="rounded-2xl border border-primary/20 bg-primary/10 p-5 text-sm leading-7 text-muted-foreground">
+            You do not need to choose the framework, database, or AI tool before contacting me. Those decisions should
+            come after the product need is clear.
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
