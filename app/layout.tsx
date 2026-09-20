@@ -9,9 +9,9 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Portfolio | Freelance Developer",
-  description: "Professional web design, app development, and IT services",
-    generator: 'v0.dev'
+  title: "Karthikeyan | Vibe Coder & AI Product Builder",
+  description:
+    "Karthikeyan builds modern websites, product experiences, and automation systems with AI-assisted engineering, strong UX, and fast execution.",
 }
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
