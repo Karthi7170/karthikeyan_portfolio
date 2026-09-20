@@ -12,7 +12,7 @@ import {
   Layers3,
   Rocket,
   Sparkles,
-  TerminalSquare,
+  SquareTerminal,
   WandSparkles,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -126,7 +126,7 @@ export default function Home() {
               <div className="terminal-line"><span className="terminal-prompt">$</span><span>test responsive behaviour + edge cases</span></div>
               <div className="terminal-line"><span className="terminal-prompt">$</span><span>deploy, observe, refine</span></div>
               <div className="mt-6 flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 font-mono text-xs text-primary">
-                <TerminalSquare className="h-4 w-4" />
+                <SquareTerminal className="h-4 w-4" />
                 status: shipping ideas into reality
               </div>
             </div>
