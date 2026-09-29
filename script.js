@@ -1,46 +1,184 @@
-const menuButton = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('.site-nav');
-const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-const sections = Array.from(document.querySelectorAll('main section[id]'));
+/* AI-MAD Creative Lab — progressive enhancement, no third-party JS. */
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  root.classList.add('js');
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const header = $('.header');
+  const menu = $('.menu-button');
+  const nav = $('#primary-nav');
+  const navLinks = $$('.nav-item');
+  const toast = $('.toast');
+  let toastTimer;
 
-function closeMenu() {
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Open navigation');
-  navigation.classList.remove('is-open');
-}
-menuButton.addEventListener('click', () => {
-  const opening = menuButton.getAttribute('aria-expanded') !== 'true';
-  menuButton.setAttribute('aria-expanded', String(opening));
-  menuButton.setAttribute('aria-label', opening ? 'Close navigation' : 'Open navigation');
-  navigation.classList.toggle('is-open', opening);
-});
-navLinks.forEach(link => link.addEventListener('click', closeMenu));
-document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
-document.addEventListener('click', event => {
-  if (!navigation.contains(event.target) && !menuButton.contains(event.target)) closeMenu();
-});
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    navLinks.forEach(link => {
-      const active = link.getAttribute('href') === '#' + entry.target.id;
-      link.classList.toggle('is-active', active);
-      if (active) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
-    });
+  // Compact mobile menu with proper expanded state.
+  function closeMenu() {
+    menu.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-label', 'Open menu');
+    nav.classList.remove('is-open');
+  }
+  menu.addEventListener('click', () => {
+    const opening = menu.getAttribute('aria-expanded') !== 'true';
+    menu.setAttribute('aria-expanded', String(opening));
+    menu.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
+    nav.classList.toggle('is-open', opening);
   });
-}, { rootMargin: '-25% 0px -60% 0px' });
-sections.forEach(section => sectionObserver.observe(section));
-if ('IntersectionObserver' in window) {
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
+  navLinks.forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target) && !menu.contains(event.target)) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1000) closeMenu();
+  }, { passive: true });
+
+  // Theme switch; light is the visual default, preference is opt-in.
+  const themeButton = $('.theme-toggle');
+  function setTheme(theme) {
+    const dark = theme === 'dark';
+    root.dataset.theme = dark ? 'dark' : 'light';
+    themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    themeButton.setAttribute('title', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    themeButton.querySelector('.theme-glyph').textContent = dark ? '☀' : '◐';
+    $('meta[name="theme-color"]').setAttribute('content', dark ? '#111119' : '#f5f4ee');
+    try { localStorage.setItem('aimad-theme', dark ? 'dark' : 'light'); } catch (_) { /* private browsing */ }
+  }
+  try {
+    if (localStorage.getItem('aimad-theme') === 'dark') setTheme('dark');
+  } catch (_) { /* private browsing */ }
+  themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+  // Scroll progress and active section links, throttled with rAF.
+  let scrollTicking = false;
+  function updateScroll() {
+    scrollTicking = false;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    $('.scroll-progress').style.width = Math.min(100, Math.max(0, 100 * window.scrollY / max)) + '%';
+    header.classList.toggle('is-scrolled', window.scrollY > 20);
+  }
+  function onScroll() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    window.requestAnimationFrame(updateScroll);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateScroll();
+
+  const sections = $$('main section[id]');
+  if ('IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          const active = link.getAttribute('href') === '#' + entry.target.id;
+          link.classList.toggle('is-current', active);
+          if (active) link.setAttribute('aria-current', 'page');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-22% 0px -64% 0px' });
+    sections.forEach(section => sectionObserver.observe(section));
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -35px 0px', threshold: 0.05 });
+    $$('.reveal').forEach(el => revealObserver.observe(el));
+  } else {
+    $$('.reveal').forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Filter the real project links without replacing them or changing URLs.
+  const filterButtons = $$('.filter-button');
+  const projectCards = $$('.project');
+  filterButtons.forEach(button => button.addEventListener('click', () => {
+    const category = button.dataset.filter;
+    filterButtons.forEach(item => {
+      const active = item === button;
+      item.classList.toggle('is-selected', active);
+      item.setAttribute('aria-pressed', String(active));
     });
-  }, { threshold: .12 });
-  document.querySelectorAll('.reveal').forEach(item => revealObserver.observe(item));
-} else {
-  document.querySelectorAll('.reveal').forEach(item => item.classList.add('is-visible'));
-}
-document.getElementById('year').textContent = new Date().getFullYear();
+    projectCards.forEach(card => {
+      card.hidden = category !== 'all' && card.dataset.category !== category;
+    });
+  }));
+
+  // Native <dialog> quick navigation, keyboard shortcut and click-away close.
+  const commandDialog = $('.command-dialog');
+  const commandTrigger = $('.command-trigger');
+  const commandClose = $('.command-close');
+  function openCommand() {
+    closeMenu();
+    if (!commandDialog.open && typeof commandDialog.showModal === 'function') commandDialog.showModal();
+    else if (commandDialog.open) commandDialog.close();
+  }
+  commandTrigger.addEventListener('click', openCommand);
+  commandClose.addEventListener('click', () => commandDialog.close());
+  $$('.command-dialog nav a').forEach(link => link.addEventListener('click', () => commandDialog.close()));
+  commandDialog.addEventListener('click', event => {
+    const rect = commandDialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) commandDialog.close();
+  });
+  document.addEventListener('keydown', event => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      openCommand();
+    }
+  });
+
+  // Small confirmation shown only after a successful copy.
+  function notify(message) {
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2500);
+  }
+  const copyButton = $('.email-copy');
+  copyButton.addEventListener('click', async () => {
+    const email = copyButton.dataset.copyEmail;
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+        copied = true;
+      } else {
+        const input = document.createElement('textarea');
+        input.value = email;
+        input.style.position = 'fixed';
+        input.style.opacity = '0';
+        document.body.appendChild(input);
+        input.select();
+        copied = document.execCommand('copy');
+        input.remove();
+      }
+    } catch (_) { /* browser or user may deny clipboard */ }
+    notify(copied ? 'EMAIL COPIED — LET’S CREATE ✳' : 'SELECT THE EMAIL TO COPY IT');
+  });
+
+  // Gentle depth and interactive lighting only for precise pointers.
+  const portrait = $('[data-tilt]');
+  const pointerGlow = $('.pointer-glow');
+  if (finePointer.matches && !reduceMotion.matches) {
+    portrait.addEventListener('pointermove', event => {
+      const bounds = portrait.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - .5;
+      const y = (event.clientY - bounds.top) / bounds.height - .5;
+      portrait.style.transform = 'rotate(5deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg)';
+    });
+    portrait.addEventListener('pointerleave', () => portrait.style.removeProperty('transform'));
+    window.addEventListener('pointermove', event => {
+      pointerGlow.style.transform = 'translate3d(' + (event.clientX - 115) + 'px,' + (event.clientY - 115) + 'px,0)';
+    }, { passive: true });
+  }
+
+  $('#year').textContent = String(new Date().getFullYear());
+})();
