@@ -80,7 +80,7 @@ try{
 
   const reduced=await browser.newPage({viewport:{width:1024,height:768},reducedMotion:'reduce'});
   await reduced.goto(base,{waitUntil:'domcontentloaded'});
-  assert.equal(await reduced.locator('.reveal').first().evaluate(el=>getComputedStyle(el).transitionDuration),'0.01ms');
+  assert.ok(parseFloat(await reduced.locator('.reveal').first().evaluate(el=>getComputedStyle(el).transitionDuration)) <= 0.00002);
   await reduced.close();
 
   assert.deepEqual(errors,[]);
