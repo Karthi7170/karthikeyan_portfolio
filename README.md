@@ -1,26 +1,58 @@
-# Karthikeyan K — Creative Developer
+# Karthikeyan K — AI-MAD Creative Lab
 
-A cinematic, mobile-first personal portfolio for **Karthikeyan K** — vibe coder, web developer, and app developer.
+A custom, expressive portfolio for **Karthikeyan K**, a vibe coder, web developer, app developer and AI creative. Built as an editorial website with an asymmetric portrait hero, an interactive project gallery and a warm-paper / electric-violet design system.
 
-## What's inside
+## Run locally
 
-- Oversized editorial hero with a cinematic version of the supplied portrait.
-- Home, Service, Project and Contact sections with working anchor navigation.
-- Responsive layout, mobile menu, subtle scroll reveals and reduced-motion support.
-- Lightweight static HTML, CSS and JavaScript. No framework or build dependencies.
+Open \`index.html\` directly in a modern browser, or serve this folder with a local static server:
 
-## Preview locally
+\`\`\`sh
+python -m http.server 8000
+\`\`\`
 
-Open `index.html` in a browser, or run any static web server in the repository root (for example, `python -m http.server 8000`).
+Open http://localhost:8000.
 
-## Deploy
+No build step, API key, data collection or third-party JavaScript library is required. Google Fonts are optional; local system-font fallbacks are provided.
 
-Import this repository into Vercel as an **Other** framework project. The project is static: no build command is needed; publish the repository root. It can also be published with GitHub Pages.
+## Sections
 
-## Update your details
+- Home: custom hero, original portfolio portrait and creative collage
+- About: introduction to Karthikeyan and AI-MAD Studio
+- Services: web development, app development and AI-assisted creative work
+- Projects: real projects with interactive website/app filtering
+- Process: talk, create, launch
+- Contact: email link, copy-email action and GitHub profile
 
-- `index.html`: copy, project names and contact email.
-- `assets/portrait.webp`: optimized portrait.
-- `styles.css`: visual design and responsive styles.
+### Real project destinations
 
-This portfolio currently presents three named projects, without claiming unverified metrics or supplying invented live URLs. Add validated project demo links when ready.
+- [New Royal Tiles](https://royaltiles.vercel.app/)
+- [Sugumar Portfolio](https://sugumar-portfolio-beta.vercel.app/)
+- [VIP-Hunter](https://vip-hunter.vercel.app/)
+- [Deccan Matriculation School](https://www.deccanmatric.in/)
+
+These URLs are editable in \`index.html\`. Confirm live deployment availability before sharing the page with a client.
+
+## Interactions
+
+- Sticky navigation with active section indicator and mobile menu
+- Light/dark toggle with stored preference (when permitted by browser)
+- Press **Ctrl+K** or **⌘K** for quick navigation
+- Filter projects: All / Websites / Apps
+- Scroll progress indicator and intersection-based reveals
+- Tilt portrait and gentle pointer lighting on precise-pointer devices
+- Accessible copy-email control with success/error feedback
+- Reduced-motion support and graceful static content with JavaScript disabled
+
+## Files
+
+\`\`\`
+index.html               Semantic content and visual mockups
+styles.css               Tokens, design system, motion and responsive layout
+script.js                Progressive enhancement and interactive features
+assets/portrait.webp     Original edited portrait; retained from prior design
+assets/mark.svg          Custom AI-MAD monogram/favicon
+\`\`\`
+
+## Publish
+
+Import the repository into Vercel as a static/"Other" project with the **repository root** as the output directory and no build command, or publish it with GitHub Pages. Committing code to GitHub does not itself guarantee a deployment.
