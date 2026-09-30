@@ -1278,3 +1278,33 @@ a:focus-visible,button:focus-visible{
   .robot-orbit,.robot-float-badge,.studio-live-dot{animation:none!important}
   .robot-figure{transition:none;will-change:auto}
 }
+
+
+/* Ultra-high-resolution layout: a vector illustration rather than upscaled media. */
+@media(min-width:1900px){
+  .hero--studio{min-height:calc(100svh - 82px)}
+  .studio-hero-inner{
+    max-width:2260px;min-height:calc(100svh - 155px);
+    gap:clamp(70px,5vw,170px);
+    padding-top:clamp(80px,6vh,155px);
+    padding-bottom:clamp(80px,6vh,155px);
+  }
+  .studio-hero-edge{max-width:2260px}
+  .studio-eyebrow{font-size:12px;margin-bottom:65px}
+  .headline-pre{font-size:clamp(86px,4.8vw,130px)}
+  .headline-brand{font-size:clamp(145px,7.3vw,230px)}
+  .studio-hero-lede{max-width:720px;font-size:clamp(30px,1.75vw,48px);margin-top:58px}
+  .studio-hero-desc{font-size:clamp(16px,1vw,21px);max-width:710px}
+  .studio-button{min-height:62px;padding-inline:26px;font-size:15px;gap:36px}
+  .studio-hero-bottom{max-width:745px;margin-top:95px}
+  .studio-hero-services span,.studio-scroll-link{font-size:12px}
+  .robot-stage{max-width:1100px;height:clamp(790px,43vw,1250px)}
+  .robot-svg{width:100%;max-height:1250px}
+  .robot-data{font-size:12px}
+  .robot-float-badge{padding:19px 24px;font-size:13px}
+  .robot-float-badge small{font-size:12px}
+  .badge-cube{width:50px;height:50px;font-size:33px}
+  .hero--studio .hero-ring{width:min(75vw,1400px)}
+  .hero--studio .hero-ring-two{width:min(55vw,1050px)}
+  .hero--studio .hero-lens{width:min(62vw,1100px)}
+}
