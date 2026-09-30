@@ -1,10 +1,16 @@
-# KARTHIKEYAN — AI X MAD
+# AI X MAD — Creative Technology Studio
 
-A professional, black-and-blue portfolio for Karthikeyan K, vibe coder, web developer and app developer. **AI X MAD** is the studio name.
+A high-fidelity, mobile-first business website for **AI X MAD**, a creative technology studio founded by Karthikeyan K. The studio offers website development, app development and AI-assisted creative work.
 
-The first screen is intentionally typography-only: the name **KARTHIKEYAN** and the exact subtitle **Vibe coder - web developer - App developer**. The previous portrait image is retained in the repository but is not displayed in the homepage.
+## Creative direction
 
-Visual design: Manrope headline typography, Inter interface and body text, midnight-black and deep-blue gradients, volumetric blue lighting, a subtle motion-aware lens and light field, cinematic typography, responsive case-study cards and accessible transitions.
+The homepage introduces the **AI X MAD** brand first, with an original futuristic robot rendered entirely as **inline SVG** and CSS. Its gradients, optical lighting, 3D-style pose, orbit layers and responsive composition remain sharp on retina and 4K displays—without loading a large video, 3D engine, paid plugin or image asset. Motion is subtle, respects reduced-motion preferences, and pointer-based robot tilt is limited to devices with precise pointers.
+
+- Palette: midnight blue, deep black, frosted steel and electric blue.
+- Typography: Space Grotesk for headlines, Plus Jakarta Sans for interface/body copy, and IBM Plex Mono for technical labels.
+- The main calls to action navigate to the real project gallery and contact form.
+- The existing founder introduction, three service categories, four portfolio projects, development process and WhatsApp contact features remain.
+- No founder photograph appears in the hero.
 
 ## Run locally
 
@@ -20,7 +26,7 @@ No build step, API key, data collection or third-party JavaScript library is req
 
 ## Sections
 
-- Home: typography-only KARTHIKEYAN hero with cinematic volumetric blue lighting, lens geometry and motion-aware effects
+- Home: AI X MAD studio introduction, original SVG robot, cinematic lighting, motion-aware 3D-style interaction and clear project/contact CTAs
 - About: introduction to Karthikeyan and AI X MAD
 - Services: web development, app development and AI-assisted creative work
 - Projects: real projects with interactive website/app filtering
@@ -43,9 +49,9 @@ These URLs are editable in `index.html`. Confirm live deployment availability be
 - Press **Ctrl+K** or **⌘K** for quick navigation
 - Filter projects: All / Websites / Apps
 - Scroll progress indicator and intersection-based reveals
-- Interactive hero lighting on precise-pointer devices (no portrait on the homepage)
+- Interactive hero lighting and robot tilt on precise-pointer devices (no portrait on the homepage)
 - Accessible copy-email control with success/error feedback
-- Dismissible WhatsApp chat preview (desktop initially open, mobile initially collapsed)
+- Dismissible WhatsApp chat preview (initially collapsed on all screens for a non-intrusive experience)
 - Reduced-motion support and graceful static content with JavaScript disabled
 
 ## Files
@@ -62,9 +68,9 @@ assets/mark.svg          Custom AI X MAD monogram/favicon
 
 Import the repository into Vercel as a static/"Other" project with the **repository root** as the output directory and no build command, or publish it with GitHub Pages. Committing code to GitHub does not itself guarantee a deployment.
 
-## 2026 visual refresh
+## Studio refresh
 
-All original About, Services, Projects, Process and Contact content and the original project URLs are preserved. The first screen contains no image. Project mockups are stylized in blue while remaining navigable to the real project destinations.
+All original About, Services, Projects, Process and Contact content and the original project URLs are preserved. The first screen has an original scalable vector robot instead of the founder's photograph. Project mockups remain styled in blue and link to the existing project destinations.
 
 Keep `tests/smoke.mjs` and `tests/browser.mjs` passing before merging changes.
 
@@ -72,4 +78,8 @@ Keep `tests/smoke.mjs` and `tests/browser.mjs` passing before merging changes.
 
 The phone number is **+91 99447 54339** (WhatsApp international format: `919944754339`). The contact form collects visitor name, optional email, project type and message. When a visitor submits it, the browser opens `wa.me` with a prefilled WhatsApp message; the visitor reviews it and presses **Send** in WhatsApp. **The website does not send the message itself or store submissions on a server.** Without JavaScript, the form still opens WhatsApp with the visitor's message through its regular GET action. The floating WhatsApp prompt can be dismissed and reopened, with an accessible keyboard-operated launcher; it never sends unsolicited messages.
 
-The hero and chat widget respect `prefers-reduced-motion`. On small screens the WhatsApp prompt starts collapsed to avoid blocking the homepage content.
+The hero and chat widget respect `prefers-reduced-motion`. On all screen sizes the WhatsApp prompt starts collapsed to avoid blocking the homepage artwork or content.
+
+## Quality checks
+
+The GitHub Actions workflow validates the JavaScript and runs static assertions plus headless Chromium checks at desktop, mobile and 3840 × 2160 UHD viewport sizes. The suite also checks reduced-motion behavior, interactive project filtering, WhatsApp message handoff and the dismissible contact widget. Browser screenshots are uploaded as a workflow artifact for visual review. These checks do not mean the site was opened in the owner's local Chrome profile.
