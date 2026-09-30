@@ -72,3 +72,39 @@ test('Contact actions remain real links, no invented placeholders', () => {
   assert.ok(!html.includes('href="#"'));
   assert.ok(!html.includes('example.com'));
 });
+
+test('WhatsApp project inquiry has accessible fields and a real fallback action', () => {
+  assert.match(html, /<form id="contact-form"[\s\S]*?action="https:\/\/api\.whatsapp\.com\/send"/);
+  assert.match(html, /name="phone" value="919944754339"/);
+  assert.match(html, /id="contact-name"[^>]*required/);
+  assert.match(html, /id="contact-email"[^>]*type="email"/);
+  assert.match(html, /id="contact-project"[^>]*name="project_type"/);
+  assert.match(html, /id="contact-message"[^>]*name="text"[^>]*required/);
+  assert.match(html, /id="contact-form-help"/);
+  assert.match(js, /encodeURIComponent\(lines\.join\('\\n'\)\)/);
+  assert.match(js, /'https:\/\/wa\.me\/919944754339\?text='/);
+});
+
+test('WhatsApp prompt is dismissible, keyboard accessible, and does not send on load', () => {
+  assert.match(html, /class="whatsapp-widget is-open"/);
+  assert.match(html, /class="wa-panel" id="wa-panel"/);
+  assert.match(html, /aria-label="Dismiss WhatsApp pop-up"/);
+  assert.match(html, /aria-controls="wa-panel"/);
+  assert.match(html, /href="https:\/\/wa\.me\/919944754339"/);
+  assert.match(js, /whatsappPanel\.hidden = !open/);
+  assert.match(js, /whatsappLauncher\.addEventListener\('click'/);
+  assert.match(js, /event\.code === 'Space'/);
+  assert.doesNotMatch(js, /fetch\(['"]https:\/\/wa\.me/);
+});
+
+test('Cinematic hero uses decorative layers with no portrait or additional headline', () => {
+  const hero = html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0] ?? '';
+  assert.match(hero, /class="hero-lightfield"/);
+  assert.match(hero, /class="hero-lens"/);
+  assert.match(hero, /class="hero-floor"/);
+  assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
+  assert.equal((hero.match(/<p\b/g) ?? []).length, 1);
+  assert.doesNotMatch(hero, /<img\b/);
+  assert.match(css, /@keyframes lightfieldFloat/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+});
