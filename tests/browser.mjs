@@ -11,10 +11,12 @@ try {
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
   await desktop.goto(base, { waitUntil: 'domcontentloaded' });
   await desktop.waitForSelector('#hero-heading');
-  assert.equal(await desktop.title(), 'Karthikeyan — Vibe coder, Web developer & App developer | AI X MAD');
-  assert.equal(await desktop.locator('#hero-heading').innerText(), 'KARTHIKEYAN');
-  assert.equal(await desktop.locator('.hero-roles').innerText(), 'Vibe coder - web developer - App developer');
-  assert.equal(await desktop.locator('.hero img').count(), 0, 'Homepage must contain no portrait');
+  assert.equal(await desktop.title(), 'AI X MAD — Web, App & AI Creative Studio');
+  assert.match(await desktop.locator('#hero-heading').innerText(), /Ideas, meet/);
+  assert.match(await desktop.locator('#hero-heading').innerText(), /MAD/);
+  assert.equal(await desktop.locator('.hero img').count(), 0, 'Homepage must contain no founder portrait');
+  assert.equal(await desktop.locator('.robot-svg').count(), 1, 'Scalable original robot must render');
+  assert.ok((await desktop.locator('.robot-svg').boundingBox()).width > 300, 'Robot is visible on desktop');
   assert.match(await desktop.locator('.logo').innerText(), /AI X MAD/);
   assert.equal(await desktop.locator('.project:not([hidden])').count(), 4);
   await desktop.locator('[data-filter="app"]').click();
@@ -31,13 +33,15 @@ try {
   assert.equal(await desktop.locator('.command-dialog').evaluate(el => el.open), true, 'Command palette opens');
   await desktop.keyboard.press('Escape');
   assert.equal(await desktop.locator('.command-dialog').evaluate(el => el.open), false, 'Palette closes on Escape');
-  assert.equal(await desktop.locator('#wa-panel').isVisible(), true, 'Desktop WhatsApp pop-up starts visible');
+  assert.equal(await desktop.locator('#wa-panel').isVisible(), false, 'Non-intrusive desktop WhatsApp prompt starts collapsed');
+  await desktop.locator('.wa-launcher').click();
+  assert.equal(await desktop.locator('#wa-panel').isVisible(), true, 'WhatsApp prompt opens on demand');
   await desktop.locator('.wa-close').click();
   assert.equal(await desktop.locator('#wa-panel').isVisible(), false, 'WhatsApp pop-up dismisses');
   await desktop.locator('.wa-launcher').click();
   assert.equal(await desktop.locator('#wa-panel').isVisible(), true, 'WhatsApp pop-up reopens');
   await desktop.locator('.wa-close').click();
-  assert.equal(await desktop.locator('.wa-chat-link').getAttribute('href'), 'https://wa.me/919944754339?text=Hi%20Karthikeyan%2C%20I%20want%20to%20discuss%20a%20project.');
+  assert.equal(await desktop.locator('.wa-chat-link').getAttribute('href'), 'https://wa.me/919944754339?text=Hi%20AI%20X%20MAD%2C%20I%20want%20to%20discuss%20a%20project.');
 
   // Native validity prevents an empty message from navigating away.
   await desktop.locator('.form-submit').click();
@@ -64,7 +68,6 @@ try {
   assert.ok(message.includes('Alex Example') && message.includes('alex@example.com'));
   assert.ok(message.includes('Website development') && message.includes('I need a modern responsive website'));
   await desktop.locator('#contact-form').evaluate(form => form.reset());
-  await desktop.locator('.wa-launcher').click();
   console.log('Contact form WhatsApp message and dismissible chat pop-up: PASS');
   await desktop.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await desktop.waitForTimeout(850);
@@ -77,12 +80,13 @@ try {
   const desktopOverflow = await desktop.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
   if (desktopOverflow) console.log('DESKTOP OVERFLOW ELEMENTS:', await desktop.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(desktopOverflow, false, 'Desktop must not overflow horizontally');
-  console.log('Desktop name-only hero, filters, theme persistence, keyboard palette and layout: PASS');
+  console.log('Desktop AI X MAD robot hero, filters, theme persistence, keyboard palette and layout: PASS');
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', err => errors.push('mobile: ' + err.message));
   await mobile.goto(base, { waitUntil: 'domcontentloaded' });
-  assert.equal(await mobile.locator('#hero-heading').innerText(), 'KARTHIKEYAN');
+  assert.match(await mobile.locator('#hero-heading').innerText(), /AI/);
+  assert.equal(await mobile.locator('.robot-svg').count(), 1, 'Mobile robot SVG is present');
   assert.equal(await mobile.locator('.hero img').count(), 0);
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'false');
   await mobile.locator('.menu-button').click();
@@ -105,13 +109,27 @@ try {
   const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
   if (mobileOverflow) console.log('MOBILE OVERFLOW ELEMENTS:', await mobile.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(mobileOverflow, false, 'Mobile must not overflow horizontally');
-  console.log('Mobile name-only hero, menu, anchors and layout at 390px: PASS');
+  console.log('Mobile AI X MAD business hero, menu, anchors and layout at 390px: PASS');
 
   await mobile.setViewportSize({ width: 320, height: 760 });
   await mobile.waitForTimeout(100);
   const smallOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
   assert.equal(smallOverflow, false, 'Small mobile must not overflow horizontally');
   console.log('Small mobile width 320px: PASS');
+  const uhd = await browser.newPage({ viewport: { width: 3840, height: 2160 }, deviceScaleFactor: 1 });
+  uhd.on('pageerror', err => errors.push('4k: ' + err.message));
+  await uhd.goto(base, { waitUntil: 'domcontentloaded' });
+  await uhd.evaluate(async () => { await document.fonts.ready; });
+  assert.ok((await uhd.locator('.robot-svg').boundingBox()).width > 650, 'Robot vector must scale to UHD');
+  assert.equal(await uhd.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2), false, 'UHD layout has no horizontal overflow');
+  await uhd.screenshot({ path: 'artifacts/4k-hero.png', animations: 'disabled' });
+  console.log('4K 3840x2160 responsive vector hero: PASS');
+
+  const reduced = await browser.newPage({ viewport: { width: 1024, height: 768 }, reducedMotion: 'reduce' });
+  await reduced.goto(base, { waitUntil: 'domcontentloaded' });
+  assert.equal(await reduced.locator('.robot-svg').evaluate(el => getComputedStyle(el).animationName), 'none');
+  await reduced.close();
+  console.log('Reduced-motion robot animation fallback: PASS');
   assert.deepEqual(errors, [], 'No uncaught page errors');
   console.log('Browser smoke suite: ALL PASSED');
 } finally {
