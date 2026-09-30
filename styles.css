@@ -571,9 +571,8 @@ body{
 .service-card:nth-child(2) .tool-cube:hover{border-color:#8e73ff;box-shadow:11px 13px 0 #030610,-1px -1px 0 #5d4bb8}
 .service-card:nth-child(3) .tool-cube:hover{border-color:#ed74ff;box-shadow:11px 13px 0 #030610,-1px -1px 0 #9b4fa8}
 .tool-cube img{
-  filter:none;
+  filter:drop-shadow(0 6px 16px rgba(73,126,255,.18));
   transform:translateZ(18px);
-  drop-shadow:0 6px 16px rgba(73,126,255,.18);
 }
 .tool-cube span{color:#dce7fa}
 
