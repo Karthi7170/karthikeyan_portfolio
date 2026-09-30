@@ -46,7 +46,9 @@
     });
   });
 
+  const usesAnchorNav = navLinks.some(link => (link.getAttribute("href") || "").startsWith("#"));
   function updateActiveNav(){
+    if(!usesAnchorNav) return;
     const marker = window.scrollY + 150;
     let active = "home";
     for(const section of sections){
@@ -61,9 +63,11 @@
     });
   }
 
-  window.addEventListener("scroll", updateActiveNav, {passive:true});
-  window.addEventListener("resize", updateActiveNav, {passive:true});
-  updateActiveNav();
+  if(usesAnchorNav){
+    window.addEventListener("scroll", updateActiveNav, {passive:true});
+    window.addEventListener("resize", updateActiveNav, {passive:true});
+    updateActiveNav();
+  }
 
   if("IntersectionObserver" in window){
     const observer = new IntersectionObserver(entries => {
