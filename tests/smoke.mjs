@@ -100,11 +100,16 @@ test('Project cards use thumbnails sourced from their original live sites',()=>{
   assert.match(css,/\.site-thumbnail img/);
 });
 
-test('Obsidian monochrome theme and WhatsApp icon are present',()=>{
+test('Colorful AI x MAD spectrum theme and WhatsApp icon are present',()=>{
   assert.match(html,/Space\+Grotesk/);
   assert.match(html,/IBM\+Plex\+Mono/);
-  assert.match(css,/AI x MAD — Obsidian \/ Chalk editorial system/);
-  assert.match(css,/--bg:#050505/);
-  assert.match(css,/filter:grayscale\(1\)/);
+  assert.match(html,/theme-color" content="#050712"/);
+  assert.match(css,/AI x MAD — Spectrum Studio theme/);
+  for(const value of ['#050712','#4d7cff','#36d8ff','#8b5cff','#ec5cff','#ffb86b']) assert.ok(css.includes(value),value);
+  assert.match(css,/background:linear-gradient\(90deg,#36d8ff 0%,#4d7cff 36%,#8b5cff 67%,#ec5cff 100%\)/);
+  assert.match(css,/\.site-thumbnail img\{[\s\S]*?filter:saturate\(1\.08\)/);
+  assert.match(css,/\.service-card:nth-child\(1\)/);
+  assert.match(css,/\.service-card:nth-child\(2\)/);
+  assert.match(css,/\.service-card:nth-child\(3\)/);
   assert.match(html,/aria-label="Open WhatsApp chat preview">[\s\S]*?<svg/);
 });
