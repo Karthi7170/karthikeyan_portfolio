@@ -19,7 +19,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--text);
   background:
     radial-gradient(900px 460px at 58% 3%,rgba(18,93,255,.12),transparent 68%),
@@ -63,7 +63,7 @@ button{cursor:pointer}
   border-bottom:1px solid rgba(61,160,255,.18);
 }
 .brand{display:inline-flex;flex-direction:column;gap:2px;white-space:nowrap}
-.brand-line{font:700 18px/1 "Space Grotesk",sans-serif;letter-spacing:.01em}
+.brand-line{font:700 18px/1 "Manrope",sans-serif;letter-spacing:.01em}
 .brand-line strong{color:var(--cyan)}
 .brand-line span{color:#c6d3ff;margin:0 4px}
 .brand-line b{color:#8e74ff}
@@ -103,7 +103,7 @@ button{cursor:pointer}
 .section-heading.center{text-align:center}
 .section-heading h2{
   margin:8px 0 8px;
-  font:700 clamp(34px,4vw,54px)/1.02 "Space Grotesk",sans-serif;
+  font:700 clamp(34px,4vw,54px)/1.02 "Manrope",sans-serif;
   letter-spacing:-.04em
 }
 .section-heading h2 span,.hero h1 span,.about h2 span,.idea-card h3 span,.custom-strip h3 span{color:#43b7ff}
@@ -168,7 +168,7 @@ button{cursor:pointer}
 .hero h1{
   margin:20px 0 14px;
   max-width:720px;
-  font:800 clamp(43px,5.8vw,78px)/.96 "Space Grotesk",sans-serif;
+  font:800 clamp(43px,5.8vw,78px)/.96 "Manrope",sans-serif;
   letter-spacing:-.055em;
   text-wrap:balance
 }
@@ -206,7 +206,7 @@ button{cursor:pointer}
   border-right:1px solid rgba(255,255,255,.12)
 }
 .stats div:last-child,.about-stats div:last-child{border-right:0}
-.stats strong,.about-stats strong{font:700 21px/1 "Space Grotesk",sans-serif}
+.stats strong,.about-stats strong{font:700 21px/1 "Manrope",sans-serif}
 .stats span,.about-stats span{color:#bac7db;font-size:10px}
 
 /* Services */
@@ -240,7 +240,7 @@ button{cursor:pointer}
 .icon-box.cyan{color:#38d7ff;text-shadow:0 0 16px #38d7ff}
 .icon-box.blue{color:#57a8ff}
 .icon-box.purple{color:#a566ff}
-.service-card h3{margin:0 0 10px;font:700 15px/1.18 "Space Grotesk",sans-serif}
+.service-card h3{margin:0 0 10px;font:700 15px/1.18 "Manrope",sans-serif}
 .service-card p{margin:0;color:#aab9cf;font-size:10px;line-height:1.55}
 .service-card>a{
   width:31px;height:31px;border-radius:50%;display:grid;place-items:center;margin-top:auto;
@@ -278,7 +278,7 @@ button{cursor:pointer}
   left:-8%;right:-8%;top:14px;height:70px;border-top:1px solid rgba(81,105,255,.56);border-radius:50%
 }
 .custom-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:28px}
-.custom-strip h3{margin:0;font:700 clamp(21px,2.3vw,30px)/1.15 "Space Grotesk",sans-serif}
+.custom-strip h3{margin:0;font:700 clamp(21px,2.3vw,30px)/1.15 "Manrope",sans-serif}
 .custom-strip p{margin:10px 0 0;color:#9db0ca;font-size:10px;word-spacing:10px}
 .custom-strip p span{color:#57bfff;word-spacing:normal}
 
@@ -303,7 +303,7 @@ button{cursor:pointer}
   border:1px solid rgba(47,124,215,.34);border-radius:14px;padding:22px;
   background:linear-gradient(180deg,rgba(8,24,46,.9),rgba(5,15,30,.92))
 }
-.why-card h3,.idea-card h3{margin:0 0 14px;font:700 17px/1.15 "Space Grotesk",sans-serif}
+.why-card h3,.idea-card h3{margin:0 0 14px;font:700 17px/1.15 "Manrope",sans-serif}
 .why-card ul,.skills-card ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .why-card li,.skills-card li{font-size:10px;color:#c6d2e4}
 .why-card li::before,.skills-card li::before{content:"✓";color:#62c8ff;margin-right:9px}
@@ -329,7 +329,7 @@ button{cursor:pointer}
   background:linear-gradient(115deg,rgba(4,16,31,.98),rgba(8,24,47,.93))
 }
 .about-copy{padding:40px 24px 36px 38px;display:flex;flex-direction:column;justify-content:center}
-.about-copy h2{margin:12px 0 6px;font:700 clamp(34px,4.3vw,58px)/.98 "Space Grotesk",sans-serif;letter-spacing:-.04em}
+.about-copy h2{margin:12px 0 6px;font:700 clamp(34px,4.3vw,58px)/.98 "Manrope",sans-serif;letter-spacing:-.04em}
 .about-copy h3{margin:0 0 15px;font-size:14px}
 .about-copy p{max-width:560px;margin:0;color:#afbdd0;font-size:12px;line-height:1.65}
 .about-photo{position:relative;min-height:410px;overflow:hidden;background:#04101e}
@@ -339,38 +339,23 @@ button{cursor:pointer}
 .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:saturate(.82) contrast(1.1) brightness(.8)}
 .photo-signature{
   position:absolute;z-index:2;left:38px;bottom:58px;
-  font:500 24px/1 "Space Grotesk",sans-serif;font-style:italic;transform:rotate(-9deg);color:#eef5ff
+  font:500 24px/1 "Manrope",sans-serif;font-style:italic;transform:rotate(-9deg);color:#eef5ff
 }
 .mini-brand{
   position:absolute;right:20px;bottom:24px;z-index:2;
   padding:10px 12px;border-radius:10px;border:1px solid rgba(68,148,239,.38);
-  background:rgba(2,13,28,.75);font:700 16px/1 "Space Grotesk",sans-serif;color:#51cfff
+  background:rgba(2,13,28,.75);font:700 16px/1 "Manrope",sans-serif;color:#51cfff
 }
-.mini-brand small{display:block;font:600 6px/1.4 Inter,sans-serif;letter-spacing:.18em;color:#a8b5ca;margin-top:4px}
+.mini-brand small{display:block;font:600 6px/1.4 "Manrope",sans-serif;letter-spacing:.18em;color:#a8b5ca;margin-top:4px}
 .about-stats{
   position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);
   padding:22px 0;border-bottom:1px solid rgba(255,255,255,.08)
 }
 .journey-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:28px}
 .journey{padding:22px 4px}
-.journey h3{font:700 22px/1.1 "Space Grotesk",sans-serif;margin:0 0 10px}
+.journey h3{font:700 22px/1.1 "Manrope",sans-serif;margin:0 0 10px}
 .journey p{max-width:700px;color:#afbdd0;font-size:11px;line-height:1.65;margin:0 0 16px}
 .skills-card{padding:22px;border:1px solid rgba(53,130,222,.3);border-radius:14px;background:rgba(6,19,37,.72)}
-
-/* Testimonials */
-.testimonials{
-  padding:88px 0;
-  background:linear-gradient(180deg,rgba(5,16,31,.68),rgba(2,7,19,.15));
-  border-block:1px solid rgba(67,140,224,.12)
-}
-.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.testimonial{
-  min-height:185px;padding:22px;border:1px solid rgba(62,139,229,.28);border-radius:14px;
-  background:linear-gradient(180deg,rgba(9,24,46,.9),rgba(5,14,29,.95))
-}
-.testimonial>span{display:block;font:700 34px/1 Georgia,serif;color:#5dcfff}
-.testimonial p{color:#b4c1d3;font-size:11px;line-height:1.65}
-.testimonial b{font-size:10px;color:#e2ebf8}
 
 /* Contact */
 .contact{padding:86px 0 28px;overflow:hidden}
@@ -397,7 +382,7 @@ button{cursor:pointer}
   background:linear-gradient(180deg,rgba(8,25,48,.92),rgba(4,14,28,.94));
   box-shadow:0 18px 60px rgba(0,0,0,.16)
 }
-.contact-form h3,.contact-info h3{margin:0 0 14px;font:700 16px/1 "Space Grotesk",sans-serif}
+.contact-form h3,.contact-info h3{margin:0 0 14px;font:700 16px/1 "Manrope",sans-serif}
 .contact-form{display:grid;gap:9px}
 .contact-form input,.contact-form select,.contact-form textarea{
   width:100%;border:1px solid rgba(71,132,207,.28);border-radius:5px;
@@ -474,7 +459,7 @@ button{cursor:pointer}
   .hero-actions{justify-content:center}
   .hero-art{min-height:300px}
   .stats{margin-top:10px}
-  .project-grid,.testimonial-grid{grid-template-columns:1fr}
+  .project-grid{grid-template-columns:1fr}
   .process-row{grid-template-columns:repeat(3,1fr)}
   .process-step:nth-child(3)>b{display:none}
   .why-grid,.about-hero,.journey-grid,.contact-grid{grid-template-columns:1fr}
@@ -496,7 +481,7 @@ button{cursor:pointer}
   .stats,.about-stats{grid-template-columns:repeat(2,1fr);gap:16px}
   .stats div:nth-child(2),.about-stats div:nth-child(2){border-right:0}
   .stats div:nth-child(-n+2),.about-stats div:nth-child(-n+2){padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}
-  .services,.process,.about,.testimonials,.contact{padding-top:72px;padding-bottom:72px}
+  .services,.process,.about,.contact{padding-top:72px;padding-bottom:72px}
   .service-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .service-card{min-height:275px;padding:22px 12px 15px}
   .project-grid{gap:12px}
@@ -524,4 +509,166 @@ button{cursor:pointer}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
+}
+
+/* 2026-09 professional typography + mobile-first refinement */
+body{
+  font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;
+  line-height:1.6;
+}
+.brand-line,
+.hero h1,
+.section-heading h2,
+.service-card h3,
+.about-copy h2,
+.journey h3,
+.contact-form h3,
+.contact-info h3,
+.mini-brand,
+.photo-signature{
+  font-family:"Manrope",system-ui,sans-serif;
+}
+.desktop-nav a{font-size:13px;font-weight:600}
+.hero h1{
+  font-size:clamp(40px,5.2vw,66px);
+  line-height:1.02;
+  letter-spacing:-.035em;
+  font-weight:700;
+}
+.hero p{font-size:15px;line-height:1.7}
+.section-heading h2{
+  font-size:clamp(29px,3.5vw,43px);
+  line-height:1.1;
+  letter-spacing:-.025em;
+  font-weight:700;
+}
+.section-heading p{font-size:14px;line-height:1.65}
+.service-card h3{font-size:16px;line-height:1.28;font-weight:650}
+.service-card p{font-size:12px;line-height:1.65}
+.project-meta h3{font-size:14px;font-weight:650}
+.project-meta p{font-size:11px}
+.process-step h3{font-size:15px}
+.process-step p{font-size:12px;line-height:1.55}
+.about-copy{padding:42px 34px 38px 40px}
+.about-copy h2{
+  font-size:clamp(36px,4vw,54px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  font-weight:700;
+}
+.about-copy h3{font-size:15px;font-weight:600}
+.about-copy p,
+.about-intro,
+.about-extra{max-width:620px;font-size:13px;line-height:1.72;color:#b8c5d7}
+.about-extra{margin-top:12px!important}
+.about-focus{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:22px;
+}
+.about-focus>div{
+  min-height:108px;
+  padding:14px;
+  border:1px solid rgba(61,143,236,.28);
+  border-radius:12px;
+  background:linear-gradient(180deg,rgba(9,28,53,.72),rgba(5,17,33,.78));
+}
+.about-focus strong{
+  display:block;
+  margin-bottom:7px;
+  color:#f4f8ff;
+  font-size:12px;
+  font-weight:700;
+}
+.about-focus span{
+  display:block;
+  color:#9fb0c6;
+  font-size:10.5px;
+  line-height:1.55;
+}
+.journey p{font-size:13px;line-height:1.72}
+.skills-card li,
+.why-card li{font-size:12px;line-height:1.65}
+.contact-form h3,.contact-info h3{font-size:17px}
+.contact-form input,.contact-form select,.contact-form textarea{font-size:13px;min-height:44px}
+.contact-info>a,.contact-info>p{font-size:12px}
+.footer-inner nav a{font-size:10px}
+.copyright{font-size:9px}
+
+@media (max-width:1080px){
+  .service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .about-focus{grid-template-columns:1fr}
+  .about-focus>div{min-height:auto}
+}
+@media (max-width:900px){
+  :root{--side:20px}
+  .site-header{min-height:66px;padding:9px 20px}
+  .mobile-nav{top:64px;max-height:calc(100vh - 82px);overflow-y:auto}
+  .hero{padding-top:26px}
+  .hero-inner{gap:8px}
+  .hero-copy{text-align:left}
+  .hero p{margin-inline:0;max-width:620px}
+  .hero-actions{justify-content:flex-start}
+  .hero-art{min-height:250px;margin-top:-12px}
+  .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about-hero{grid-template-columns:1fr}
+  .about-copy{padding:34px 28px}
+  .about-photo{min-height:390px}
+  .journey-grid,.why-grid,.contact-grid{grid-template-columns:1fr}
+  .contact-grid{max-width:720px}
+}
+@media (max-width:640px){
+  :root{--side:14px}
+  body{font-size:14px}
+  .site-header{padding:9px 14px}
+  .page-section{scroll-margin-top:70px}
+  .hero{padding:24px 0 18px}
+  .hero h1{font-size:clamp(34px,10.8vw,47px);line-height:1.03;letter-spacing:-.03em}
+  .hero p{font-size:13.5px;line-height:1.65}
+  .hero-actions{grid-template-columns:1fr;gap:10px}
+  .hero-actions .btn{width:100%;min-height:46px}
+  .hero-art{min-height:210px;margin-top:-8px}
+  .stats,.about-stats{gap:10px}
+  .stats strong,.about-stats strong{font-size:16px}
+  .stats span,.about-stats span{font-size:10px}
+  .services,.projects,.process,.about,.contact{padding-top:60px;padding-bottom:60px}
+  .section-heading{margin-bottom:26px}
+  .section-heading h2{font-size:30px}
+  .section-heading p{font-size:13px}
+  .service-grid{grid-template-columns:1fr;gap:12px}
+  .service-card{
+    min-height:auto;
+    padding:22px 20px;
+    align-items:flex-start;
+    text-align:left;
+  }
+  .service-card p{font-size:13px}
+  .service-card>a{margin-top:16px}
+  .project-grid{grid-template-columns:1fr}
+  .project-card{padding:10px}
+  .process-row{grid-template-columns:1fr}
+  .process-step{text-align:left}
+  .about-copy{padding:28px 20px}
+  .about-copy h2{font-size:36px}
+  .about-copy p,.about-intro,.about-extra{font-size:13px}
+  .about-focus{grid-template-columns:1fr;gap:8px}
+  .about-focus strong{font-size:12px}
+  .about-focus span{font-size:11px}
+  .about-photo{min-height:350px}
+  .journey{padding:18px 0}
+  .journey p{font-size:13px}
+  .contact-form,.contact-info{padding:18px}
+  .contact-form input,.contact-form select,.contact-form textarea{font-size:13px}
+  .footer-inner nav{gap:10px 14px}
+  .footer-inner nav a{font-size:10px}
+  .wa-panel{width:min(290px,calc(100vw - 28px))}
+}
+@media (max-width:420px){
+  .hero h1{font-size:34px}
+  .stats,.about-stats{grid-template-columns:repeat(2,1fr)}
+  .about-photo{min-height:320px}
+  .photo-signature{font-size:18px}
+  .mini-brand{font-size:14px}
 }
