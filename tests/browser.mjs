@@ -22,6 +22,8 @@ try{
   const firstWork=await desktop.locator('.project-card.is-active h3').innerText();
   assert.equal(firstWork,'New Royal Tiles');
   await desktop.waitForTimeout(2250);
+  const carouselDebug=await desktop.locator('[data-work-carousel]').evaluate(el=>({ticks:el.dataset.autoTicks,hidden:document.hidden,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,scroll:el.querySelector('.work-viewport').scrollLeft}));
+  console.log('WORK CAROUSEL DEBUG',JSON.stringify(carouselDebug));
   const autoWork=await desktop.locator('.project-card.is-active h3').innerText();
   assert.equal(autoWork,'Sugumar Portfolio','Work carousel should auto-swipe after 2 seconds');
   await desktop.locator('.work-next').click();
