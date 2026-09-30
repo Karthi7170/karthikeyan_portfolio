@@ -30,6 +30,7 @@ try {
   assert.equal(await desktop.locator('.command-dialog').evaluate(el => el.open), false, 'Palette closes on Escape');
   await desktop.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await desktop.waitForTimeout(850);
+  assert.equal(await desktop.locator('.nav-item.is-current').getAttribute('href'), '#home', 'Home should be active at top');
   await desktop.screenshot({ path: 'artifacts/desktop-hero.png', animations: 'disabled' });
   for (const item of await desktop.locator('.reveal').all()) { await item.scrollIntoViewIfNeeded(); await desktop.waitForTimeout(18); }
   await desktop.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
@@ -51,6 +52,7 @@ try {
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'false', 'Mobile navigation closes');
   await mobile.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await mobile.waitForTimeout(900);
+  assert.equal(await mobile.locator('.nav-item.is-current').getAttribute('href'), '#home', 'Home should be active on mobile after return');
   await mobile.screenshot({ path: 'artifacts/mobile-hero.png', animations: 'disabled' });
   for (const item of await mobile.locator('.reveal:visible').all()) { await item.scrollIntoViewIfNeeded({ timeout: 3000 }); await mobile.waitForTimeout(18); }
   await mobile.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
