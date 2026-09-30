@@ -26,29 +26,31 @@
     link.addEventListener("click", () => setMenu(false));
   });
 
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") setMenu(false);
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") setMenu(false);
   });
 
-  document.addEventListener("click", e => {
+  document.addEventListener("click", event => {
     if (!mobileNav || !menu) return;
-    if (!mobileNav.contains(e.target) && !menu.contains(e.target)) setMenu(false);
+    if (!mobileNav.contains(event.target) && !menu.contains(event.target)) setMenu(false);
   });
 
   let raf = 0;
   function updateScroll() {
     raf = 0;
-
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    if (progress) progress.style.width = Math.min(100, Math.max(0, window.scrollY / max * 100)) + "%";
+
+    if (progress) {
+      progress.style.width = Math.min(100, Math.max(0, window.scrollY / max * 100)) + "%";
+    }
 
     if (header) {
       header.style.borderBottomColor = window.scrollY > 12
-        ? "rgba(0,0,0,.12)"
-        : "rgba(0,0,0,.06)";
+        ? "rgba(23,100,164,.30)"
+        : "rgba(23,100,164,.16)";
     }
 
-    const marker = window.scrollY + Math.min(window.innerHeight * 0.33, 280);
+    const marker = window.scrollY + Math.min(window.innerHeight * 0.35, 300);
     let active = "home";
 
     for (const section of sections) {
@@ -64,12 +66,12 @@
     });
   }
 
-  function onScroll() {
+  function requestScrollUpdate() {
     if (!raf) raf = requestAnimationFrame(updateScroll);
   }
 
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", onScroll, { passive: true });
+  addEventListener("scroll", requestScrollUpdate, { passive: true });
+  addEventListener("resize", requestScrollUpdate, { passive: true });
   updateScroll();
 
   if ("IntersectionObserver" in window) {
@@ -81,7 +83,7 @@
       });
     }, {
       threshold: 0.08,
-      rootMargin: "0px 0px -28px 0px"
+      rootMargin: "0px 0px -30px 0px"
     });
 
     $$(".reveal").forEach(el => observer.observe(el));
@@ -105,8 +107,6 @@
     waClose?.addEventListener("click", () => setWhatsApp(false));
   }
 
-  const form = $("#contact-form");
-
   function notify(message) {
     if (!toast) return;
     toast.textContent = message;
@@ -115,48 +115,9 @@
     notify.timer = setTimeout(() => toast.classList.remove("is-visible"), 2200);
   }
 
-  form?.addEventListener("submit", e => {
-    e.preventDefault();
-
-    if (!form.reportValidity()) return;
-
-    const name = $("#contact-name")?.value.trim() || "";
-    const email = $("#contact-email")?.value.trim() || "";
-    const phone = $("#contact-phone")?.value.trim() || "";
-    const service = $("#contact-service")?.value || "";
-    const message = $("#contact-message")?.value.trim() || "";
-
-    const text = [
-      "Hi AI x MAD, I found your portfolio website.",
-      "",
-      "Name: " + name,
-      "Email: " + email,
-      "Phone: " + phone,
-      "Service: " + service,
-      "",
-      "Project details:",
-      message
-    ].join("\n");
-
-    const url = "https://wa.me/919944754339?text=" + encodeURIComponent(text);
-    window.open(url, "_blank", "noopener,noreferrer");
-    notify("Opening WhatsApp with your enquiry");
+  $$('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener("click", () => notify("Opening your email app"));
   });
-
-  const testimonialTrack = $("[data-testimonial-track]");
-  const testimonialPrev = $("[data-testimonial-prev]");
-  const testimonialNext = $("[data-testimonial-next]");
-
-  function moveTestimonials(direction) {
-    if (!testimonialTrack) return;
-    const card = testimonialTrack.querySelector(".testimonial-card");
-    if (!card) return;
-    const amount = card.getBoundingClientRect().width + 12;
-    testimonialTrack.scrollBy({ left: direction * amount, behavior: "smooth" });
-  }
-
-  testimonialPrev?.addEventListener("click", () => moveTestimonials(-1));
-  testimonialNext?.addEventListener("click", () => moveTestimonials(1));
 
   const year = $("#year");
   if (year) year.textContent = String(new Date().getFullYear());
