@@ -31,6 +31,41 @@ try {
   assert.equal(await desktop.locator('.command-dialog').evaluate(el => el.open), true, 'Command palette opens');
   await desktop.keyboard.press('Escape');
   assert.equal(await desktop.locator('.command-dialog').evaluate(el => el.open), false, 'Palette closes on Escape');
+  assert.equal(await desktop.locator('#wa-panel').isVisible(), true, 'Desktop WhatsApp pop-up starts visible');
+  await desktop.locator('.wa-close').click();
+  assert.equal(await desktop.locator('#wa-panel').isVisible(), false, 'WhatsApp pop-up dismisses');
+  await desktop.locator('.wa-launcher').click();
+  assert.equal(await desktop.locator('#wa-panel').isVisible(), true, 'WhatsApp pop-up reopens');
+  await desktop.locator('.wa-close').click();
+  assert.equal(await desktop.locator('.wa-chat-link').getAttribute('href'), 'https://wa.me/919944754339?text=Hi%20Karthikeyan%2C%20I%20want%20to%20discuss%20a%20project.');
+
+  // Native validity prevents an empty message from navigating away.
+  await desktop.locator('.form-submit').click();
+  assert.equal(await desktop.locator('#contact-name').evaluate(field => field.validity.valueMissing), true);
+  await desktop.locator('#contact-name').fill('Alex Example');
+  await desktop.locator('#contact-email').fill('alex@example.com');
+  await desktop.locator('#contact-project').selectOption('Website development');
+  await desktop.locator('#contact-message').fill('I need a modern responsive website for my company.');
+  await desktop.evaluate(() => {
+    window.__capturedWhatsapp = '';
+    const original = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function () {
+      if (this.href.startsWith('https://wa.me/919944754339?text=')) {
+        window.__capturedWhatsapp = this.href;
+        return;
+      }
+      return original.call(this);
+    };
+  });
+  await desktop.locator('.form-submit').click();
+  const whatsappUrl = await desktop.evaluate(() => window.__capturedWhatsapp);
+  assert.ok(whatsappUrl.startsWith('https://wa.me/919944754339?text='), 'Form produces the correct WhatsApp destination');
+  const message = new URL(whatsappUrl).searchParams.get('text');
+  assert.ok(message.includes('Alex Example') && message.includes('alex@example.com'));
+  assert.ok(message.includes('Website development') && message.includes('I need a modern responsive website'));
+  await desktop.locator('#contact-form').evaluate(form => form.reset());
+  await desktop.locator('.wa-launcher').click();
+  console.log('Contact form WhatsApp message and dismissible chat pop-up: PASS');
   await desktop.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await desktop.waitForTimeout(850);
   assert.equal(await desktop.locator('.nav-item.is-current').getAttribute('href'), '#home', 'Home should be active at top');
@@ -54,6 +89,11 @@ try {
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'true', 'Mobile menu opens');
   await mobile.locator('.nav-item[href="#project"]').click();
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'false', 'Mobile navigation closes');
+  assert.equal(await mobile.locator('#wa-panel').isVisible(), false, 'Mobile WhatsApp prompt starts collapsed');
+  await mobile.locator('.wa-launcher').click();
+  assert.equal(await mobile.locator('#wa-panel').isVisible(), true, 'Mobile WhatsApp prompt opens');
+  await mobile.locator('.wa-close').click();
+  assert.equal(await mobile.locator('#wa-panel').isVisible(), false, 'Mobile WhatsApp prompt dismisses');
   await mobile.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await mobile.waitForTimeout(900);
   assert.equal(await mobile.locator('.nav-item.is-current').getAttribute('href'), '#home', 'Home should be active on mobile after return');
