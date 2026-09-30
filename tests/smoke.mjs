@@ -19,15 +19,21 @@ test('HTML structure, unique IDs and working internal anchors', () => {
   assert.match(html, /<title>[^<]+<\/title>/);
 });
 
-test('Name-only first screen, exact subtitle, AI X MAD branding and source assets', () => {
+test('Studio-first hero contains an original vector robot and no portrait photograph', () => {
   for (const asset of ['../assets/portrait.webp', '../assets/mark.svg', '../index.html', '../styles.css', '../script.js']) {
     assert.ok(statSync(new URL(asset, import.meta.url)).size > 50, 'Missing/empty asset: ' + asset);
   }
-  const hero = html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(hero, 'Homepage hero must exist');
-  assert.match(hero, /<h1 id="hero-heading">KARTHIKEYAN<\/h1>/);
-  assert.match(hero, /Vibe coder - web developer - App developer/);
-  assert.doesNotMatch(hero, /<img\b/i, 'First page must contain no portrait');
+  const hero = html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0] ?? '';
+  assert.match(hero, /<h1 id="hero-heading" class="studio-headline">/);
+  assert.match(hero, /class="headline-brand"/);
+  assert.match(hero, /class="brand-ai">AI<\/span>/);
+  assert.match(hero, /class="brand-mad">MAD/);
+  assert.match(hero, /class="robot-svg"/);
+  assert.match(hero, /viewBox="0 0 640 710"/);
+  assert.match(hero, /href="#project" class="studio-button/);
+  assert.match(hero, /href="#contact" class="studio-button/);
+  assert.doesNotMatch(hero, /<img\b/i, 'Homepage must not include the founder photograph');
+  assert.match(html, /Karthikeyan K — the person behind AI X MAD Studio/);
   assert.match(html, /AI X MAD/);
   assert.doesNotMatch(html, /AI-MAD/);
 });
@@ -86,8 +92,8 @@ test('WhatsApp project inquiry has accessible fields and a real fallback action'
 });
 
 test('WhatsApp prompt is dismissible, keyboard accessible, and does not send on load', () => {
-  assert.match(html, /class="whatsapp-widget is-open"/);
-  assert.match(html, /class="wa-panel" id="wa-panel"/);
+  assert.match(html, /class="whatsapp-widget"/);
+  assert.match(html, /class="wa-panel" id="wa-panel" hidden/);
   assert.match(html, /aria-label="Dismiss WhatsApp pop-up"/);
   assert.match(html, /aria-controls="wa-panel"/);
   assert.match(html, /href="https:\/\/wa\.me\/919944754339"/);
@@ -97,14 +103,20 @@ test('WhatsApp prompt is dismissible, keyboard accessible, and does not send on 
   assert.doesNotMatch(js, /fetch\(['"]https:\/\/wa\.me/);
 });
 
-test('Cinematic hero uses decorative layers with no portrait or additional headline', () => {
+test('Cinematic vector robot is motion-aware, responsive and 4K-resolution independent', () => {
   const hero = html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0] ?? '';
   assert.match(hero, /class="hero-lightfield"/);
   assert.match(hero, /class="hero-lens"/);
-  assert.match(hero, /class="hero-floor"/);
+  assert.match(hero, /class="robot-figure"/);
+  assert.match(hero, /class="robot-eyes"/);
+  assert.match(hero, /class="robot-reactor"/);
   assert.equal((hero.match(/<h1\b/g) ?? []).length, 1);
-  assert.equal((hero.match(/<p\b/g) ?? []).length, 1);
-  assert.doesNotMatch(hero, /<img\b/);
-  assert.match(css, /@keyframes lightfieldFloat/);
+  assert.doesNotMatch(hero, /<img\b/i);
+  assert.match(css, /@keyframes robotFloat/);
+  assert.match(css, /@media\(min-width:1900px\)/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+  assert.match(css, /"Space Grotesk"/);
+  assert.match(css, /"Plus Jakarta Sans"/);
+  assert.match(js, /const robotStage = \$\('\[data-robot-stage\]'\)/);
+  assert.match(js, /!reduceMotion\.matches/);
 });
