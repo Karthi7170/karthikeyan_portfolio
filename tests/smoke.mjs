@@ -26,8 +26,9 @@ test('Reference-inspired hero uses Higgsfield motion and original UI overlay',()
 });
 
 test('Professional type and responsive layout are present',()=>{
-  assert.match(html,/Inter\+Tight/);
-  assert.match(css,/"Inter Tight"/);
+  assert.match(html,/Space\+Grotesk/);
+  assert.match(html,/IBM\+Plex\+Mono/);
+  assert.match(css,/"Space Grotesk"/);
   for(const bp of ['1100px','900px','650px','390px']) assert.ok(css.includes('@media(max-width:'+bp+')'));
   assert.match(css,/prefers-reduced-motion:reduce/);
   assert.match(css,/\.motion-frame/);
