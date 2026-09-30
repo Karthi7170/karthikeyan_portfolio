@@ -1,6 +1,6 @@
 # Karthikeyan K — AI-MAD Creative Lab
 
-A custom, expressive portfolio for **Karthikeyan K**, a vibe coder, web developer, app developer and AI creative. Built as an editorial website with an asymmetric portrait hero, an interactive project gallery and a warm-paper / electric-violet design system.
+A custom, expressive portfolio for **Karthikeyan K**, a vibe coder, web developer, app developer and AI creative. Built as an editorial website with an holographic portrait hero, an interactive project gallery and a deep-graphite / phosphor-green / optical-cyan cyber-lab design system.
 
 ## Run locally
 
@@ -35,7 +35,7 @@ These URLs are editable in `index.html`. Confirm live deployment availability be
 ## Interactions
 
 - Sticky navigation with active section indicator and mobile menu
-- Light/dark toggle with stored preference (when permitted by browser)
+- Phosphor/cyan palette toggle with stored preference (when permitted by browser)
 - Press **Ctrl+K** or **⌘K** for quick navigation
 - Filter projects: All / Websites / Apps
 - Scroll progress indicator and intersection-based reveals
@@ -56,3 +56,7 @@ assets/mark.svg          Custom AI-MAD monogram/favicon
 ## Publish
 
 Import the repository into Vercel as a static/"Other" project with the **repository root** as the output directory and no build command, or publish it with GitHub Pages. Committing code to GitHub does not itself guarantee a deployment.
+
+## Cyber-lab redesign
+
+The design takes inspiration from cybersecurity interfaces, not from claimed security qualifications: a phosphor-green and cyan UI, Oxanium headings, IBM Plex Mono system labels, a scanlined portrait, angular project cards, circuit-grid backgrounds, terminal-style controls and motion-aware transitions. The existing content, image, four destinations, filters, quick navigation, accessibility controls and contact functionality are preserved. Use the theme switcher to alternate between phosphor green and cyan. Every animated effect has a reduced-motion fallback.
