@@ -35,7 +35,7 @@ test('Professional type and responsive layout are present',()=>{
 
 test('All existing portfolio destinations are preserved',()=>{
   for(const url of ['https://royaltiles.vercel.app/','https://sugumar-portfolio-beta.vercel.app/','https://vip-hunter.vercel.app/','https://www.deccanmatric.in/']) assert.ok(html.includes(url),url);
-  assert.equal((html.match(/class="project-card reveal"/g)??[]).length,4);
+  assert.equal((html.match(/data-work-slide/g)??[]).length,4);
 });
 
 test('Contact and WhatsApp workflow remains functional',()=>{
@@ -61,4 +61,18 @@ test('External project links are protected',()=>{
   const rels=html.match(/target="_blank" rel="noopener noreferrer"/g)??[];
   assert.equal(targets.length,rels.length);
   assert.doesNotMatch(html,/href="#"/);
+});
+
+
+test('Selected work is a user-controllable 2-second swipe carousel',()=>{
+  assert.match(html,/data-work-carousel/);
+  assert.equal((html.match(/data-work-slide/g)??[]).length,4);
+  assert.equal((html.match(/data-work-dot=/g)??[]).length,4);
+  assert.match(html,/class="work-prev"/);
+  assert.match(html,/class="work-next"/);
+  assert.match(css,/scroll-snap-type:x mandatory/);
+  assert.match(css,/\.project-card\.is-active/);
+  assert.match(js,/setInterval\(\(\)=>updateWorkUI\(workIndex\+1,[\s\S]*?2000\)/);
+  assert.match(js,/reduceMotion\.matches/);
+  assert.match(js,/mouseenter',stopAuto/);
 });
