@@ -174,5 +174,106 @@
     }, { passive: true });
   }
 
+  // Cinematic hero lighting responds to pointer movement without introducing images.
+  const hero = $('.hero');
+  if (hero && finePointer.matches && !reduceMotion.matches) {
+    let pointerFrame = 0;
+    hero.addEventListener('pointermove', event => {
+      if (pointerFrame) return;
+      const x = event.clientX;
+      const y = event.clientY;
+      pointerFrame = window.requestAnimationFrame(() => {
+        pointerFrame = 0;
+        const rect = hero.getBoundingClientRect();
+        hero.style.setProperty('--pointer-x', Math.max(0, Math.min(100, (x - rect.left) / rect.width * 100)) + '%');
+        hero.style.setProperty('--pointer-y', Math.max(0, Math.min(100, (y - rect.top) / rect.height * 100)) + '%');
+      });
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      hero.style.removeProperty('--pointer-x');
+      hero.style.removeProperty('--pointer-y');
+    });
+  }
+
+  // WhatsApp contact form: prepare the message; the visitor sends it in WhatsApp.
+  // Without JS the GET form still opens WhatsApp with its message field.
+  const contactForm = $('#contact-form');
+  if (contactForm) {
+    const nameField = $('#contact-name');
+    const messageField = $('#contact-message');
+    [nameField, messageField].forEach(field => {
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    });
+    contactForm.addEventListener('submit', event => {
+      if (!contactForm.reportValidity()) {
+        event.preventDefault();
+        return;
+      }
+      const name = nameField.value.trim();
+      const message = messageField.value.trim();
+      if (!name) {
+        event.preventDefault();
+        nameField.setCustomValidity('Please enter your name.');
+        nameField.reportValidity();
+        return;
+      }
+      if (message.length < 10) {
+        event.preventDefault();
+        messageField.setCustomValidity('Please add at least 10 characters about your idea.');
+        messageField.reportValidity();
+        return;
+      }
+      event.preventDefault();
+      const email = $('#contact-email').value.trim();
+      const project = $('#contact-project').value;
+      const lines = [
+        'Hi Karthikeyan, I found your AI X MAD portfolio.',
+        '',
+        'Name: ' + name
+      ];
+      if (email) lines.push('Email: ' + email);
+      if (project) lines.push('Project type: ' + project);
+      lines.push('', 'My idea:', message);
+      const url = 'https://wa.me/919944754339?text=' + encodeURIComponent(lines.join('\n'));
+      const link = document.createElement('a');
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.click();
+    });
+  }
+
+  // Dismissible on-page WhatsApp prompt. Never automatically sends a message.
+  // The launcher remains a real WhatsApp link when JavaScript is unavailable.
+  const whatsappWidget = $('.whatsapp-widget');
+  const whatsappPanel = $('#wa-panel');
+  const whatsappLauncher = $('.wa-launcher');
+  const whatsappClose = $('.wa-close');
+  if (whatsappWidget && whatsappPanel && whatsappLauncher && whatsappClose) {
+    const compactScreen = window.matchMedia('(max-width: 600px)');
+    function setWhatsappOpen(open) {
+      whatsappPanel.hidden = !open;
+      whatsappWidget.classList.toggle('is-open', open);
+      whatsappLauncher.setAttribute('aria-expanded', String(open));
+      whatsappLauncher.setAttribute('aria-label', open ? 'Close WhatsApp chat preview' : 'Open WhatsApp chat preview');
+    }
+    setWhatsappOpen(!compactScreen.matches);
+    whatsappLauncher.addEventListener('click', event => {
+      event.preventDefault();
+      setWhatsappOpen(whatsappPanel.hidden);
+    });
+    whatsappLauncher.addEventListener('keydown', event => {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        whatsappLauncher.click();
+      }
+    });
+    whatsappClose.addEventListener('click', () => {
+      setWhatsappOpen(false);
+      whatsappLauncher.focus();
+    });
+    compactScreen.addEventListener('change', event => setWhatsappOpen(!event.matches));
+  }
+
   $('#year').textContent = String(new Date().getFullYear());
 })();
