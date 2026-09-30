@@ -174,3 +174,205 @@ img,video{display:block;max-width:100%}
   .work-pagination{margin-top:14px}.work-dot{width:22px}.work-dot.is-active{width:44px}
 }
 @media(prefers-reduced-motion:reduce){.project-card,.project-preview,.work-dot{transition:none!important}.work-live-dot{animation:none!important}*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.motion-frame{transform:none!important}}
+
+
+/* ==========================================================================
+   AI x MAD — Obsidian / Chalk editorial system
+   Monochrome minimalism + terminal noir + grayscale editorial contrast.
+   ========================================================================== */
+:root{
+  --bg:#050505;--bg2:#0a0a0a;--panel:#0d0d0d;--panel2:#111;
+  --ink:#f4f2ec;--muted:#9c9c98;--line:#272727;
+  --blue:#d7d7d2;--blue2:#ededE8;--cyan:#fff;
+  color-scheme:dark;
+}
+body{
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+    #050505;
+  background-size:72px 72px;
+  color:var(--ink);
+  font-family:"Inter",Arial,sans-serif;
+}
+.site-header{
+  background:rgba(5,5,5,.88);
+  border-bottom-color:#222!important;
+  box-shadow:none;
+}
+.brand{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.05em}
+.brand-mark{background:#f4f2ec;color:#050505;border-color:#f4f2ec}
+.nav-link,.header-cta,.section-index,.section-kicker,.hero-meta,.work-carousel-hint,.service-number,.thumbnail-label{
+  font-family:"IBM Plex Mono",monospace;
+}
+.nav-link{color:#8f8f8b}.nav-link:hover,.nav-link.is-active{color:#f4f2ec}.nav-link:after{background:#f4f2ec}
+.header-cta{background:#f4f2ec;color:#050505;border-color:#f4f2ec}.header-cta:hover{background:#fff;border-color:#fff}
+.menu-toggle{background:#0c0c0c;border-color:#2b2b2b}
+.mobile-nav{background:#080808;border-bottom-color:#262626}.mobile-nav a{color:#d7d7d2}
+.scroll-progress{background:#f4f2ec;box-shadow:none}
+
+.hero{
+  background:
+    radial-gradient(ellipse 45% 58% at 74% 44%,rgba(255,255,255,.06),transparent 72%),
+    #050505;
+}
+.hero:before{
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:88px 88px;
+}
+.hero:after{background:radial-gradient(circle,rgba(255,255,255,.045),transparent 68%)}
+.section-kicker{color:#898985}.section-kicker span{color:#f4f2ec}
+.hero h1,.statement-heading h2,.services-heading h2,.work-heading h2,.process-heading h2,.about-grid h2,.contact-copy h2{
+  font-family:"Space Grotesk",sans-serif;
+}
+.hero h1{color:#f5f3ed}.hero h1 span{color:#a7a7a2}
+.hero-intro{color:#9b9b97}
+.button-primary{background:#f4f2ec;color:#050505;border-color:#f4f2ec;box-shadow:none}.button-primary:hover{background:#fff}
+.button-ghost{background:#090909;border-color:#333;color:#ddd}.button-ghost:hover{background:#121212;border-color:#777}
+.hero-meta{border-top-color:#242424;color:#747470}
+.motion-frame{border-color:#2c2c2c;background:#050505;box-shadow:0 34px 90px #000}
+.motion-video{filter:grayscale(1) contrast(1.15) brightness(.72)}
+.motion-shade{background:linear-gradient(90deg,rgba(0,0,0,.45),transparent 40%),linear-gradient(0deg,rgba(0,0,0,.72),transparent 34%,transparent 74%,rgba(0,0,0,.28))}
+.ui-label,.ui-coordinate{color:#d7d7d2}.ui-corner{border-color:#9f9f9a}.ui-orbit{border-color:#ffffff28}.ui-pulse{background:#fff;box-shadow:0 0 0 6px #ffffff12,0 0 25px #ffffff55}
+.visual-note{color:#70706d}.visual-dot{background:#f4f2ec;box-shadow:none}
+.hero-partners{border-top-color:#222;color:#747470}.hero-partners i{background:#e7e7e2}
+
+.statement,.services,.work,.process,.about,.contact{background:#050505}
+.section-index{border-top-color:#242424;color:#6f6f6b}.section-index span:first-child{color:#d2d2cc}
+.services-heading h2 span,.work-heading h2 span,.process-heading h2 span,.about-grid h2 span,.contact-copy h2 span{color:#a8a8a3}
+.services-heading p,.work-heading p,.process-heading p,.about-grid p,.contact-copy p{color:#92928e}
+
+/* Services: all three cards in one clean row. */
+.services-inline{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:stretch;
+}
+.service-card{
+  min-height:470px;
+  display:flex;
+  flex-direction:column;
+  padding:28px 24px 24px;
+  border:1px solid #282828;
+  border-radius:2px;
+  background:linear-gradient(180deg,#0a0a0a,#070707);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+  transition:transform .28s ease,border-color .28s ease,background .28s ease;
+}
+.service-card:hover{transform:translateY(-5px);border-color:#5b5b58;background:#0d0d0d}
+.service-card-top{display:flex;align-items:center;gap:13px;margin-bottom:34px}
+.service-number{color:#f2f2ec;font-size:10px;letter-spacing:.12em}
+.service-rule{height:1px;flex:1;background:#2a2a2a}
+.service-card h3{
+  margin:0 0 18px;
+  font:600 clamp(30px,2.6vw,43px)/1.02 "Space Grotesk",sans-serif;
+  letter-spacing:-.055em;
+}
+.service-card>p{margin:0;color:#92928e;font-size:13px;line-height:1.75;max-width:440px}
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:auto;
+  padding-top:34px;
+}
+.tool-cube{
+  position:relative;
+  min-height:82px;
+  display:grid;
+  grid-template-columns:40px 1fr;
+  align-items:center;
+  gap:11px;
+  padding:13px 12px;
+  border:1px solid #2c2c2c;
+  border-radius:8px;
+  background:linear-gradient(145deg,#151515,#090909);
+  box-shadow:8px 8px 0 #000,-1px -1px 0 #2e2e2e;
+  transform:perspective(500px) rotateX(5deg) rotateY(-4deg);
+  transition:transform .24s,border-color .24s,box-shadow .24s;
+}
+.tool-cube:hover{
+  transform:perspective(500px) rotateX(0) rotateY(0) translateY(-3px);
+  border-color:#686863;
+  box-shadow:11px 13px 0 #000,-1px -1px 0 #4b4b48;
+}
+.tool-cube img{
+  width:34px;height:34px;object-fit:contain;filter:grayscale(1);
+}
+.tool-cube span{
+  min-width:0;color:#deded8;font:600 10px/1.35 "IBM Plex Mono",monospace;
+  overflow-wrap:anywhere;
+}
+
+/* Work: real project-site screenshots in monochrome editorial frames. */
+.work-carousel-head{border-bottom:1px solid #242424;padding-bottom:13px}
+.work-carousel-hint{color:#747470}.work-live-dot{background:#eee;box-shadow:0 0 0 4px #ffffff0c;animation:workPulse 3s ease-in-out infinite}
+.work-arrow{background:#0b0b0b;border-color:#303030;color:#efefe9}.work-arrow:hover{background:#efefe9;color:#060606;border-color:#efefe9}
+.work-viewport:focus-visible{outline-color:#d6d6d1}
+.project-card{filter:grayscale(1) brightness(.7);opacity:.72}
+.project-card.is-active{filter:grayscale(.15) brightness(.92);opacity:1}
+.project-preview{background:#090909;border-color:#2d2d2d;border-radius:3px}
+.project-card.is-active .project-preview{border-color:#5b5b58;box-shadow:0 28px 70px #000b}
+.site-thumbnail{position:relative;background:#0b0b0b;isolation:isolate}
+.site-thumbnail:before{
+  content:"";
+  position:absolute;inset:0;z-index:0;
+  background:repeating-linear-gradient(135deg,#0d0d0d 0 12px,#111 12px 24px);
+}
+.site-thumbnail img{
+  position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:top center;
+  filter:grayscale(1) contrast(1.07) brightness(.82);
+  transition:transform .55s ease,filter .35s ease;
+}
+.project-card.is-active .site-thumbnail img{filter:grayscale(.55) contrast(1.08) brightness(.88)}
+.project-card:hover .site-thumbnail img{transform:scale(1.018);filter:grayscale(.1) contrast(1.05) brightness(.92)}
+.thumbnail-label{
+  position:absolute;z-index:3;left:13px;bottom:12px;
+  padding:7px 9px;border:1px solid #ffffff36;background:rgba(4,4,4,.82);
+  color:#f1f1eb;font-size:8px;letter-spacing:.08em;backdrop-filter:blur(8px);
+}
+.project-info>span{color:#8e8e89}.project-info h3{font-family:"Space Grotesk",sans-serif;color:#f3f2ed}.project-info p{color:#858581}.project-info b{color:#cfcfca}
+.work-dot{background:#2c2c2c}.work-dot.is-active{background:#f2f2ec;box-shadow:none}
+
+/* Process/about/contact editorial lines. */
+.process{background:#080808}.process-steps{border-top-color:#2a2a2a}.process-step{border-bottom-color:#2a2a2a}.process-step>span,.process-step b{color:#b9b9b3}
+.about{background:#050505}.about-grid a{color:#e4e4df;border-bottom-color:#777}
+.contact{background:#070707}.contact-whatsapp{border-bottom-color:#70706c;color:#efefe9}
+.contact-form{background:#0a0a0a;border-color:#2c2c2c;border-radius:2px}
+.contact-form input,.contact-form select,.contact-form textarea{background:#050505;border-color:#303030;color:#f3f2ed;border-radius:2px}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:#deded8;box-shadow:0 0 0 2px #ffffff10}
+.contact-submit-row button{background:#efefe9;color:#050505;border-color:#efefe9;border-radius:2px}.contact-submit-row button:hover{background:#fff}
+.contact-footer{border-top-color:#292929}.email-copy{color:#dadad5}
+.footer{background:#030303;border-top-color:#222}.footer>a:first-child{font-family:"Space Grotesk",sans-serif;color:#f4f2ec}
+
+/* WhatsApp keeps its recognizable green only as a functional brand cue. */
+.wa-launcher{
+  width:56px;height:56px;
+  background:#25d366;color:#fff;
+  border:1px solid #69e596;
+  box-shadow:0 12px 34px #000a,0 0 0 4px #25d36612;
+}
+.wa-launcher:hover{background:#20c45d}
+.wa-panel{background:#0a0a0a;border-color:#333;border-radius:8px}
+.wa-panel-head{border-bottom-color:#282828}.wa-panel p{color:#a6a6a1}
+.wa-chat-link{background:#25d366;color:#fff;border-radius:4px}
+.wa-inline-icon{display:inline-grid;place-items:center}.wa-inline-icon svg{width:16px;height:16px}
+
+/* Responsive service row and tool cubes. */
+@media(max-width:1000px){
+  .services-inline{grid-template-columns:1fr}
+  .service-card{min-height:auto}
+  .tool-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tool-cube{grid-template-columns:1fr;justify-items:center;text-align:center;min-height:95px}
+}
+@media(max-width:650px){
+  .services-inline{gap:10px}
+  .service-card{padding:22px 18px}
+  .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:26px}
+  .tool-cube{min-height:82px}
+  .project-card{filter:grayscale(.9) brightness(.72)}
+  .project-card.is-active{filter:grayscale(.2) brightness(.94)}
+}
