@@ -19,11 +19,17 @@ test('HTML structure, unique IDs and working internal anchors', () => {
   assert.match(html, /<title>[^<]+<\/title>/);
 });
 
-test('Portrait, brand icon and CSS/JS assets exist', () => {
+test('Name-only first screen, exact subtitle, AI X MAD branding and source assets', () => {
   for (const asset of ['../assets/portrait.webp', '../assets/mark.svg', '../index.html', '../styles.css', '../script.js']) {
     assert.ok(statSync(new URL(asset, import.meta.url)).size > 50, 'Missing/empty asset: ' + asset);
   }
-  assert.match(html, /src="assets\/portrait\.webp"/);
+  const hero = html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(hero, 'Homepage hero must exist');
+  assert.match(hero, /<h1 id="hero-heading">KARTHIKEYAN<\/h1>/);
+  assert.match(hero, /Vibe coder - web developer - App developer/);
+  assert.doesNotMatch(hero, /<img\b/i, 'First page must contain no portrait');
+  assert.match(html, /AI X MAD/);
+  assert.doesNotMatch(html, /AI-MAD/);
 });
 
 test('Project cards use the real destinations and secure new tabs', () => {
