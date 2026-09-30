@@ -4,18 +4,20 @@ AI x MAD is a business-first creative technology website for Karthikeyan K, focu
 
 ## Visual direction
 
-The current design is rebuilt around the supplied motion-reference video:
+The current design uses the **Executive Signal** system: a professional agency-style template with a light porcelain canvas, crisp graphite typography, cobalt action color, and dark editorial bands for the Work and Contact sections.
 
-- near-black canvas with cool blue lighting
-- compact navigation and restrained UI chrome
-- large white grotesk typography with a blue accent
-- text-and-technology split hero composition
-- cinematic perspective browser panels
-- floating technical UI lines, rings, grids and glows
-- large editorial service and project sections
-- smooth scroll reveals and pointer-based depth on precise-pointer devices
+- white/porcelain hero shell with a premium split layout
+- cobalt primary actions and restrained blue accents
+- dark editorial project carousel for contrast
+- clean white service cards with compact tool tiles
+- structured process and founder sections with generous spacing
+- dark business contact section with the existing WhatsApp workflow
+- responsive behavior across desktop, tablet, mobile and 4K
 
-The site uses **Inter Tight** for the display typography and **Inter** for interface/body copy.
+Typography:
+- **Sora** — display/headline type
+- **Manrope** — body/interface type
+- **JetBrains Mono** — labels and technical metadata
 
 ## Higgsfield motion
 
