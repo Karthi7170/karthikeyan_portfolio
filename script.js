@@ -122,7 +122,6 @@
       },130);
     },{passive:true});
 
-    document.addEventListener('visibilitychange',()=>document.hidden?stopAuto():startAuto());
 
     updateWorkUI(0,{scroll:false});
     startAuto();
