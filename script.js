@@ -54,6 +54,7 @@
   themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
 
   // Scroll progress and active section links, throttled with rAF.
+  const sections = $('main section[id]');
   let scrollTicking = false;
   function updateScroll() {
     scrollTicking = false;
@@ -84,7 +85,6 @@
   window.addEventListener('resize', onScroll, { passive: true });
   updateScroll();
 
-  const sections = $$('main section[id]');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
