@@ -23,15 +23,20 @@ try{
   assert.ok(Math.max(...serviceBoxes.map(x=>x.top))-Math.min(...serviceBoxes.map(x=>x.top))<8,'Desktop services should share one row');
   assert.equal(await desktop.locator('.site-thumbnail img').count(),4,'Every project should use a live-site thumbnail');
   assert.equal(await desktop.locator('.wa-launcher svg').count(),1,'WhatsApp launcher should use the icon');
-  assert.equal(await desktop.locator('meta[name="theme-color"]').getAttribute('content'),'#03060b');
-  const serviceBackgrounds=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>getComputedStyle(c).backgroundImage));
-  assert.equal(new Set(serviceBackgrounds).size,3,'Each service family should have a distinct colorful treatment');
+  assert.equal(await desktop.locator('meta[name="theme-color"]').getAttribute('content'),'#f4f6f8');
+  const heroSurface=await desktop.locator('.executive-hero-grid').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,radius:getComputedStyle(el).borderRadius}));
+  assert.equal(heroSurface.bg,'rgb(255, 255, 255)','Hero should use a clean white business surface');
+  assert.equal(heroSurface.radius,'28px','Hero should use the executive rounded shell');
+  const serviceBackgrounds=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>getComputedStyle(c).backgroundColor));
+  assert.ok(serviceBackgrounds.every(v=>v==='rgb(255, 255, 255)'),'Services should use consistent professional white cards');
   const activeThumbFilter=await desktop.locator('.project-card.is-active .site-thumbnail img').evaluate(el=>getComputedStyle(el).filter);
   assert.equal(/grayscale\(1\)/.test(activeThumbFilter),false,'Active project thumbnail should retain color');
-  const primaryButtonBg=await desktop.locator('.button-primary').evaluate(el=>getComputedStyle(el).backgroundImage);
-  assert.match(primaryButtonBg,/linear-gradient/,'Primary CTA should use the cobalt blue gradient');
-  const bodyBg=await desktop.locator('body').evaluate(el=>getComputedStyle(el).backgroundImage);
-  assert.match(bodyBg,/radial-gradient/,'Midnight Cyber background should retain subtle blue glow');
+  const primaryButtonBg=await desktop.locator('.button-primary').evaluate(el=>getComputedStyle(el).backgroundColor);
+  assert.equal(primaryButtonBg,'rgb(49, 94, 251)','Primary CTA should use the cobalt business accent');
+  const workBg=await desktop.locator('#work').evaluate(el=>getComputedStyle(el).backgroundColor);
+  assert.equal(workBg,'rgb(17, 19, 24)','Work section should use the dark editorial band');
+  const heroFont=await desktop.locator('.hero h1').evaluate(el=>getComputedStyle(el).fontFamily);
+  assert.match(heroFont,/Sora/,'Hero typography should use the new professional display font');
 
 
   await desktop.locator('[data-work-carousel]').scrollIntoViewIfNeeded();
