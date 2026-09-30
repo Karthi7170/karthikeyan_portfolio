@@ -477,3 +477,298 @@ body{
 .wa-panel{background:#08131f;border-color:#2a4560}.wa-panel-head{border-bottom-color:#243b54}.wa-panel p{color:#a8bbcf}
 
 @media(max-width:650px){.project-card{filter:none;opacity:.7}.project-card.is-active{filter:none;opacity:1}}
+
+
+/* ==========================================================================
+   AI x MAD — Executive Signal
+   Professional agency template: porcelain surfaces, graphite typography,
+   cobalt action color, dark editorial work/contact sections.
+   ========================================================================== */
+:root{
+  --paper:#f4f6f8;
+  --paper-2:#edf1f5;
+  --surface:#ffffff;
+  --ink:#111318;
+  --graphite:#171b22;
+  --muted:#667085;
+  --line:#d7dde5;
+  --blue:#315efb;
+  --blue-2:#6a8cff;
+  --cyan:#39c8ff;
+  --navy:#0d1525;
+  --navy-2:#111b2d;
+}
+html,body{background:var(--paper);color:var(--ink);font-family:"Manrope",Arial,sans-serif}
+body{
+  background:
+    radial-gradient(1000px 520px at 78% -10%,rgba(49,94,251,.07),transparent 70%),
+    linear-gradient(#f6f8fa,#f4f6f8);
+}
+.site-header{
+  height:78px;
+  background:rgba(247,249,251,.88);
+  border-bottom:1px solid rgba(17,19,24,.08)!important;
+  box-shadow:0 8px 30px rgba(20,30,45,.05);
+  backdrop-filter:blur(18px);
+}
+.brand{color:#111318;font:700 17px/1 "Sora",sans-serif}
+.brand-mark{
+  background:#111318;color:#fff;border-color:#111318;
+  box-shadow:none;border-radius:8px;
+}
+.nav-link{color:#667085;font-weight:650}
+.nav-link:hover,.nav-link.is-active{color:#111318}
+.nav-link:after{background:#315efb}
+.header-cta{
+  background:#111318;color:#fff;border-color:#111318;
+  border-radius:999px;padding-inline:17px;
+  box-shadow:none;
+}
+.header-cta:hover{background:#315efb;border-color:#315efb}
+.menu-toggle{background:#fff;border-color:#d7dde5}
+.menu-toggle span{background:#111318}
+.mobile-nav{background:#fff;border-bottom-color:#d7dde5}.mobile-nav a{color:#273142}
+.scroll-progress{background:#315efb;box-shadow:none}
+
+/* Hero: polished business split-card instead of cyber canvas */
+.executive-hero{
+  min-height:auto;
+  padding-top:clamp(30px,5vw,70px);
+  padding-bottom:46px;
+  background:transparent;
+}
+.executive-hero:before,.executive-hero:after{display:none}
+.executive-hero-grid{
+  min-height:690px;
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  align-items:stretch;
+  gap:0;
+  border:1px solid #dce2ea;
+  border-radius:28px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 30px 80px rgba(20,31,48,.09);
+}
+.executive-hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(48px,6vw,88px);
+  background:
+    radial-gradient(420px 300px at 6% 0%,rgba(49,94,251,.065),transparent 72%),
+    #fff;
+}
+.section-kicker{
+  color:#687385;
+  font:600 10px/1.5 "JetBrains Mono",monospace;
+  letter-spacing:.12em;
+}
+.section-kicker span{color:#315efb}
+.hero h1{
+  margin-top:0;
+  font:700 clamp(58px,6.4vw,106px)/.94 "Sora",sans-serif;
+  letter-spacing:-.075em;color:#111318;
+}
+.hero h1 span{
+  color:#315efb;background:none;-webkit-text-fill-color:initial;
+}
+.hero-intro{color:#667085;font-size:15px;line-height:1.8;max-width:560px}
+.hero-actions{margin-top:36px}
+.button{border-radius:999px;min-height:50px;padding-inline:20px}
+.button-primary{background:#315efb;border-color:#315efb;color:#fff;box-shadow:none}
+.button-primary:hover{background:#244bd5;box-shadow:0 12px 25px rgba(49,94,251,.18)}
+.button-ghost{background:#fff;border-color:#d7dde5;color:#111318}
+.button-ghost:hover{background:#f4f6f8;border-color:#bfc8d5}
+.hero-meta{border-top-color:#e1e6ed;color:#7b8494}
+.executive-hero-visual{
+  padding:22px;
+  background:linear-gradient(145deg,#edf2f8,#e9eef5);
+  display:flex;align-items:stretch;
+}
+.motion-frame{
+  width:100%;height:100%;min-height:646px;
+  transform:none!important;
+  border:0;border-radius:22px;
+  background:#0d1525;
+  box-shadow:0 24px 50px rgba(13,21,37,.18);
+}
+.motion-frame:before{border-radius:22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.motion-video{filter:saturate(1.02) contrast(1.04) brightness(.92)}
+.motion-shade{background:linear-gradient(0deg,rgba(13,21,37,.52),transparent 36%,transparent 78%,rgba(13,21,37,.18))}
+.ui-label,.ui-coordinate{font-family:"JetBrains Mono",monospace}
+.ui-label{color:#fff}.ui-coordinate{color:#b8c4d5}
+.ui-corner{border-color:#6ea1ff}.ui-orbit{border-color:#6f99ff38}
+.ui-pulse{background:#fff;box-shadow:0 0 0 6px #ffffff12,0 0 28px #315efb66}
+.visual-note{color:#657183}
+.visual-dot{background:#315efb;box-shadow:none}
+.hero-partners{
+  margin-top:24px;padding:18px 0 0;
+  border-top:1px solid #d9dfe7;color:#677386;
+  justify-content:flex-start;
+}
+.hero-partners i{background:#315efb}
+
+/* Shared business sections */
+.section-index{
+  border-top:1px solid #d5dbe4;
+  color:#7a8493;
+  font-family:"JetBrains Mono",monospace;
+}
+.section-index span:first-child{color:#315efb}
+.services,.process,.about{background:transparent}
+.services,.work,.process,.about,.contact{padding-top:110px;padding-bottom:120px}
+.services-heading,.work-heading{margin-top:36px}
+.services-heading h2,.work-heading h2,.process-heading h2,.about-grid h2,.contact-copy h2{
+  font-family:"Sora",sans-serif;
+}
+.services-heading h2,.process-heading h2,.about-grid h2{color:#111318}
+.services-heading h2 span,.process-heading h2 span,.about-grid h2 span{color:#315efb}
+.services-heading p,.process-heading p,.about-grid p{color:#667085}
+
+/* Services: premium product cards */
+.services-inline{gap:18px}
+.service-card{
+  min-height:490px;
+  border:1px solid #dce2ea;
+  border-radius:20px;
+  background:#fff!important;
+  box-shadow:0 18px 45px rgba(23,34,51,.06)!important;
+  padding:30px 26px 26px;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.service-card:hover{transform:translateY(-6px);border-color:#bfc9d8!important;box-shadow:0 24px 60px rgba(23,34,51,.10)!important}
+.service-card-top{margin-bottom:42px}
+.service-number{color:#315efb!important;font-family:"JetBrains Mono",monospace}
+.service-rule{background:#e0e5ec!important}
+.service-card h3{color:#111318;font-family:"Sora",sans-serif;font-size:clamp(30px,2.5vw,42px)}
+.service-card>p{color:#667085}
+.tool-grid{gap:10px}
+.tool-cube{
+  min-height:78px;
+  background:#f6f8fb!important;
+  border:1px solid #dce3ec!important;
+  box-shadow:none!important;
+  transform:none!important;
+  border-radius:12px;
+}
+.tool-cube:hover{transform:translateY(-2px)!important;border-color:#9fb4d5!important;box-shadow:0 10px 24px rgba(49,94,251,.08)!important}
+.tool-cube img{filter:none;transform:none}
+.tool-cube span{color:#2b3442}
+
+/* Work: editorial dark band */
+.work{
+  width:100%;max-width:none;
+  padding-inline:max(var(--side),calc((100vw - var(--max))/2 + var(--side)));
+  background:#111318;
+  color:#fff;
+}
+.work .section-index{border-top-color:#30343b;color:#7e8797}
+.work .section-index span:first-child{color:#89a8ff}
+.work-heading h2{color:#fff}
+.work-heading h2 span{color:#89a8ff}
+.work-heading p{color:#98a2b3}
+.work-carousel-head{border-bottom-color:#2c3138}
+.work-carousel-hint{color:#8b95a5}
+.work-live-dot{background:#39c8ff;box-shadow:none}
+.work-arrow{background:#1a1e25;border-color:#333b46;color:#fff}
+.work-arrow:hover{background:#315efb;border-color:#315efb}
+.project-card{opacity:.62;filter:none}
+.project-card.is-active{opacity:1}
+.project-preview{border-radius:18px;border-color:#2a313b;background:#1a1e25}
+.project-card.is-active .project-preview{border-color:#546174;box-shadow:0 30px 70px #0008}
+.site-thumbnail:before{background:#1a1e25}
+.site-thumbnail img{filter:saturate(.98) contrast(1.02) brightness(.95)}
+.project-card.is-active .site-thumbnail img{filter:saturate(1.03) contrast(1.03) brightness(1)}
+.thumbnail-label{
+  background:rgba(17,19,24,.84);
+  border-color:#ffffff2e;color:#fff;
+  border-radius:999px;padding:7px 10px;
+}
+.project-info>span{color:#8fa8ff!important}
+.project-info h3{color:#fff;font-family:"Sora",sans-serif}
+.project-info p{color:#a1a9b6}
+.project-info b{color:#fff}
+.work-dot{background:#353b45}
+.work-dot.is-active{background:#315efb;box-shadow:none}
+
+/* Process: horizontal executive timeline */
+.process-grid{grid-template-columns:.8fr 1.2fr;gap:80px}
+.process-steps{border-top:1px solid #d7dde5}
+.process-step{border-bottom:1px solid #d7dde5;padding:34px 0}
+.process-step>span{color:#315efb}
+.process-step h3{font-family:"Sora",sans-serif;color:#111318}
+.process-step p{color:#667085}
+.process-step b{color:#315efb}
+
+/* About: quiet editorial block */
+.about{
+  background:#edf1f5;
+  width:100%;max-width:none;
+  padding-inline:max(var(--side),calc((100vw - var(--max))/2 + var(--side)));
+}
+.about .section-index{border-top-color:#cfd7e0}
+.about-grid{grid-template-columns:1.08fr .92fr;gap:90px}
+.about-grid a{color:#111318;border-bottom-color:#315efb;font-weight:700}
+
+/* Contact: premium dark close */
+.contact{
+  width:100%;max-width:none;
+  padding-inline:max(var(--side),calc((100vw - var(--max))/2 + var(--side)));
+  background:#0d1525;
+  color:#fff;
+}
+.contact .section-index{border-top-color:#2a3850;color:#8591a5}
+.contact .section-index span:first-child{color:#7ea0ff}
+.contact-copy h2{color:#fff}
+.contact-copy h2 span{color:#89a8ff;background:none;-webkit-text-fill-color:initial}
+.contact-copy p{color:#a2aec0}
+.contact-whatsapp{color:#fff;border-bottom-color:#315efb}
+.contact-form{
+  background:#131d2e;border:1px solid #2b3b56;border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,.16);
+}
+.contact-form label{color:#dfe7f2}
+.contact-form input,.contact-form select,.contact-form textarea{
+  background:#0d1525;border-color:#34445f;color:#fff;border-radius:10px;
+}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{
+  border-color:#6f91ff;box-shadow:0 0 0 3px rgba(49,94,251,.14)
+}
+.contact-submit-row button{background:#315efb;border-color:#315efb;border-radius:999px}
+.contact-submit-row button:hover{background:#244bd5}
+.contact-footer{border-top-color:#2b3a51}
+.email-copy,.contact-footer>a{color:#dce6f5}
+.footer{
+  background:#0a101d;color:#7f8a9d;border-top-color:#22304a;
+}
+.footer>a:first-child{color:#fff;font-family:"Sora",sans-serif}
+.footer>a:last-child{color:#b7c4d6}
+.wa-panel{background:#111b2d;border-color:#31435f}
+.wa-panel-head{border-bottom-color:#2c3c56}
+.wa-panel p{color:#b2bfd0}
+
+/* Responsive */
+@media(max-width:1000px){
+  .executive-hero-grid{grid-template-columns:1fr;min-height:0}
+  .executive-hero-visual{min-height:520px}
+  .motion-frame{min-height:480px}
+  .services-inline{grid-template-columns:1fr}
+  .service-card{min-height:auto}
+  .process-grid,.about-grid{grid-template-columns:1fr;gap:45px}
+}
+@media(max-width:650px){
+  .site-header{height:68px}
+  .executive-hero{padding-top:18px}
+  .executive-hero-grid{border-radius:18px}
+  .executive-hero-copy{padding:34px 22px 28px}
+  .hero h1{font-size:clamp(46px,14vw,68px)}
+  .executive-hero-visual{padding:10px;min-height:390px}
+  .motion-frame{min-height:370px;border-radius:14px}
+  .hero-actions{grid-template-columns:1fr}
+  .services,.work,.process,.about,.contact{padding-top:82px;padding-bottom:88px}
+  .service-card{padding:24px 20px}
+  .work{padding-inline:18px}
+  .about,.contact{padding-inline:18px}
+  .contact-form{padding:20px}
+}
