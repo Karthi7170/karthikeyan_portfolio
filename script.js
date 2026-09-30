@@ -11,6 +11,7 @@
   const navLinks=$$('.nav-link');
   const sections=$$('main section[id]');
   const toast=$('.toast');
+  window.__aimadDebug={stage:'selectors'};
 
   function setMenu(open){
     menu.setAttribute('aria-expanded',String(open));
@@ -41,7 +42,9 @@
   addEventListener('scroll',onScroll,{passive:true});
   addEventListener('resize',onScroll,{passive:true});
   updateScroll();
+  window.__aimadDebug.stage='scroll-ready';
 
+  window.__aimadDebug.stage='before-reveal';
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
@@ -55,8 +58,10 @@
 
   // Selected Work carousel: cinematic horizontal swipe every 2 seconds.
   // Autoplay pauses on hover/focus/touch and is disabled for reduced-motion users.
+  window.__aimadDebug.stage='before-carousel';
   const workCarousel=$('[data-work-carousel]');
   if(workCarousel){
+    window.__aimadDebug.stage='carousel-found';
     const viewport=$('.work-viewport',workCarousel);
     const slides=$('[data-work-slide]',workCarousel);
     const dots=$('[data-work-dot]',workCarousel);
@@ -69,6 +74,7 @@
     let scrollTimer=0;
     let programmatic=false;
     const labels=slides.map(slide=>slide.querySelector('h3')?.textContent.trim()||'Project');
+    window.__aimadDebug.stage='carousel-data';
 
     function updateWorkUI(index,{scroll=true,smooth=true,announce=false}={}){
       workIndex=(index+slides.length)%slides.length;
@@ -126,6 +132,7 @@
     workCarousel.dataset.autoTicks='0';
     updateWorkUI(0,{scroll:false});
     startAuto();
+    window.__aimadDebug.stage='carousel-ready';
   }
 
   if(finePointer.matches&&!reduceMotion.matches){
