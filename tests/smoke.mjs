@@ -68,8 +68,8 @@ test('Selected work is a user-controllable 2-second swipe carousel',()=>{
   assert.match(html,/data-work-carousel/);
   assert.equal((html.match(/data-work-slide/g)??[]).length,4);
   assert.equal((html.match(/data-work-dot=/g)??[]).length,4);
-  assert.match(html,/class="work-prev"/);
-  assert.match(html,/class="work-next"/);
+  assert.match(html,/class="[^"]*work-prev[^"]*"/);
+  assert.match(html,/class="[^"]*work-next[^"]*"/);
   assert.match(css,/scroll-snap-type:x mandatory/);
   assert.match(css,/\.project-card\.is-active/);
   assert.match(js,/setInterval\(\(\)=>updateWorkUI\(workIndex\+1,[\s\S]*?2000\)/);
