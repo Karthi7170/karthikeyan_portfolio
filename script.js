@@ -142,4 +142,35 @@
       });
     }
   }
+  // Projects auto-slider
+  const sliders = $(".project-slider[data-project-slider]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  sliders.forEach(slider => {
+    const track=$(".project-track",slider), viewport=$(".project-viewport",slider), prev=$(".project-prev",slider), next=$(".project-next",slider), dotsWrap=$(".project-dots",slider);
+    if(!track||!viewport||!prev||!next||!dotsWrap) return;
+    const originals=Array.from(track.children), count=originals.length;
+    if(count<2) return;
+    originals.forEach(card=>{const clone=card.cloneNode(true);clone.setAttribute("aria-hidden","true");clone.classList.add("slider-clone","visible");clone.classList.remove("reveal");track.appendChild(clone);});
+    let index=0,timer=null,paused=false,startX=null;
+    const dots=originals.map((_,i)=>{const dot=document.createElement("button");dot.className="project-dot"+(i===0?" active":"");dot.type="button";dot.setAttribute("role","tab");dot.setAttribute("aria-label","Show project "+(i+1));dot.setAttribute("aria-selected",String(i===0));dot.addEventListener("click",()=>{index=i;render(true);start();});dotsWrap.appendChild(dot);return dot;});
+    const gap=()=>parseFloat(getComputedStyle(track).gap||"18")||18;
+    const step=()=>{const card=track.querySelector(".project-slide");return card?card.getBoundingClientRect().width+gap():viewport.clientWidth;};
+    const logical=()=>((index%count)+count)%count;
+    function updateDots(){const active=logical();dots.forEach((dot,i)=>{const on=i===active;dot.classList.toggle("active",on);dot.setAttribute("aria-selected",String(on));});}
+    function render(animate=true){track.style.transition=animate&&!reducedMotion?"transform .6s cubic-bezier(.22,.61,.36,1)":"none";track.style.transform="translate3d("+(-index*step())+"px,0,0)";updateDots();}
+    function nextSlide(){index+=1;render(true);}
+    function prevSlide(){if(index===0){index=count;render(false);requestAnimationFrame(()=>requestAnimationFrame(()=>{index=count-1;render(true);}));}else{index-=1;render(true);}}
+    function stop(){if(timer){clearInterval(timer);timer=null;}}
+    function start(){stop();if(!reducedMotion&&!paused) timer=setInterval(nextSlide,3000);}
+    track.addEventListener("transitionend",()=>{if(index>=count){index%=count;render(false);}});
+    next.addEventListener("click",()=>{nextSlide();start();});
+    prev.addEventListener("click",()=>{prevSlide();start();});
+    slider.addEventListener("mouseenter",()=>{paused=true;stop();});
+    slider.addEventListener("mouseleave",()=>{paused=false;start();});
+    viewport.addEventListener("touchstart",e=>{paused=true;stop();startX=e.touches[0]?.clientX??null;},{passive:true});
+    viewport.addEventListener("touchend",e=>{const endX=e.changedTouches[0]?.clientX??null;if(startX!==null&&endX!==null){const dx=endX-startX;if(Math.abs(dx)>45)(dx<0?nextSlide:prevSlide)();}startX=null;setTimeout(()=>{paused=false;start();},900);},{passive:true});
+    window.addEventListener("resize",()=>render(false),{passive:true});
+    render(false);start();
+  });
+
 })();
