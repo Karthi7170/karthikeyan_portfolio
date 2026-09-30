@@ -124,23 +124,41 @@
     <section id="work" class="work section-shell">
       <div class="section-index reveal"><span>04 / Selected work</span><span>Real projects, different worlds</span></div>
       <div class="work-heading reveal"><h2>Work that moves<br><span>from idea to real.</span></h2><p>Four projects built around four very different problems.</p></div>
-      <div class="project-list">
-        <a class="project-card reveal" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer">
-          <div class="project-preview project-tiles"><div class="preview-browser"><span>NEW ROYAL</span><strong>Spaces worth<br>staying in.</strong><i>↗</i></div></div>
-          <div class="project-info"><span>01 / SHOWROOM WEBSITE</span><h3>New Royal Tiles</h3><p>A premium digital storefront for a physical showroom.</p><b>Visit site ↗</b></div>
-        </a>
-        <a class="project-card reveal" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer">
-          <div class="project-preview project-film"><div class="film-word">SUGUMAR</div><span>SELECTED FILMS / EDITORIAL PORTFOLIO</span></div>
-          <div class="project-info"><span>02 / CREATOR PORTFOLIO</span><h3>Sugumar Portfolio</h3><p>A cinematic home for a video editor's work.</p><b>Visit site ↗</b></div>
-        </a>
-        <a class="project-card reveal" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer">
-          <div class="project-preview project-vip"><div class="vip-ui"><small>VIP — HUNTER</small><strong>Your next move,<br>in sight.</strong><span>Discover opportunities ↗</span></div></div>
-          <div class="project-info"><span>03 / WEB APPLICATION</span><h3>VIP-Hunter</h3><p>A job-discovery experience for the next career step.</p><b>Visit app ↗</b></div>
-        </a>
-        <a class="project-card reveal" href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer">
-          <div class="project-preview project-school"><div class="school-ui"><small>DECCAN</small><strong>BIG FUTURES<br>START HERE.</strong><span>AIM · ATTEMPT · ACHIEVE</span></div></div>
-          <div class="project-info"><span>04 / EDUCATION WEBSITE</span><h3>Deccan School</h3><p>A welcoming web presence for a learning community.</p><b>Visit site ↗</b></div>
-        </a>
+      <div class="work-carousel reveal" data-work-carousel aria-roledescription="carousel" aria-label="Selected AI x MAD projects">
+        <div class="work-carousel-head">
+          <p class="work-carousel-hint"><span class="work-live-dot" aria-hidden="true"></span> Auto swipe every 2 seconds <span class="desktop-hint">· Hover to pause</span></p>
+          <div class="work-carousel-controls">
+            <button type="button" class="work-arrow work-prev" aria-label="Show previous project">←</button>
+            <button type="button" class="work-arrow work-next" aria-label="Show next project">→</button>
+          </div>
+        </div>
+        <div class="work-viewport" tabindex="0">
+          <div class="project-list work-track">
+            <a class="project-card is-active" data-work-slide aria-current="true" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <div class="project-preview project-tiles"><div class="preview-browser"><span>NEW ROYAL</span><strong>Spaces worth<br>staying in.</strong><i>↗</i></div></div>
+              <div class="project-info"><span>01 / SHOWROOM WEBSITE</span><h3>New Royal Tiles</h3><p>A premium digital storefront for a physical showroom.</p><b>Visit site ↗</b></div>
+            </a>
+            <a class="project-card" data-work-slide href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <div class="project-preview project-film"><div class="film-word">SUGUMAR</div><span>SELECTED FILMS / EDITORIAL PORTFOLIO</span></div>
+              <div class="project-info"><span>02 / CREATOR PORTFOLIO</span><h3>Sugumar Portfolio</h3><p>A cinematic home for a video editor's work.</p><b>Visit site ↗</b></div>
+            </a>
+            <a class="project-card" data-work-slide href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <div class="project-preview project-vip"><div class="vip-ui"><small>VIP — HUNTER</small><strong>Your next move,<br>in sight.</strong><span>Discover opportunities ↗</span></div></div>
+              <div class="project-info"><span>03 / WEB APPLICATION</span><h3>VIP-Hunter</h3><p>A job-discovery experience for the next career step.</p><b>Visit app ↗</b></div>
+            </a>
+            <a class="project-card" data-work-slide href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer">
+              <div class="project-preview project-school"><div class="school-ui"><small>DECCAN</small><strong>BIG FUTURES<br>START HERE.</strong><span>AIM · ATTEMPT · ACHIEVE</span></div></div>
+              <div class="project-info"><span>04 / EDUCATION WEBSITE</span><h3>Deccan School</h3><p>A welcoming web presence for a learning community.</p><b>Visit site ↗</b></div>
+            </a>
+          </div>
+        </div>
+        <div class="work-pagination" role="tablist" aria-label="Choose project">
+          <button type="button" class="work-dot is-active" data-work-dot="0" aria-label="Show New Royal Tiles" aria-selected="true"></button>
+          <button type="button" class="work-dot" data-work-dot="1" aria-label="Show Sugumar Portfolio" aria-selected="false"></button>
+          <button type="button" class="work-dot" data-work-dot="2" aria-label="Show VIP-Hunter" aria-selected="false"></button>
+          <button type="button" class="work-dot" data-work-dot="3" aria-label="Show Deccan School" aria-selected="false"></button>
+        </div>
+        <p class="sr-only" aria-live="polite" id="work-carousel-status">Showing project 1 of 4: New Royal Tiles</p>
       </div>
     </section>
 
