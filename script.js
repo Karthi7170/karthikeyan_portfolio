@@ -68,7 +68,6 @@
     let resumeTimer=0;
     let scrollTimer=0;
     let programmatic=false;
-    let inView=true;
     const labels=slides.map(slide=>slide.querySelector('h3')?.textContent.trim()||'Project');
 
     function updateWorkUI(index,{scroll=true,smooth=true,announce=false}={}){
@@ -96,7 +95,7 @@
     function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
     function startAuto(){
       stopAuto();
-      if(reduceMotion.matches||!inView||document.hidden)return;
+      if(reduceMotion.matches||document.hidden)return;
       workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
     }
     function restartLater(delay=2800){
@@ -128,13 +127,6 @@
       },130);
     },{passive:true});
 
-    if('IntersectionObserver' in window){
-      const workObserver=new IntersectionObserver(entries=>{
-        inView=entries[0]?.isIntersecting??true;
-        if(inView)startAuto();else stopAuto();
-      },{threshold:.2});
-      workObserver.observe(workCarousel);
-    }
     document.addEventListener('visibilitychange',()=>document.hidden?stopAuto():startAuto());
     if(reduceMotion.addEventListener)reduceMotion.addEventListener('change',()=>reduceMotion.matches?stopAuto():startAuto());
 
