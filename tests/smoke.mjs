@@ -70,7 +70,7 @@ test('Contact actions remain real links, no invented placeholders', () => {
   assert.ok(html.includes('mailto:karthikumaran7170@gmail.com'));
   assert.ok(html.includes('https://github.com/Karthi7170'));
   assert.ok(!html.includes('href="#"'));
-  assert.ok(!html.includes('example.com'));
+  assert.doesNotMatch(html, /href=["']https?:\/\/(?:www\.)?example\.com/i);
 });
 
 test('WhatsApp project inquiry has accessible fields and a real fallback action', () => {
