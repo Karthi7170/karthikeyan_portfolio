@@ -598,7 +598,23 @@ button{cursor:pointer}
 
 /* Four requested visual updates */
 .hero-picture{display:block;width:100%;line-height:0;animation:heroLaptopFloat 7s ease-in-out infinite;will-change:transform}
-.hero-laptop-image{display:block;width:100%;max-width:860px;height:auto;object-fit:contain;margin-inline:auto;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;filter:none!important;-webkit-mask-image:radial-gradient(ellipse 94% 92% at 50% 49%,#000 0 67%,rgba(0,0,0,.95) 76%,rgba(0,0,0,.52) 89%,transparent 100%);mask-image:radial-gradient(ellipse 94% 92% at 50% 49%,#000 0 67%,rgba(0,0,0,.95) 76%,rgba(0,0,0,.52) 89%,transparent 100%)}
+.hero-laptop-image{
+  display:block;
+  width:100%;
+  max-width:860px;
+  height:auto;
+  object-fit:contain;
+  margin-inline:auto;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:contrast(1.03) saturate(1.035)!important;
+  mix-blend-mode:multiply;
+  image-rendering:auto;
+  -webkit-mask-image:radial-gradient(ellipse 99% 97% at 50% 50%,#000 0 82%,rgba(0,0,0,.98) 89%,rgba(0,0,0,.72) 95%,transparent 100%);
+  mask-image:radial-gradient(ellipse 99% 97% at 50% 50%,#000 0 82%,rgba(0,0,0,.98) 89%,rgba(0,0,0,.72) 95%,transparent 100%);
+}
 @keyframes heroLaptopFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 .service-card>i.service-icon{width:48px;height:48px;display:grid;place-items:center;overflow:visible;background:transparent;border-radius:0}
