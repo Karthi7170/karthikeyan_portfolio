@@ -23,6 +23,12 @@ try{
   assert.ok(Math.max(...serviceBoxes.map(x=>x.top))-Math.min(...serviceBoxes.map(x=>x.top))<8,'Desktop services should share one row');
   assert.equal(await desktop.locator('.site-thumbnail img').count(),4,'Every project should use a live-site thumbnail');
   assert.equal(await desktop.locator('.wa-launcher svg').count(),1,'WhatsApp launcher should use the icon');
+  assert.equal(await desktop.locator('meta[name="theme-color"]').getAttribute('content'),'#050712');
+  const serviceBackgrounds=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>getComputedStyle(c).backgroundImage));
+  assert.equal(new Set(serviceBackgrounds).size,3,'Each service family should have a distinct colorful treatment');
+  const activeThumbFilter=await desktop.locator('.project-card.is-active .site-thumbnail img').evaluate(el=>getComputedStyle(el).filter);
+  assert.equal(/grayscale\(1\)/.test(activeThumbFilter),false,'Active project thumbnail should retain color');
+
 
   await desktop.locator('[data-work-carousel]').scrollIntoViewIfNeeded();
   await desktop.waitForTimeout(250);
