@@ -95,7 +95,6 @@
     function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
     function startAuto(){
       stopAuto();
-      if(reduceMotion.matches||document.hidden)return;
       workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
     }
     function restartLater(delay=2800){
@@ -107,8 +106,6 @@
     next?.addEventListener('click',()=>{updateWorkUI(workIndex+1,{announce:true});restartLater()});
     dots.forEach((dot,i)=>dot.addEventListener('click',()=>{updateWorkUI(i,{announce:true});restartLater()}));
 
-    workCarousel.addEventListener('focusin',stopAuto);
-    workCarousel.addEventListener('focusout',e=>{if(!workCarousel.contains(e.relatedTarget))startAuto()});
     viewport.addEventListener('pointerdown',()=>{stopAuto();clearTimeout(resumeTimer)},{passive:true});
     viewport.addEventListener('pointerup',()=>restartLater(2500),{passive:true});
     viewport.addEventListener('touchend',()=>restartLater(2500),{passive:true});
@@ -126,7 +123,6 @@
     },{passive:true});
 
     document.addEventListener('visibilitychange',()=>document.hidden?stopAuto():startAuto());
-    if(reduceMotion.addEventListener)reduceMotion.addEventListener('change',()=>reduceMotion.matches?stopAuto():startAuto());
 
     updateWorkUI(0,{scroll:false});
     startAuto();
