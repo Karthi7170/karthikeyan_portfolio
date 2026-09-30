@@ -53,7 +53,7 @@
     $$('.reveal').forEach(el=>io.observe(el));
   }else{$$('.reveal').forEach(el=>el.classList.add('is-visible'))}
 
-  // Selected Work carousel: cinematic horizontal swipe every 2 seconds.
+  // Selected Work carousel: cinematic horizontal swipe every 3 seconds.
   // Autoplay pauses on hover/focus/touch and is disabled for reduced-motion users.
   const workCarousel=$('[data-work-carousel]');
   if(workCarousel){
@@ -95,9 +95,9 @@
     function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
     function startAuto(){
       stopAuto();
-      workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
+      workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),3000);
     }
-    function restartLater(delay=2800){
+    function restartLater(delay=3800){
       stopAuto();clearTimeout(resumeTimer);
       resumeTimer=setTimeout(startAuto,delay);
     }
@@ -107,8 +107,8 @@
     dots.forEach((dot,i)=>dot.addEventListener('click',()=>{updateWorkUI(i,{announce:true});restartLater()}));
 
     viewport.addEventListener('pointerdown',()=>{stopAuto();clearTimeout(resumeTimer)},{passive:true});
-    viewport.addEventListener('pointerup',()=>restartLater(2500),{passive:true});
-    viewport.addEventListener('touchend',()=>restartLater(2500),{passive:true});
+    viewport.addEventListener('pointerup',()=>restartLater(3500),{passive:true});
+    viewport.addEventListener('touchend',()=>restartLater(3500),{passive:true});
     viewport.addEventListener('scroll',()=>{
       if(programmatic)return;
       clearTimeout(scrollTimer);
