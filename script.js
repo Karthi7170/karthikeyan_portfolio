@@ -53,6 +53,95 @@
     $$('.reveal').forEach(el=>io.observe(el));
   }else{$$('.reveal').forEach(el=>el.classList.add('is-visible'))}
 
+  // Selected Work carousel: cinematic horizontal swipe every 2 seconds.
+  // Autoplay pauses on hover/focus/touch and is disabled for reduced-motion users.
+  const workCarousel=$('[data-work-carousel]');
+  if(workCarousel){
+    const viewport=$('.work-viewport',workCarousel);
+    const slides=$('[data-work-slide]',workCarousel);
+    const dots=$('[data-work-dot]',workCarousel);
+    const prev=$('.work-prev',workCarousel);
+    const next=$('.work-next',workCarousel);
+    const status=$('#work-carousel-status');
+    let workIndex=0;
+    let workTimer=0;
+    let resumeTimer=0;
+    let scrollTimer=0;
+    let programmatic=false;
+    let inView=true;
+    const labels=slides.map(slide=>slide.querySelector('h3')?.textContent.trim()||'Project');
+
+    function updateWorkUI(index,{scroll=true,smooth=true,announce=false}={}){
+      workIndex=(index+slides.length)%slides.length;
+      slides.forEach((slide,i)=>{
+        const active=i===workIndex;
+        slide.classList.toggle('is-active',active);
+        if(active)slide.setAttribute('aria-current','true');else slide.removeAttribute('aria-current');
+      });
+      dots.forEach((dot,i)=>{
+        const active=i===workIndex;
+        dot.classList.toggle('is-active',active);
+        dot.setAttribute('aria-selected',String(active));
+      });
+      if(status&&announce)status.textContent='Showing project '+(workIndex+1)+' of '+slides.length+': '+labels[workIndex];
+      if(scroll){
+        programmatic=true;
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          const left=Math.max(0,slides[workIndex].offsetLeft-viewport.offsetLeft);
+          viewport.scrollTo({left,behavior:smooth&&!reduceMotion.matches?'smooth':'auto'});
+          setTimeout(()=>{programmatic=false},700);
+        }));
+      }
+    }
+    function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
+    function startAuto(){
+      stopAuto();
+      if(reduceMotion.matches||!inView||document.hidden)return;
+      workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
+    }
+    function restartLater(delay=2800){
+      stopAuto();clearTimeout(resumeTimer);
+      resumeTimer=setTimeout(startAuto,delay);
+    }
+
+    prev?.addEventListener('click',()=>{updateWorkUI(workIndex-1,{announce:true});restartLater()});
+    next?.addEventListener('click',()=>{updateWorkUI(workIndex+1,{announce:true});restartLater()});
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{updateWorkUI(i,{announce:true});restartLater()}));
+
+    workCarousel.addEventListener('mouseenter',stopAuto);
+    workCarousel.addEventListener('mouseleave',startAuto);
+    workCarousel.addEventListener('focusin',stopAuto);
+    workCarousel.addEventListener('focusout',e=>{if(!workCarousel.contains(e.relatedTarget))startAuto()});
+    viewport.addEventListener('pointerdown',()=>{stopAuto();clearTimeout(resumeTimer)},{passive:true});
+    viewport.addEventListener('pointerup',()=>restartLater(2500),{passive:true});
+    viewport.addEventListener('touchend',()=>restartLater(2500),{passive:true});
+    viewport.addEventListener('scroll',()=>{
+      if(programmatic)return;
+      clearTimeout(scrollTimer);
+      scrollTimer=setTimeout(()=>{
+        let nearest=0,dist=Infinity;
+        slides.forEach((slide,i)=>{
+          const d=Math.abs(slide.offsetLeft-viewport.scrollLeft);
+          if(d<dist){dist=d;nearest=i}
+        });
+        if(nearest!==workIndex)updateWorkUI(nearest,{scroll:false,announce:true});
+      },130);
+    },{passive:true});
+
+    if('IntersectionObserver' in window){
+      const workObserver=new IntersectionObserver(entries=>{
+        inView=entries[0]?.isIntersecting??true;
+        if(inView)startAuto();else stopAuto();
+      },{threshold:.2});
+      workObserver.observe(workCarousel);
+    }
+    document.addEventListener('visibilitychange',()=>document.hidden?stopAuto():startAuto());
+    if(reduceMotion.addEventListener)reduceMotion.addEventListener('change',()=>reduceMotion.matches?stopAuto():startAuto());
+
+    updateWorkUI(0,{scroll:false});
+    startAuto();
+  }
+
   if(finePointer.matches&&!reduceMotion.matches){
     const frame=$('.motion-frame');
     const visual=$('.hero-visual');
