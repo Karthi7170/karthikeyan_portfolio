@@ -64,7 +64,7 @@ test('External project links are protected',()=>{
 });
 
 
-test('Selected work is a user-controllable 2-second swipe carousel',()=>{
+test('Selected work is a user-controllable 3-second swipe carousel',()=>{
   assert.match(html,/data-work-carousel/);
   assert.equal((html.match(/data-work-slide/g)??[]).length,4);
   assert.equal((html.match(/data-work-dot=/g)??[]).length,4);
@@ -72,7 +72,8 @@ test('Selected work is a user-controllable 2-second swipe carousel',()=>{
   assert.match(html,/class="[^"]*work-next[^"]*"/);
   assert.match(css,/scroll-snap-type:x mandatory/);
   assert.match(css,/\.project-card\.is-active/);
-  assert.match(js,/setInterval\([\s\S]*?updateWorkUI\(workIndex\+1,[\s\S]*?2000\)/);
+  assert.match(css,/\.project-card\.is-active\{flex-basis:clamp\(480px,42vw,680px\)/);
+  assert.match(js,/setInterval\([\s\S]*?updateWorkUI\(workIndex\+1,[\s\S]*?3000\)/);
   assert.match(js,/reduceMotion\.matches/);
   assert.match(js,/pointerdown',\(\)=>\{stopAuto/);
 });
