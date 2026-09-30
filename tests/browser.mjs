@@ -6,7 +6,7 @@ const base='http://127.0.0.1:4173';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const errors=[];mkdirSync('artifacts',{recursive:true});
 try{
-  const desktop=await browser.newPage({viewport:{width:1440,height:900}});
+  const desktop=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
   desktop.on('pageerror',e=>errors.push('desktop: '+e.message));
   await desktop.goto(base,{waitUntil:'domcontentloaded'});
   await desktop.waitForSelector('.hero-grid');
@@ -62,7 +62,7 @@ try{
   await desktop.screenshot({path:'artifacts/desktop-full.png',fullPage:true,animations:'disabled'});
   assert.equal(await desktop.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
 
-  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'no-preference'});
   mobile.on('pageerror',e=>errors.push('mobile: '+e.message));
   await mobile.goto(base,{waitUntil:'domcontentloaded'});
   assert.equal(await mobile.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
@@ -83,7 +83,7 @@ try{
   await mobile.waitForTimeout(80);
   assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
 
-  const uhd=await browser.newPage({viewport:{width:3840,height:2160}});
+  const uhd=await browser.newPage({viewport:{width:3840,height:2160},reducedMotion:'no-preference'});
   uhd.on('pageerror',e=>errors.push('uhd: '+e.message));
   await uhd.goto(base,{waitUntil:'domcontentloaded'});
   await uhd.evaluate(async()=>{await document.fonts.ready});
