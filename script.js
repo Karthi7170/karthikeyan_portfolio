@@ -13,6 +13,23 @@
   function setWA(open){ if(!launcher||!panel)return; panel.hidden=!open; }
   launcher?.addEventListener("click",()=>setWA(panel.hidden)); close?.addEventListener("click",()=>setWA(false));
 
+  const onePageLinks=$(".onepage-nav a[href^='#']");
+  const onePageSections=$(".page-section[id]");
+  if(onePageLinks.length && onePageSections.length){
+    const updateActive=()=>{
+      const marker=window.scrollY+110;
+      let active="home";
+      for(const section of onePageSections){
+        if(section.offsetTop<=marker) active=section.id;
+        else break;
+      }
+      onePageLinks.forEach(link=>link.classList.toggle("active",link.getAttribute("href")==="#"+active));
+    };
+    window.addEventListener("scroll",updateActive,{passive:true});
+    window.addEventListener("resize",updateActive,{passive:true});
+    updateActive();
+  }
+
   const year=$("#year"); if(year)year.textContent=new Date().getFullYear();
 
   const filters=$$(".filter-bar button"), projects=$$("[data-type]");
