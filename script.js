@@ -1,4 +1,4 @@
-/* AI-MAD Creative Lab — progressive enhancement, no third-party JS. */
+/* AI-MAD Cyber Lab — responsive interactions, no third-party JavaScript. */
 (() => {
   'use strict';
   const root = document.documentElement;
@@ -45,7 +45,7 @@
     themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     themeButton.setAttribute('title', dark ? 'Switch to light theme' : 'Switch to dark theme');
     themeButton.querySelector('.theme-glyph').textContent = dark ? '☀' : '◐';
-    $('meta[name="theme-color"]').setAttribute('content', dark ? '#111119' : '#f5f4ee');
+    $('meta[name="theme-color"]').setAttribute('content', dark ? '#050d15' : '#070b0c');
     try { localStorage.setItem('aimad-theme', dark ? 'dark' : 'light'); } catch (_) { /* private browsing */ }
   }
   try {
@@ -172,7 +172,7 @@
       const bounds = portrait.getBoundingClientRect();
       const x = (event.clientX - bounds.left) / bounds.width - .5;
       const y = (event.clientY - bounds.top) / bounds.height - .5;
-      portrait.style.transform = 'rotate(5deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg)';
+      portrait.style.transform = 'rotate(3deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg)';
     });
     portrait.addEventListener('pointerleave', () => portrait.style.removeProperty('transform'));
     window.addEventListener('pointermove', event => {
