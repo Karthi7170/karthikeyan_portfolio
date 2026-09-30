@@ -16,6 +16,13 @@ try{
   assert.equal(await desktop.locator('#hero-motion-video').count(),1);
   assert.equal(await desktop.locator('.project-card').count(),4);
   assert.equal(await desktop.locator('.contact-form').count(),1);
+  assert.equal(await desktop.locator('.browser-stage').count(),0,'Oversized browser mockup should be removed');
+  assert.equal(await desktop.locator('.service-card').count(),3);
+  const serviceBoxes=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>({top:c.getBoundingClientRect().top,left:c.getBoundingClientRect().left,width:c.getBoundingClientRect().width,tools:c.querySelectorAll('.tool-cube').length})));
+  assert.ok(serviceBoxes.every(x=>x.tools>=4),'Each service should show at least four tool logos');
+  assert.ok(Math.max(...serviceBoxes.map(x=>x.top))-Math.min(...serviceBoxes.map(x=>x.top))<8,'Desktop services should share one row');
+  assert.equal(await desktop.locator('.site-thumbnail img').count(),4,'Every project should use a live-site thumbnail');
+  assert.equal(await desktop.locator('.wa-launcher svg').count(),1,'WhatsApp launcher should use the icon');
 
   await desktop.locator('[data-work-carousel]').scrollIntoViewIfNeeded();
   await desktop.waitForTimeout(250);
@@ -68,6 +75,8 @@ try{
   mobile.on('pageerror',e=>errors.push('mobile: '+e.message));
   await mobile.goto(base,{waitUntil:'domcontentloaded'});
   assert.equal(await mobile.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
+  assert.equal(await mobile.locator('.service-card').count(),3);
+  assert.equal(await mobile.locator('.tool-cube').count()>=12,true);
   await mobile.locator('.menu-toggle').click();
   assert.equal(await mobile.locator('.mobile-nav').isVisible(),true);
   await mobile.locator('.mobile-nav a[href="#work"]').click();
