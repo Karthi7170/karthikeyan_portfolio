@@ -4,11 +4,11 @@ A custom, expressive portfolio for **Karthikeyan K**, a vibe coder, web develope
 
 ## Run locally
 
-Open \`index.html\` directly in a modern browser, or serve this folder with a local static server:
+Open `index.html` directly in a modern browser, or serve this folder with a local static server:
 
-\`\`\`sh
+```sh
 python -m http.server 8000
-\`\`\`
+```
 
 Open http://localhost:8000.
 
@@ -30,7 +30,7 @@ No build step, API key, data collection or third-party JavaScript library is req
 - [VIP-Hunter](https://vip-hunter.vercel.app/)
 - [Deccan Matriculation School](https://www.deccanmatric.in/)
 
-These URLs are editable in \`index.html\`. Confirm live deployment availability before sharing the page with a client.
+These URLs are editable in `index.html`. Confirm live deployment availability before sharing the page with a client.
 
 ## Interactions
 
@@ -45,13 +45,13 @@ These URLs are editable in \`index.html\`. Confirm live deployment availability 
 
 ## Files
 
-\`\`\`
+```
 index.html               Semantic content and visual mockups
 styles.css               Tokens, design system, motion and responsive layout
 script.js                Progressive enhancement and interactive features
 assets/portrait.webp     Original edited portrait; retained from prior design
 assets/mark.svg          Custom AI-MAD monogram/favicon
-\`\`\`
+```
 
 ## Publish
 
