@@ -1,303 +1,150 @@
-/* AI X MAD — creative studio interactions, accessible navigation, vector robot. */
 (() => {
   'use strict';
-  const root = document.documentElement;
-  root.classList.add('js');
-  const $ = (selector, scope = document) => scope.querySelector(selector);
-  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const header = $('.header');
-  const menu = $('.menu-button');
-  const nav = $('#primary-nav');
-  const navLinks = $$('.nav-item');
-  const toast = $('.toast');
-  let toastTimer;
+  const $=(s,c=document)=>c.querySelector(s);
+  const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer=window.matchMedia('(hover: hover) and (pointer: fine)');
+  const progress=$('.scroll-progress');
+  const header=$('.site-header');
+  const menu=$('.menu-toggle');
+  const mobileNav=$('#mobile-nav');
+  const navLinks=$$('.nav-link');
+  const sections=$$('main section[id]');
+  const toast=$('.toast');
 
-  // Compact mobile menu with proper expanded state.
-  function closeMenu() {
-    menu.setAttribute('aria-expanded', 'false');
-    menu.setAttribute('aria-label', 'Open menu');
-    nav.classList.remove('is-open');
+  function setMenu(open){
+    menu.setAttribute('aria-expanded',String(open));
+    menu.setAttribute('aria-label',open?'Close menu':'Open menu');
+    mobileNav.classList.toggle('is-open',open);
   }
-  menu.addEventListener('click', () => {
-    const opening = menu.getAttribute('aria-expanded') !== 'true';
-    menu.setAttribute('aria-expanded', String(opening));
-    menu.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
-    nav.classList.toggle('is-open', opening);
-  });
-  navLinks.forEach(link => link.addEventListener('click', closeMenu));
-  document.addEventListener('click', event => {
-    if (!nav.contains(event.target) && !menu.contains(event.target)) closeMenu();
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
-  });
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1000) closeMenu();
-  }, { passive: true });
+  menu.addEventListener('click',()=>setMenu(menu.getAttribute('aria-expanded')!=='true'));
+  $$('#mobile-nav a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+  document.addEventListener('click',e=>{if(!mobileNav.contains(e.target)&&!menu.contains(e.target))setMenu(false)});
 
-  // Theme switch; light is the visual default, preference is opt-in.
-  const themeButton = $('.theme-toggle');
-  function setTheme(theme) {
-    const dark = theme === 'dark';
-    root.dataset.theme = dark ? 'dark' : 'light';
-    themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    themeButton.setAttribute('title', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    themeButton.querySelector('.theme-glyph').textContent = dark ? '☀' : '◐';
-    $('meta[name="theme-color"]').setAttribute('content', dark ? '#02050c' : '#060b16');
-    try { localStorage.setItem('aimad-theme', dark ? 'dark' : 'light'); } catch (_) { /* private browsing */ }
-  }
-  try {
-    if (localStorage.getItem('aimad-theme') === 'dark') setTheme('dark');
-  } catch (_) { /* private browsing */ }
-  themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
-
-  // Scroll progress and active section links, throttled with rAF.
-  const sections = Array.from(document.querySelectorAll('main section[id]'));
-  let scrollTicking = false;
-  function updateScroll() {
-    scrollTicking = false;
-    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    $('.scroll-progress').style.width = Math.min(100, Math.max(0, 100 * window.scrollY / max)) + '%';
-    header.classList.toggle('is-scrolled', window.scrollY > 20);
-    // Select by document position, not observer callback order: the hero
-    // must remain the active section after returning to the top.
-    const viewportMarker = window.scrollY + Math.min(window.innerHeight * .35, 340);
-    let activeId = 'home';
-    for (const section of sections) {
-      if (section.offsetTop <= viewportMarker) activeId = section.id;
-      else break;
-    }
-    navLinks.forEach(link => {
-      const active = link.getAttribute('href') === '#' + activeId;
-      link.classList.toggle('is-current', active);
-      if (active) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
+  let raf=0;
+  function updateScroll(){
+    raf=0;
+    const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    progress.style.width=Math.min(100,Math.max(0,scrollY/max*100))+'%';
+    header.style.borderBottomColor=scrollY>16?'rgba(94,129,182,.24)':'rgba(105,138,192,.12)';
+    const marker=scrollY+Math.min(innerHeight*.34,320);
+    let active='home';
+    for(const section of sections){if(section.offsetTop<=marker)active=section.id;else break}
+    navLinks.forEach(link=>{
+      const on=link.getAttribute('href')==='#'+active;
+      link.classList.toggle('is-active',on);
+      if(on)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
     });
   }
-  function onScroll() {
-    if (scrollTicking) return;
-    scrollTicking = true;
-    window.requestAnimationFrame(updateScroll);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  function onScroll(){if(!raf)raf=requestAnimationFrame(updateScroll)}
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
   updateScroll();
 
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
         entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
+        io.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -35px 0px', threshold: 0.05 });
-    $$('.reveal').forEach(el => revealObserver.observe(el));
-  } else {
-    $$('.reveal').forEach(el => el.classList.add('is-visible'));
-  }
+    },{threshold:.08,rootMargin:'0px 0px -35px 0px'});
+    $$('.reveal').forEach(el=>io.observe(el));
+  }else{$$('.reveal').forEach(el=>el.classList.add('is-visible'))}
 
-  // Filter the real project links without replacing them or changing URLs.
-  const filterButtons = $$('.filter-button');
-  const projectCards = $$('.project');
-  filterButtons.forEach(button => button.addEventListener('click', () => {
-    const category = button.dataset.filter;
-    filterButtons.forEach(item => {
-      const active = item === button;
-      item.classList.toggle('is-selected', active);
-      item.setAttribute('aria-pressed', String(active));
-    });
-    projectCards.forEach(card => {
-      card.hidden = category !== 'all' && card.dataset.category !== category;
-    });
-  }));
-
-  // Native <dialog> quick navigation, keyboard shortcut and click-away close.
-  const commandDialog = $('.command-dialog');
-  const commandTrigger = $('.command-trigger');
-  const commandClose = $('.command-close');
-  function openCommand() {
-    closeMenu();
-    if (!commandDialog.open && typeof commandDialog.showModal === 'function') commandDialog.showModal();
-    else if (commandDialog.open) commandDialog.close();
-  }
-  commandTrigger.addEventListener('click', openCommand);
-  commandClose.addEventListener('click', () => commandDialog.close());
-  $$('.command-dialog nav a').forEach(link => link.addEventListener('click', () => commandDialog.close()));
-  commandDialog.addEventListener('click', event => {
-    const rect = commandDialog.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) commandDialog.close();
-  });
-  document.addEventListener('keydown', event => {
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault();
-      openCommand();
+  if(finePointer.matches&&!reduceMotion.matches){
+    const frame=$('.motion-frame');
+    const visual=$('.hero-visual');
+    if(frame&&visual){
+      let tiltFrame=0,x=0,y=0;
+      visual.addEventListener('pointermove',e=>{
+        const r=visual.getBoundingClientRect();
+        x=Math.max(-1,Math.min(1,(e.clientX-r.left)/r.width*2-1));
+        y=Math.max(-1,Math.min(1,(e.clientY-r.top)/r.height*2-1));
+        if(tiltFrame)return;
+        tiltFrame=requestAnimationFrame(()=>{
+          tiltFrame=0;
+          frame.style.transform='perspective(1400px) rotateY('+(-7+x*4).toFixed(2)+'deg) rotateX('+(2-y*3).toFixed(2)+'deg) translate3d(0,0,0)';
+        });
+      },{passive:true});
+      visual.addEventListener('pointerleave',()=>frame.style.transform='');
     }
-  });
+    $$('[data-tilt]').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform='rotateX('+(-y*3).toFixed(2)+'deg) rotateY('+(x*4).toFixed(2)+'deg)';
+      },{passive:true});
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
 
-  // Small confirmation shown only after a successful copy.
-  function notify(message) {
-    toast.textContent = message;
+  const video=$('#hero-motion-video');
+  if(video){
+    const tryPlay=()=>{const p=video.play();if(p&&typeof p.catch==='function')p.catch(()=>{})};
+    if(document.visibilityState==='visible')tryPlay();
+    document.addEventListener('visibilitychange',()=>document.visibilityState==='visible'?tryPlay():video.pause());
+    video.addEventListener('error',()=>video.classList.add('video-fallback'));
+  }
+
+  function notify(message){
+    toast.textContent=message;
     toast.classList.add('is-visible');
-    window.clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2500);
-  }
-  const copyButton = $('.email-copy');
-  copyButton.addEventListener('click', async () => {
-    const email = copyButton.dataset.copyEmail;
-    let copied = false;
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(email);
-        copied = true;
-      } else {
-        const input = document.createElement('textarea');
-        input.value = email;
-        input.style.position = 'fixed';
-        input.style.opacity = '0';
-        document.body.appendChild(input);
-        input.select();
-        copied = document.execCommand('copy');
-        input.remove();
-      }
-    } catch (_) { /* browser or user may deny clipboard */ }
-    notify(copied ? 'EMAIL COPIED — LET’S CREATE ✳' : 'SELECT THE EMAIL TO COPY IT');
-  });
-
-  // Subtle pointer light: the opening screen is type-only by design.
-  const pointerGlow = $('.pointer-glow');
-  if (pointerGlow && finePointer.matches && !reduceMotion.matches) {
-    window.addEventListener('pointermove', event => {
-      pointerGlow.style.transform = 'translate3d('
-        + (event.clientX - 115) + 'px,' + (event.clientY - 115) + 'px,0)';
-    }, { passive: true });
+    clearTimeout(notify.timer);
+    notify.timer=setTimeout(()=>toast.classList.remove('is-visible'),2200);
   }
 
-  // Cinematic hero lighting responds to pointer movement without introducing images.
-  const hero = $('.hero');
-  if (hero && finePointer.matches && !reduceMotion.matches) {
-    let pointerFrame = 0;
-    hero.addEventListener('pointermove', event => {
-      if (pointerFrame) return;
-      const x = event.clientX;
-      const y = event.clientY;
-      pointerFrame = window.requestAnimationFrame(() => {
-        pointerFrame = 0;
-        const rect = hero.getBoundingClientRect();
-        hero.style.setProperty('--pointer-x', Math.max(0, Math.min(100, (x - rect.left) / rect.width * 100)) + '%');
-        hero.style.setProperty('--pointer-y', Math.max(0, Math.min(100, (y - rect.top) / rect.height * 100)) + '%');
-      });
-    }, { passive: true });
-    hero.addEventListener('pointerleave', () => {
-      hero.style.removeProperty('--pointer-x');
-      hero.style.removeProperty('--pointer-y');
+  const copy=$('.email-copy');
+  if(copy){
+    copy.addEventListener('click',async()=>{
+      const email=copy.dataset.copyEmail;
+      let ok=false;
+      try{
+        if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(email);ok=true}
+        else{
+          const t=document.createElement('textarea');t.value=email;t.style.position='fixed';t.style.opacity='0';
+          document.body.appendChild(t);t.select();ok=document.execCommand('copy');t.remove();
+        }
+      }catch(_){}
+      notify(ok?'Email copied':'Email: '+email);
     });
   }
 
-  // Motion robot: pointer movement adds a subtle 3D pose to an SVG that
-  // renders crisply at any device resolution. No WebGL, video, or heavy assets.
-  const robotStage = $('[data-robot-stage]');
-  if (robotStage && finePointer.matches && !reduceMotion.matches) {
-    let robotFrame = 0;
-    let robotX = 0;
-    let robotY = 0;
-    robotStage.addEventListener('pointermove', event => {
-      const rect = robotStage.getBoundingClientRect();
-      robotX = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
-      robotY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
-      if (robotFrame) return;
-      robotFrame = window.requestAnimationFrame(() => {
-        robotFrame = 0;
-        robotStage.style.setProperty('--rx', (-robotY * 4).toFixed(2) + 'deg');
-        robotStage.style.setProperty('--ry', (robotX * 6).toFixed(2) + 'deg');
-      });
-    }, { passive: true });
-    robotStage.addEventListener('pointerleave', () => {
-      robotStage.style.removeProperty('--rx');
-      robotStage.style.removeProperty('--ry');
+  const form=$('#contact-form');
+  if(form){
+    form.addEventListener('submit',e=>{
+      if(!form.reportValidity()){e.preventDefault();return}
+      e.preventDefault();
+      const name=$('#contact-name').value.trim();
+      const email=$('#contact-email').value.trim();
+      const project=$('#contact-project').value;
+      const message=$('#contact-message').value.trim();
+      if(message.length<10){$('#contact-message').setCustomValidity('Please tell me a little more about your idea.');$('#contact-message').reportValidity();return}
+      $('#contact-message').setCustomValidity('');
+      const lines=['Hi AI x MAD, I found your website.','','Name: '+name];
+      if(email)lines.push('Email: '+email);
+      if(project)lines.push('Project type: '+project);
+      lines.push('','My idea:',message);
+      const a=document.createElement('a');
+      a.href='https://wa.me/919944754339?text='+encodeURIComponent(lines.join('\n'));
+      a.target='_blank';a.rel='noopener noreferrer';a.click();
     });
+    $('#contact-message').addEventListener('input',e=>e.currentTarget.setCustomValidity(''));
   }
 
-  // WhatsApp contact form: prepare the message; the visitor sends it in WhatsApp.
-  // Without JS the GET form still opens WhatsApp with its message field.
-  const contactForm = $('#contact-form');
-  if (contactForm) {
-    const nameField = $('#contact-name');
-    const messageField = $('#contact-message');
-    [nameField, messageField].forEach(field => {
-      field.addEventListener('input', () => field.setCustomValidity(''));
-    });
-    contactForm.addEventListener('submit', event => {
-      if (!contactForm.reportValidity()) {
-        event.preventDefault();
-        return;
-      }
-      const name = nameField.value.trim();
-      const message = messageField.value.trim();
-      if (!name) {
-        event.preventDefault();
-        nameField.setCustomValidity('Please enter your name.');
-        nameField.reportValidity();
-        return;
-      }
-      if (message.length < 10) {
-        event.preventDefault();
-        messageField.setCustomValidity('Please add at least 10 characters about your idea.');
-        messageField.reportValidity();
-        return;
-      }
-      event.preventDefault();
-      const email = $('#contact-email').value.trim();
-      const project = $('#contact-project').value;
-      const lines = [
-        'Hi AI X MAD, I found your studio website.',
-        '',
-        'Name: ' + name
-      ];
-      if (email) lines.push('Email: ' + email);
-      if (project) lines.push('Project type: ' + project);
-      lines.push('', 'My idea:', message);
-      const url = 'https://wa.me/919944754339?text=' + encodeURIComponent(lines.join('\n'));
-      const link = document.createElement('a');
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.click();
-    });
+  const panel=$('#wa-panel'),launcher=$('.wa-launcher'),close=$('.wa-close');
+  function setWa(open){
+    if(!panel||!launcher)return;
+    panel.hidden=!open;
+    launcher.setAttribute('aria-expanded',String(open));
+    launcher.setAttribute('aria-label',open?'Close WhatsApp chat preview':'Open WhatsApp chat preview');
+  }
+  if(panel&&launcher&&close){
+    setWa(false);
+    launcher.addEventListener('click',e=>{e.preventDefault();setWa(panel.hidden)});
+    launcher.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();launcher.click()}});
+    close.addEventListener('click',()=>{setWa(false);launcher.focus()});
   }
 
-  // Dismissible on-page WhatsApp prompt. Never automatically sends a message.
-  // The launcher remains a real WhatsApp link when JavaScript is unavailable.
-  const whatsappWidget = $('.whatsapp-widget');
-  const whatsappPanel = $('#wa-panel');
-  const whatsappLauncher = $('.wa-launcher');
-  const whatsappClose = $('.wa-close');
-  if (whatsappWidget && whatsappPanel && whatsappLauncher && whatsappClose) {
-    const compactScreen = window.matchMedia('(max-width: 600px)');
-    function setWhatsappOpen(open) {
-      whatsappPanel.hidden = !open;
-      whatsappWidget.classList.toggle('is-open', open);
-      whatsappLauncher.setAttribute('aria-expanded', String(open));
-      whatsappLauncher.setAttribute('aria-label', open ? 'Close WhatsApp chat preview' : 'Open WhatsApp chat preview');
-    }
-    setWhatsappOpen(false);
-    whatsappLauncher.addEventListener('click', event => {
-      event.preventDefault();
-      setWhatsappOpen(whatsappPanel.hidden);
-    });
-    whatsappLauncher.addEventListener('keydown', event => {
-      if (event.code === 'Space') {
-        event.preventDefault();
-        whatsappLauncher.click();
-      }
-    });
-    whatsappClose.addEventListener('click', () => {
-      setWhatsappOpen(false);
-      whatsappLauncher.focus();
-    });
-    compactScreen.addEventListener('change', () => setWhatsappOpen(false));
-  }
-
-  $('#year').textContent = String(new Date().getFullYear());
+  const year=$('#year');if(year)year.textContent=String(new Date().getFullYear());
 })();
