@@ -1,267 +1,197 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#060b16">
-  <meta name="description" content="AI X MAD is a creative technology studio building modern websites, intuitive applications and AI-powered digital experiences. Explore our work and start your next project.">
+  <meta name="theme-color" content="#03060d">
+  <meta name="description" content="AI x MAD is a creative technology studio building premium websites, apps and AI-powered digital experiences.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="AI X MAD — Creative Technology Studio">
-  <meta property="og:description" content="Websites, apps and AI experiences with a different kind of intelligence.">
+  <meta property="og:title" content="AI x MAD — Creative Technology Studio">
+  <meta property="og:description" content="Web development, app development and AI creative work with a cinematic technology-first approach.">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
-  <title>AI X MAD — Web, App & AI Creative Studio</title>
+  <title>AI x MAD — Web, App & AI Studio</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="pointer-glow" aria-hidden="true"></div>
-  <header class="header" id="top">
-    <a class="logo" href="#home" aria-label="AI X MAD — go to home">
-      <span class="logo-symbol" aria-hidden="true"><span>AXM</span></span>
-      <span class="logo-word">AI <span class="logo-x">X</span> MAD<small>CREATIVE DEVELOPMENT STUDIO</small></span>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="AI x MAD home">
+      <span class="brand-mark" aria-hidden="true">×</span>
+      <span>AI x MAD</span>
     </a>
-    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
-      <a href="#home" class="nav-item is-current" aria-current="page">Home</a>
-      <a href="#about" class="nav-item">About</a>
-      <a href="#service" class="nav-item">Services</a>
-      <a href="#project" class="nav-item">Projects</a>
-      <a href="#contact" class="nav-item">Contact</a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home" class="nav-link is-active">Home</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <div class="header-tools">
-      <button type="button" class="icon-button command-trigger" aria-label="Open quick navigation" aria-keyshortcuts="Control+K Meta+K" title="Quick navigation (Ctrl/⌘ K)"><span class="command-glyph" aria-hidden="true">⌘</span><span class="command-letter" aria-hidden="true">K</span></button>
-      <button type="button" class="icon-button theme-toggle" aria-label="Switch to dark theme" title="Switch theme"><span class="theme-glyph" aria-hidden="true">◐</span></button>
-      <a class="pill-button header-contact" href="#contact">LET'S CONNECT <span aria-hidden="true">↗</span></a>
-      <button type="button" class="menu-button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span></button>
+    <div class="header-actions">
+      <a class="header-cta" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span></button>
     </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="#home">Home</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a>
+    </nav>
   </header>
-    <main id="main">
-    <section id="home" class="hero hero--studio" aria-labelledby="hero-heading">
-      <div class="hero-atmosphere" aria-hidden="true">
-        <div class="hero-ambient hero-ambient-one"></div><div class="hero-ambient hero-ambient-two"></div>
-        <div class="hero-ring hero-ring-one"></div><div class="hero-ring hero-ring-two"></div>
-        <div class="hero-horizon"></div><div class="hero-orbit"></div>
-        <div class="hero-lightfield"><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="hero-beam hero-beam-one"></div><div class="hero-beam hero-beam-two"></div>
-        <div class="hero-floor"></div><div class="hero-lens"></div><div class="hero-grain"></div>
-      </div>
-      <div class="studio-hero-inner">
-        <div class="studio-hero-copy">
-          <p class="studio-eyebrow"><span class="studio-live-dot" aria-hidden="true"></span> INDEPENDENT CREATIVE TECHNOLOGY STUDIO <span class="studio-eyebrow-line" aria-hidden="true"></span> <span class="eyebrow-index">01 / 05</span></p>
-          <h1 id="hero-heading" class="studio-headline">
-            <span class="headline-pre">Ideas, meet</span>
-            <span class="headline-brand"><span class="brand-ai">AI</span><span class="brand-times" aria-label="X">×</span><span class="brand-mad">MAD<span class="brand-period">.</span></span></span>
-          </h1>
-          <p class="studio-hero-lede">Digital experiences with a <span>different kind of intelligence.</span></p>
-          <p class="studio-hero-desc">We bring websites, apps, and AI-powered ideas to life—with thoughtful design, modern technology, and a little creative madness.</p>
-          <div class="studio-hero-actions">
-            <a href="#project" class="studio-button studio-button-primary">Explore our work <span aria-hidden="true">↗</span></a>
-            <a href="#contact" class="studio-button studio-button-secondary">Start a project <span aria-hidden="true">↗</span></a>
+
+  <main id="main">
+    <section id="home" class="hero section-shell">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="section-kicker"><span>01</span> Creative technology studio</div>
+          <h1>AI x MAD,<br><span>the blueprint</span><br>for digital tomorrow.</h1>
+          <p class="hero-intro">We build modern websites, thoughtful applications and AI-powered experiences that make brands feel future-ready.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">Explore our work <span aria-hidden="true">↗</span></a>
+            <a class="button button-ghost" href="#contact">Let's build something <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="studio-hero-bottom">
-            <div class="studio-hero-services"><span>01 / WEB</span><span>02 / APPS</span><span>03 / AI</span></div>
-            <a href="#about" class="studio-scroll-link">DISCOVER THE STUDIO <span aria-hidden="true">↓</span></a>
+          <div class="hero-meta"><span>WEB DEVELOPMENT</span><span>APP DEVELOPMENT</span><span>AI CREATIVE</span></div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="AI x MAD technology motion visual">
+          <div class="motion-frame">
+            <video id="hero-motion-video" class="motion-video" autoplay muted loop playsinline preload="metadata" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_3JFN34Qe7I15a2A1mQucztzlTZR/c18099f9-75fd-44d2-b7b7-0d91afde08f9.png">
+              <source src="HIGGSFIELD_MOTION_URL" type="video/mp4">
+            </video>
+            <div class="motion-shade" aria-hidden="true"></div>
+            <div class="motion-ui" aria-hidden="true">
+              <span class="ui-label">AI x MAD / SYSTEM_01</span>
+              <span class="ui-coordinate">43.0821° N / CREATIVE CORE</span>
+              <div class="ui-corner ui-corner-a"></div><div class="ui-corner ui-corner-b"></div>
+              <div class="ui-orbit ui-orbit-a"></div><div class="ui-orbit ui-orbit-b"></div>
+              <div class="ui-pulse"></div>
+            </div>
+          </div>
+          <div class="visual-note"><span class="visual-dot"></span> Motion generated for AI x MAD with Higgsfield</div>
+        </div>
+      </div>
+      <div class="hero-partners reveal" aria-label="Core capabilities">
+        <span>WEBSITES</span><i></i><span>APPLICATIONS</span><i></i><span>AI EXPERIENCES</span><i></i><span>DIGITAL DESIGN</span>
+      </div>
+    </section>
+
+    <section class="statement section-shell">
+      <div class="section-index reveal"><span>02 / What we build</span><span>Ideas → systems → launch</span></div>
+      <div class="statement-heading reveal">
+        <h2>Elevate your digital presence<br>with <span>AI x MAD.</span></h2>
+        <p>We turn ambitious ideas into clear, useful and visually distinctive digital products—without adding complexity for your customers.</p>
+      </div>
+      <div class="browser-stage reveal">
+        <div class="browser-window browser-window-main" data-tilt>
+          <div class="browser-bar"><span class="browser-dots"><i></i><i></i><i></i></span><span>studio.ai-x-mad</span><span>↗</span></div>
+          <div class="browser-screen">
+            <div class="browser-copy">
+              <span>01 / BUILD</span>
+              <h3>Digital experiences,<br><em>designed to move.</em></h3>
+              <p>Strategy, interface design and development working together from the first screen to the final interaction.</p>
+            </div>
+            <div class="browser-visual" aria-hidden="true">
+              <div class="glass-chip"><span>&lt;/&gt;</span></div>
+              <div class="chip-line l1"></div><div class="chip-line l2"></div><div class="chip-line l3"></div><div class="chip-line l4"></div>
+            </div>
           </div>
         </div>
-        <div class="robot-stage" data-robot-stage>
-          <div class="robot-stage-glow" aria-hidden="true"></div>
-          <div class="robot-orbit robot-orbit-back" aria-hidden="true"></div>
-          <div class="robot-orbit robot-orbit-front" aria-hidden="true"></div>
-          <div class="robot-crosshair robot-crosshair-top" aria-hidden="true"></div>
-          <div class="robot-crosshair robot-crosshair-bottom" aria-hidden="true"></div>
-          <div class="robot-radial robot-radial-one" aria-hidden="true"></div>
-          <div class="robot-radial robot-radial-two" aria-hidden="true"></div>
-          <div class="robot-figure" aria-hidden="true">
-            <svg class="robot-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 710" role="presentation" focusable="false">
-              <defs>
-                <linearGradient id="r-shell" x1=".15" y1="0" x2=".92" y2="1"><stop stop-color="#8aa3bb"/><stop offset=".13" stop-color="#2f4763"/><stop offset=".38" stop-color="#111e37"/><stop offset=".74" stop-color="#0a1428"/><stop offset="1" stop-color="#395977"/></linearGradient>
-                <linearGradient id="r-visor" x1="0" y1=".06" x2="1" y2=".92"><stop stop-color="#1d3252"/><stop offset=".36" stop-color="#070e20"/><stop offset=".69" stop-color="#0a1227"/><stop offset="1" stop-color="#0f2b43"/></linearGradient>
-                <linearGradient id="r-bust" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#597d9e"/><stop offset=".17" stop-color="#223b58"/><stop offset=".45" stop-color="#0c172b"/><stop offset=".81" stop-color="#101f34"/><stop offset="1" stop-color="#3a5c7d"/></linearGradient>
-                <linearGradient id="r-blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d4faff"/><stop offset=".24" stop-color="#77e6ff"/><stop offset=".65" stop-color="#4499ff"/><stop offset="1" stop-color="#416cff"/></linearGradient>
-                <linearGradient id="r-panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e2440"/><stop offset="1" stop-color="#020915"/></linearGradient>
-                <radialGradient id="r-aura"><stop stop-color="#7ee6ff" stop-opacity=".53"/><stop offset=".43" stop-color="#398bf9" stop-opacity=".22"/><stop offset="1" stop-color="#1b4fb3" stop-opacity="0"/></radialGradient>
-                <linearGradient id="r-glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#caebff" stop-opacity=".3"/><stop offset=".49" stop-color="#a3d6ff" stop-opacity=".015"/><stop offset="1" stop-color="#4e9eff" stop-opacity=".09"/></linearGradient>
-                <filter id="r-eye-glow" x="-170%" y="-260%" width="440%" height="620%"><feGaussianBlur stdDeviation="10"/></filter>
-                <filter id="r-deep-shadow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="18"/></filter>
-              </defs>
-              <!-- Volumetric aura; vector source stays sharp on 4K screens. -->
-              <ellipse cx="321" cy="379" rx="268" ry="304" fill="url(#r-aura)" opacity=".74"/>
-              <ellipse cx="318" cy="653" rx="210" ry="32" fill="#00040d" opacity=".55" filter="url(#r-deep-shadow)"/>
-              <!-- Lower body and articulated shoulders -->
-              <path d="M87 629 Q104 540 163 498 L250 456 L378 456 L472 498 Q530 540 552 629 L535 685 H104 Z" fill="#050a16" stroke="#4075a9" stroke-opacity=".65" stroke-width="2"/>
-              <path d="M105 619 Q130 537 179 516 L252 481 L383 481 L461 519 Q510 545 532 619 L523 671 L115 671 Z" fill="url(#r-bust)" stroke="#91bfed" stroke-opacity=".35" stroke-width="3"/>
-              <path d="M105 608 L147 540 L214 514 L224 567 L166 632 L114 641 Z" fill="url(#r-shell)" stroke="#8cc9fc" stroke-opacity=".48" stroke-width="3"/>
-              <path d="M535 608 L493 540 L426 514 L417 567 L474 632 L526 641 Z" fill="url(#r-shell)" stroke="#8cc9fc" stroke-opacity=".48" stroke-width="3"/>
-              <path d="M145 546 L199 525 L199 555 L152 612" fill="none" stroke="#81ccff" stroke-opacity=".62" stroke-width="3"/>
-              <path d="M494 546 L440 525 L440 555 L487 612" fill="none" stroke="#81ccff" stroke-opacity=".62" stroke-width="3"/>
-              <path d="M195 544 L255 497 L383 497 L444 544 L418 637 H223 Z" fill="url(#r-panel)" stroke="#699dd3" stroke-opacity=".6" stroke-width="2"/>
-              <path d="M225 563 L263 526 L382 526 L415 563" fill="none" stroke="#568abe" stroke-opacity=".42" stroke-width="2"/>
-              <path d="M234 586 L264 565 L377 565 L405 586" fill="none" stroke="#2d658b" stroke-opacity=".6" stroke-width="2"/>
-              <path d="M198 600 L230 632 L410 632 L443 600" fill="none" stroke="#90cdfc" stroke-opacity=".3" stroke-width="3"/>
-              <path d="M242 481 L268 446 H372 L395 481 L368 519 H268 Z" fill="#060e1d" stroke="#4f85b1" stroke-width="3"/>
-              <path d="M277 467 H360 L376 488 L357 509 H281 L265 488 Z" fill="url(#r-shell)" stroke="#92b6de" stroke-opacity=".45"/>
-              <path d="M288 488 H348" stroke="#65c4ff" stroke-opacity=".76" stroke-width="2"/>
-              <!-- Reactor -->
-              <g class="robot-reactor">
-                <path d="M320 523 370 549 370 600 320 629 270 600 270 549 Z" fill="#030915" stroke="#5f99ca" stroke-width="3"/>
-                <path d="M320 535 358 556 358 593 320 615 282 593 282 556 Z" fill="#102a44" stroke="url(#r-blue)" stroke-width="2.5"/>
-                <circle cx="320" cy="575" r="24" fill="#3b96ff" opacity=".34" filter="url(#r-eye-glow)"/>
-                <circle cx="320" cy="575" r="17" fill="#111d32" stroke="#a6efff" stroke-width="3"/>
-                <circle cx="320" cy="575" r="8" fill="#b8f8ff"/>
-                <path d="M315 561 305 574 L320 589 L337 572" fill="none" stroke="#71d8ff" stroke-opacity=".72" stroke-width="2"/>
-              </g>
-              <path d="M225 650 H415" stroke="#5594d1" stroke-opacity=".43" stroke-width="2"/>
-              <path d="M249 661 H392" stroke="#97c8ff" stroke-opacity=".24" stroke-width="2"/>
-              <path d="M112 664 H184 M456 664 H528" stroke="url(#r-blue)" stroke-width="3" opacity=".7"/>
-              <!-- Neck assembly -->
-              <path d="M261 420 L274 470 L299 487 H345 L370 470 L383 420" fill="url(#r-panel)" stroke="#669bd4" stroke-width="3"/>
-              <path d="M279 447 H366 L354 483 H292 Z" fill="#101e34" stroke="#7ba9d5" stroke-opacity=".55" stroke-width="2"/>
-              <path d="M298 451 V477 M311 451 V477 M325 451 V477 M338 451 V477" stroke="#529ce5" stroke-opacity=".55" stroke-width="3"/>
-              <!-- Ear / sensor modules -->
-              <path d="M179 230 Q146 245 153 320 L173 356 L206 350 L207 240 Z" fill="url(#r-shell)" stroke="#80b8ea" stroke-width="3"/>
-              <path d="M462 230 Q494 245 486 320 L467 356 L433 350 L434 240 Z" fill="url(#r-shell)" stroke="#80b8ea" stroke-width="3"/>
-              <path d="M160 267 L182 258 L181 332 L163 322 Z" fill="#0a1e36" stroke="#4d95e7" stroke-width="2"/>
-              <path d="M480 267 L457 258 L458 332 L477 322 Z" fill="#0a1e36" stroke="#4d95e7" stroke-width="2"/>
-              <path d="M171 274 V315 M469 274 V315" stroke="url(#r-blue)" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="175" cy="248" r="5" fill="#9be5ff"/><circle cx="465" cy="248" r="5" fill="#9be5ff"/>
-              <!-- Helmet shell -->
-              <path d="M187 243 Q174 147 246 111 Q317 66 394 114 Q467 152 452 243 L446 354 Q435 420 368 448 L271 448 Q202 416 193 354 Z" fill="url(#r-shell)" stroke="#8fb6d9" stroke-width="3.2"/>
-              <path d="M191 224 Q199 139 254 118 Q316 89 384 125 Q429 155 444 224 L425 215 Q418 171 385 153 Q320 115 258 150 Q223 170 216 216 Z" fill="#111d32" stroke="#a5c6e0" stroke-opacity=".65" stroke-width="2"/>
-              <path d="M212 204 Q239 130 320 128 Q408 133 428 207" fill="none" stroke="#a5d4ff" stroke-opacity=".65" stroke-width="3"/>
-              <path d="M232 160 Q281 136 326 140" fill="none" stroke="#d3e8ff" stroke-opacity=".52" stroke-width="4" stroke-linecap="round"/>
-              <path d="M241 131 Q277 102 320 103" fill="none" stroke="#b4dfff" stroke-opacity=".58" stroke-width="2"/>
-              <path d="M327 104 Q378 106 410 150" fill="none" stroke="#1c416f" stroke-width="5"/>
-              <path d="M230 181 L249 156 M410 182 L390 156" stroke="#4f8dc3" stroke-opacity=".62" stroke-width="3"/>
-              <path d="M205 256 L217 350 L241 394 L275 415 M438 256 L427 350 L402 394 L367 415" fill="none" stroke="#74afe7" stroke-opacity=".38" stroke-width="3"/>
-              <!-- Facial glass and cheek panels -->
-              <path d="M222 221 Q319 194 417 221 L420 325 Q407 374 357 404 L282 404 Q232 375 220 326 Z" fill="url(#r-visor)" stroke="#65a2da" stroke-width="3"/>
-              <path d="M225 227 Q296 213 359 222 Q278 224 231 269 Z" fill="url(#r-glass)"/>
-              <path d="M226 238 L242 229 V329 L254 361 L236 347 Z" fill="#416a8f" opacity=".42"/>
-              <path d="M413 238 L398 228 V329 L385 361 L404 347 Z" fill="#2b6796" opacity=".5"/>
-              <path d="M242 241 Q315 225 399 240 L393 315 Q376 350 353 366 H286 Q257 346 246 313 Z" fill="#040c1b" stroke="#254d73" stroke-width="2"/>
-              <path d="M255 247 H389" stroke="#9cd5ff" stroke-opacity=".22" stroke-width="2"/>
-              <!-- Glowing optical eyes -->
-              <g class="robot-eyes">
-                <path d="M256 280 L294 277 L307 286 L290 295 L254 293 Z" fill="#66c4ff" opacity=".88" filter="url(#r-eye-glow)"/>
-                <path d="M383 280 L345 277 L332 286 L349 295 L385 293 Z" fill="#66c4ff" opacity=".88" filter="url(#r-eye-glow)"/>
-                <path d="M253 281 L293 278 L307 285 L292 292 L254 291 Z" fill="url(#r-blue)" stroke="#a5efff" stroke-width="1.5"/>
-                <path d="M387 281 L347 278 L333 285 L348 292 L386 291 Z" fill="url(#r-blue)" stroke="#a5efff" stroke-width="1.5"/>
-                <path d="M266 282 H291 M348 282 H372" stroke="#efffff" stroke-opacity=".9" stroke-width="2"/>
-              </g>
-              <path d="M316 274 L306 322 L319 330 L331 322 L321 275" fill="#152740" stroke="#497ba8" stroke-width="2"/>
-              <path d="M261 315 L284 334 M378 315 L355 334" fill="none" stroke="#2b567d" stroke-width="3"/>
-              <path d="M281 357 Q320 368 360 357 L357 378 Q320 394 283 378 Z" fill="#101e33" stroke="#487ba8" stroke-width="2.5"/>
-              <path d="M288 365 H353 M293 373 H347" stroke="#88bde9" stroke-opacity=".53" stroke-width="1.5"/>
-              <path d="M301 379 H339" stroke="#419ce8" stroke-opacity=".73" stroke-width="2.5"/>
-              <!-- Lower jaw and neck side vents -->
-              <path d="M239 367 Q259 411 320 417 Q382 411 401 367 L385 415 Q362 448 319 451 Q273 447 257 414 Z" fill="url(#r-shell)" stroke="#8cb2d6" stroke-opacity=".5" stroke-width="2"/>
-              <path d="M272 420 L292 441 H348 L369 420" fill="none" stroke="#75b7e9" stroke-opacity=".35" stroke-width="2"/>
-              <path d="M211 321 L218 363 L231 383 M428 321 L421 363 L407 383" fill="none" stroke="#53b4f2" stroke-opacity=".8" stroke-width="3"/>
-              <path d="M214 295 V320 M426 295 V320" stroke="#b7edff" stroke-width="2.5"/>
-              <!-- Reflective highlight -->
-              <path d="M215 208 Q237 133 312 124" fill="none" stroke="#d9f2ff" stroke-opacity=".12" stroke-width="11" stroke-linecap="round"/>
-              <path d="M432 200 Q443 235 442 263" fill="none" stroke="#75d7fa" stroke-opacity=".24" stroke-width="7" stroke-linecap="round"/>
-              <path d="M112 620 L125 589 M528 620 L515 589" stroke="#c7f1ff" stroke-opacity=".47" stroke-width="3"/>
-            </svg>
-          </div>
-          <div class="robot-data robot-data-top" aria-hidden="true"><span class="robot-data-dot"></span> CREATIVE SYSTEM / 001</div>
-          <div class="robot-data robot-data-bottom" aria-hidden="true"><span class="robot-wave">⌁</span> MADE OF IDEAS. BUILT WITH TECH.</div>
-          <div class="robot-float-badge" aria-hidden="true"><span class="badge-cube">✳</span><span>HELLO, HUMAN.<small>LET'S CREATE.</small></span></div>
+        <div class="browser-window browser-window-back" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="services" class="services section-shell">
+      <div class="section-index reveal"><span>03 / Services</span><span>Built around your business</span></div>
+      <div class="services-heading reveal"><h2>One studio.<br><span>Three ways to build.</span></h2><p>Every project gets its own direction, but the goal stays the same: make technology simple, useful and memorable.</p></div>
+      <div class="service-stack">
+        <article class="service-panel reveal">
+          <div class="service-copy"><span class="service-number">01</span><h3>Web development</h3><p>Responsive business websites, portfolios and digital experiences built to feel premium on every screen.</p><div class="service-tags"><span>Business sites</span><span>Portfolios</span><span>Interactive UI</span></div></div>
+          <div class="service-art service-art-web" aria-hidden="true"><div class="mini-site"><span class="mini-nav"></span><strong>BUILD<br>BEYOND<br>THE TEMPLATE.</strong><i></i></div></div>
+        </article>
+        <article class="service-panel reveal">
+          <div class="service-copy"><span class="service-number">02</span><h3>App development</h3><p>Thoughtful web-app and product interfaces shaped around real user needs, not unnecessary features.</p><div class="service-tags"><span>Web apps</span><span>Product UI</span><span>User experience</span></div></div>
+          <div class="service-art service-art-app" aria-hidden="true"><div class="phone-card phone-card-back"></div><div class="phone-card phone-card-front"><span>AI x MAD</span><strong>Simple.<br>Powerful.</strong><i></i></div></div>
+        </article>
+        <article class="service-panel reveal">
+          <div class="service-copy"><span class="service-number">03</span><h3>AI & creative technology</h3><p>AI-assisted workflows, prototypes and visual ideas that help businesses explore faster and communicate differently.</p><div class="service-tags"><span>AI workflows</span><span>Creative tech</span><span>Experiments</span></div></div>
+          <div class="service-art service-art-ai" aria-hidden="true"><div class="ai-core"><span>✦</span></div><div class="ai-ring r1"></div><div class="ai-ring r2"></div><div class="ai-grid"></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="work" class="work section-shell">
+      <div class="section-index reveal"><span>04 / Selected work</span><span>Real projects, different worlds</span></div>
+      <div class="work-heading reveal"><h2>Work that moves<br><span>from idea to real.</span></h2><p>Four projects built around four very different problems.</p></div>
+      <div class="project-list">
+        <a class="project-card reveal" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <div class="project-preview project-tiles"><div class="preview-browser"><span>NEW ROYAL</span><strong>Spaces worth<br>staying in.</strong><i>↗</i></div></div>
+          <div class="project-info"><span>01 / SHOWROOM WEBSITE</span><h3>New Royal Tiles</h3><p>A premium digital storefront for a physical showroom.</p><b>Visit site ↗</b></div>
+        </a>
+        <a class="project-card reveal" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <div class="project-preview project-film"><div class="film-word">SUGUMAR</div><span>SELECTED FILMS / EDITORIAL PORTFOLIO</span></div>
+          <div class="project-info"><span>02 / CREATOR PORTFOLIO</span><h3>Sugumar Portfolio</h3><p>A cinematic home for a video editor's work.</p><b>Visit site ↗</b></div>
+        </a>
+        <a class="project-card reveal" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <div class="project-preview project-vip"><div class="vip-ui"><small>VIP — HUNTER</small><strong>Your next move,<br>in sight.</strong><span>Discover opportunities ↗</span></div></div>
+          <div class="project-info"><span>03 / WEB APPLICATION</span><h3>VIP-Hunter</h3><p>A job-discovery experience for the next career step.</p><b>Visit app ↗</b></div>
+        </a>
+        <a class="project-card reveal" href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer">
+          <div class="project-preview project-school"><div class="school-ui"><small>DECCAN</small><strong>BIG FUTURES<br>START HERE.</strong><span>AIM · ATTEMPT · ACHIEVE</span></div></div>
+          <div class="project-info"><span>04 / EDUCATION WEBSITE</span><h3>Deccan School</h3><p>A welcoming web presence for a learning community.</p><b>Visit site ↗</b></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="process" class="process section-shell">
+      <div class="section-index reveal"><span>05 / Process</span><span>Clear, collaborative, focused</span></div>
+      <div class="process-grid">
+        <div class="process-heading reveal"><h2>Good ideas deserve<br><span>good execution.</span></h2><p>Clear communication, thoughtful choices and a little curiosity at every step.</p></div>
+        <div class="process-steps">
+          <article class="process-step reveal"><span>01</span><div><h3>We talk.</h3><p>You share the idea, the challenge and what you want people to feel.</p></div><b>↘</b></article>
+          <article class="process-step reveal"><span>02</span><div><h3>I create.</h3><p>I shape the design, develop the experience and refine the details.</p></div><b>↗</b></article>
+          <article class="process-step reveal"><span>03</span><div><h3>We launch.</h3><p>We bring it into the world, ready for real people to use.</p></div><b>✦</b></article>
         </div>
       </div>
-      <div class="studio-hero-edge"><span>INDEPENDENT THINKING <i></i> INTENTIONAL EXECUTION</span><a href="#service">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span>AI X MAD © 2026</span></div>
     </section>
-        <div class="ticker" aria-label="Design, code, experiment, repeat"><div class="ticker-track" aria-hidden="true"><span>DESIGN ✳ CODE ✳ EXPERIMENT ✳ REPEAT ✳&nbsp;</span><span>DESIGN ✳ CODE ✳ EXPERIMENT ✳ REPEAT ✳&nbsp;</span><span>DESIGN ✳ CODE ✳ EXPERIMENT ✳ REPEAT ✳&nbsp;</span></div></div>
-    <section class="about section-pad" id="about" aria-labelledby="about-heading">
-      <div class="section-label reveal"><span>01 / THE HUMAN BEHIND THE CODE</span><span class="section-stroke" aria-hidden="true"></span></div>
-      <div class="about-layout">
-        <div class="about-stamp reveal" aria-hidden="true"><span class="stamp-inner">IMAGINE<br>BUILD<br>REPEAT</span><span class="stamp-spark">⌘</span></div>
-        <div class="about-main reveal">
-          <h2 id="about-heading">NOT JUST <span class="outlined">ANOTHER</span><br>DEVELOPER<span class="period">.</span></h2>
-          <p class="about-lead">I like the space where <em>creative thinking</em> meets working technology.</p>
-          <p>I'm Karthikeyan K — the person behind AI X MAD Studio. I build websites, app experiences and AI-assisted ideas with one goal: make the digital feel a little more human, useful and memorable.</p>
-          <p>From a tile showroom's online presence to a creator's portfolio or a job-discovery tool, each project starts with a different problem. That's what makes building interesting.</p>
-          <a href="#service" class="text-link">A LITTLE MORE ABOUT WHAT I DO <span aria-hidden="true">↗</span></a>
-        </div>
-        <aside class="about-side reveal"><div class="side-number">K<span class="side-small">/K</span></div><span>CURIOUS BY DEFAULT.<br>ALWAYS BUILDING.</span><div class="side-line"></div><span class="tag-chip">CODE + CREATIVITY + AI</span></aside>
+
+    <section class="about section-shell">
+      <div class="section-index reveal"><span>About the studio</span><span>Human ideas × modern technology</span></div>
+      <div class="about-grid reveal">
+        <div><h2>Built by curiosity.<br><span>Run by Karthikeyan K.</span></h2></div>
+        <div><p>I'm Karthikeyan K — the person behind AI x MAD. I like the space where creative thinking meets working technology. I build websites, app experiences and AI-assisted ideas with one goal: make digital products feel more human, useful and memorable.</p><a href="#contact">Let's work together ↗</a></div>
       </div>
     </section>
-    <section class="services section-pad" id="service" aria-labelledby="services-heading">
-      <div class="section-label reveal"><span>02 / WHAT I CAN CREATE</span><span>FROM FIRST SKETCH TO FINAL PIXEL</span></div>
-      <div class="services-heading-row reveal"><h2 id="services-heading">MY KIND OF <em>MAGIC.</em></h2><p>Not a one-size-fits-all template. Every project gets a direction of its own.</p></div>
-      <div class="service-grid">
-        <article class="service-card service-card-01 reveal"><div class="card-index"><span>01 — WEBSITES</span><span aria-hidden="true">↗</span></div><div class="service-art browser-art" aria-hidden="true"><div class="browser-top"><i></i><i></i><i></i><span>the next big thing .com</span></div><div class="browser-hero"><span>THIS<br>IS<br><em>different.</em></span><b>↗</b></div></div><div class="service-content"><h3>Web development<span>.</span></h3><p>Responsive, expressive websites that make your brand feel impossible to ignore.</p><div class="service-tags"><span>PORTFOLIOS</span><span>BUSINESS SITES</span><span>WEB EXPERIENCES</span></div></div></article>
-        <article class="service-card service-card-02 reveal"><div class="card-index"><span>02 — APPS</span><span aria-hidden="true">↗</span></div><div class="service-art app-art" aria-hidden="true"><div class="app-panel app-panel-back"><span>your ideas</span><b>01/03</b></div><div class="app-panel app-panel-front"><div class="app-punch">◉ &nbsp; ◌ &nbsp; ◌</div><div class="app-wave">〰</div><span>simple.<br><strong>powerful.</strong></span><div class="app-mini-actions"><i></i><i></i><i></i></div></div><span class="app-arrow">↗</span></div><div class="service-content"><h3>App development<span>.</span></h3><p>Thoughtful tools and interfaces designed around what people actually need.</p><div class="service-tags"><span>WEB APPS</span><span>USER EXPERIENCE</span><span>PRODUCT DESIGN</span></div></div></article>
-        <article class="service-card service-card-03 reveal"><div class="card-index"><span>03 — AI & CREATIVE</span><span aria-hidden="true">↗</span></div><div class="service-art ai-art" aria-hidden="true"><span class="ai-orbit ai-orbit-one"></span><span class="ai-orbit ai-orbit-two"></span><span class="ai-core">✳</span><span class="ai-text">WHAT IF<br>WE TRIED<br><em>THIS?</em></span></div><div class="service-content"><h3>AI-powered ideas<span>.</span></h3><p>Using AI as a creative tool to prototype faster, explore more and build smarter.</p><div class="service-tags"><span>AI WORKFLOWS</span><span>CREATIVE TECH</span><span>EXPERIMENTS</span></div></div></article>
-      </div>
-    </section>
-    <section class="projects section-pad" id="project" aria-labelledby="projects-heading">
-      <div class="section-label reveal"><span>03 / THE WORK SPEAKS</span><span>REAL PROJECTS, DIFFERENT WORLDS</span></div>
-      <div class="projects-heading-row reveal"><div><h2 id="projects-heading">BUILT WITH <em>INTENT.</em></h2><p>Some things I've turned from “what if?” into something you can explore.</p></div><div class="project-filter" role="group" aria-label="Filter projects"><button class="filter-button is-selected" type="button" data-filter="all" aria-pressed="true">ALL <span>04</span></button><button class="filter-button" type="button" data-filter="website" aria-pressed="false">WEBSITES</button><button class="filter-button" type="button" data-filter="app" aria-pressed="false">APPS</button></div></div>
-      <div class="project-grid">
-        <a class="project project-royal reveal" data-category="website" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit New Royal Tiles website (opens in new tab)">
-          <div class="project-visual royal-visual"><div class="royal-frame"><span class="royal-brand">NEW ROYAL<span>®</span></span><span class="royal-heading">SPACES<br>WORTH<br><em>STAYING IN.</em></span><div class="royal-tiles"><i></i><i></i><i></i></div></div><span class="project-open" aria-hidden="true">↗</span></div>
-          <div class="project-info"><div><span class="project-subtitle">01 / SHOWROOM WEBSITE</span><h3>New Royal Tiles</h3><p>A premium digital storefront for a physical showroom.</p></div><span class="project-visit">VISIT SITE ↗</span></div>
-        </a>
-        <a class="project project-sugumar reveal" data-category="website" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit Sugumar creative portfolio (opens in new tab)">
-          <div class="project-visual sugumar-visual"><div class="film-grain" aria-hidden="true"></div><span class="film-top">THE ART OF THE CUT.</span><div class="film-title">SUG<span>U</span>MAR<small>SELECTED FILMS — EDITORIAL PORTFOLIO</small></div><div class="film-track"><i></i><i></i><i></i><i></i><i></i></div><span class="project-open" aria-hidden="true">↗</span></div>
-          <div class="project-info"><div><span class="project-subtitle">02 / CREATOR PORTFOLIO</span><h3>Sugumar Portfolio</h3><p>A cinematic home for a video editor's work.</p></div><span class="project-visit">VISIT SITE ↗</span></div>
-        </a>
-        <a class="project project-vip reveal" data-category="app" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit VIP-Hunter web app (opens in new tab)">
-          <div class="project-visual vip-visual"><div class="vip-dashboard"><div class="vip-top"><span>◈ VIP—HUNTER</span><span>● &nbsp;● &nbsp;●</span></div><div class="vip-title">Your next move,<br><em>in sight.</em></div><div class="vip-search">Find your opportunity <span aria-hidden="true">↗</span></div><div class="vip-jobs"><div><span>01</span> DISCOVER <b>↗</b></div><div><span>02</span> ORGANIZE <b>↗</b></div></div></div><span class="project-open" aria-hidden="true">↗</span></div>
-          <div class="project-info"><div><span class="project-subtitle">03 / WEB APPLICATION</span><h3>VIP-Hunter</h3><p>A job-discovery experience for the next career step.</p></div><span class="project-visit">VISIT APP ↗</span></div>
-        </a>
-        <a class="project project-school reveal" data-category="website" href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Deccan Matriculation School website (opens in new tab)">
-          <div class="project-visual school-visual"><div class="school-sun"></div><div class="school-sheet"><div class="school-nav"><span>DECCAN<span class="school-dot">●</span></span><span>HOME &nbsp; ABOUT &nbsp; ADMISSION</span></div><div class="school-hero">BIG<br>FUTURES<br><em>START HERE.</em></div><div class="school-pill">AIM · ATTEMPT · ACHIEVE <span>↗</span></div></div><span class="project-open" aria-hidden="true">↗</span></div>
-          <div class="project-info"><div><span class="project-subtitle">04 / EDUCATION WEBSITE</span><h3>Deccan School</h3><p>A welcoming web presence for a learning community.</p></div><span class="project-visit">VISIT SITE ↗</span></div>
-        </a>
-      </div>
-      <div class="projects-after reveal"><span>EVERYTHING STARTS WITH AN IDEA. THE NEXT ONE COULD BE YOURS.</span><a href="#contact" class="text-link">LET'S MAKE IT HAPPEN ↗</a></div>
-    </section>
-    <section class="process section-pad" aria-labelledby="process-heading">
-      <div class="section-label reveal"><span>04 / HOW IT COMES TO LIFE</span><span>NO MYSTERY, JUST MOMENTUM</span></div>
-      <div class="process-layout"><div class="process-intro reveal"><h2 id="process-heading">GOOD IDEAS<br><em>DESERVE</em><br>GOOD EXECUTION<span class="period">.</span></h2><p>Clear communication, thoughtful choices and a little curiosity at every step.</p><span class="process-decoration" aria-hidden="true">↘</span></div><div class="process-steps"><div class="step reveal"><span>01</span><div><h3>We talk.</h3><p>You share the idea, the challenge and what you want people to feel.</p></div><b aria-hidden="true">✳</b></div><div class="step reveal"><span>02</span><div><h3>I create.</h3><p>I shape the design, develop the experience and refine the details.</p></div><b aria-hidden="true">↗</b></div><div class="step reveal"><span>03</span><div><h3>We launch.</h3><p>We bring it into the world, ready for real people to use.</p></div><b aria-hidden="true">✴</b></div></div></div>
-    </section>
-    <section id="contact" class="contact section-pad" aria-labelledby="contact-heading">
-      <div class="contact-top reveal"><span class="eyebrow">05 / GOT SOMETHING IN MIND?</span><span class="contact-spark" aria-hidden="true">⌬</span></div>
-      <div class="contact-main reveal"><h2 id="contact-heading">LET'S MAKE<br><em>SOMETHING</em><br>MATTER<span>.</span></h2><div class="contact-right"><span class="contact-bubble" aria-hidden="true">↗</span><p>A new website? An app idea? Something wonderfully weird? I'm all ears.</p><a class="contact-cta" href="mailto:karthikumaran7170@gmail.com?subject=Let's%20build%20something">START A CONVERSATION <span aria-hidden="true">↗</span></a></div></div>
-      <div class="contact-form-wrap reveal">
-        <div class="contact-form-intro">
-          <span class="contact-form-kicker">START A PROJECT</span>
-          <h3>Tell me what you're building.</h3>
-          <p>Share a few details and we can continue the conversation on WhatsApp.</p>
-          <a class="contact-phone" href="https://wa.me/919944754339" target="_blank" rel="noopener noreferrer" aria-label="Message AI X MAD on WhatsApp at +91 99447 54339">WhatsApp: +91 99447 54339 <span aria-hidden="true">↗</span></a>
-        </div>
-        <form id="contact-form" class="contact-form" action="https://api.whatsapp.com/send" method="get" target="_blank" rel="noopener noreferrer" aria-describedby="contact-form-help">
+
+    <section id="contact" class="contact section-shell">
+      <div class="section-index reveal"><span>Contact</span><span>Have something in mind?</span></div>
+      <div class="contact-grid">
+        <div class="contact-copy reveal"><h2>Let's make<br><span>something matter.</span></h2><p>A new website? An app idea? Something wonderfully weird? Tell me about it.</p><a class="contact-whatsapp" href="https://wa.me/919944754339" target="_blank" rel="noopener noreferrer">WhatsApp +91 99447 54339 <span>↗</span></a></div>
+        <form id="contact-form" class="contact-form reveal" action="https://api.whatsapp.com/send" method="get" target="_blank" rel="noopener noreferrer" aria-describedby="contact-help">
           <input type="hidden" name="phone" value="919944754339">
-          <div class="form-row">
-            <div class="form-field"><label for="contact-name">Your name <span aria-hidden="true">*</span></label><input id="contact-name" name="visitor_name" type="text" autocomplete="name" placeholder="Your full name" maxlength="100" required></div>
-            <div class="form-field"><label for="contact-email">Email address <span class="field-optional">(optional)</span></label><input id="contact-email" name="visitor_email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="160"></div>
-          </div>
-          <div class="form-field"><label for="contact-project">What can I help with?</label><select id="contact-project" name="project_type"><option value="">Select a project type</option><option value="Website development">Website development</option><option value="App development">App development</option><option value="AI and creative work">AI and creative work</option><option value="Something else">Something else</option></select></div>
-          <div class="form-field"><label for="contact-message">Tell me about your idea <span aria-hidden="true">*</span></label><textarea id="contact-message" name="text" rows="5" placeholder="What are you looking to create?" minlength="10" maxlength="2000" required></textarea></div>
-          <div class="form-footer"><p id="contact-form-help">This opens WhatsApp with your message prefilled. You choose when to send it.</p><button type="submit" class="form-submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button></div>
+          <label for="contact-name">Name<input id="contact-name" name="visitor_name" type="text" autocomplete="name" placeholder="Your name" maxlength="100" required></label>
+          <label for="contact-email">Email <span>(optional)</span><input id="contact-email" name="visitor_email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="160"></label>
+          <label for="contact-project">Project type<select id="contact-project" name="project_type"><option value="">Choose one</option><option value="Website development">Website development</option><option value="App development">App development</option><option value="AI and creative work">AI and creative work</option><option value="Something else">Something else</option></select></label>
+          <label for="contact-message">Tell me about the idea<textarea id="contact-message" name="text" rows="5" minlength="10" maxlength="2000" placeholder="What are you looking to create?" required></textarea></label>
+          <div class="contact-submit-row"><p id="contact-help">This opens WhatsApp with your message prefilled. You choose when to send it.</p><button type="submit">Continue on WhatsApp <span>↗</span></button></div>
         </form>
       </div>
-      <div class="contact-bottom"><div class="contact-email-wrap"><span>OR DROP A NOTE AT</span><button class="email-copy" type="button" data-copy-email="karthikumaran7170@gmail.com" aria-label="Copy email address" title="Copy email address"><span>karthikumaran7170@gmail.com</span><span aria-hidden="true">⧉</span></button></div><a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer" class="github-link">GITHUB <span aria-hidden="true">↗</span></a></div>
+      <div class="contact-footer reveal"><button class="email-copy" type="button" data-copy-email="karthikumaran7170@gmail.com">karthikumaran7170@gmail.com <span>⧉</span></button><a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
     </section>
   </main>
-  <footer class="footer"><a href="#home" class="footer-logo" aria-label="AI X MAD, back to top">A<span>×</span>M</a><span>© <span id="year">2026</span> AI X MAD. DESIGNED WITH CURIOSITY.</span><span>FOUNDED BY KARTHIKEYAN K <span class="footer-spark" aria-hidden="true">✳</span> TAMIL NADU, INDIA</span><a href="#top" class="back-top">BACK TO TOP ↑</a></footer>
-  <dialog class="command-dialog" aria-labelledby="command-title"><div class="command-header"><span id="command-title">JUMP TO A SECTION <span class="command-small">/ QUICK NAVIGATION</span></span><button class="command-close" type="button" aria-label="Close quick navigation">ESC ✕</button></div><nav aria-label="Quick navigation"><a href="#home"><span>01</span> HOME <b>↗</b></a><a href="#about"><span>02</span> ABOUT <b>↗</b></a><a href="#service"><span>03</span> SERVICES <b>↗</b></a><a href="#project"><span>04</span> PROJECTS <b>↗</b></a><a href="#contact"><span>05</span> CONTACT <b>↗</b></a></nav><div class="command-footer">PRESS ⌘ K / CTRL K TO OPEN <span>✳ AI X MAD LAB</span></div></dialog>
+
+  <footer class="footer section-shell"><a href="#home">AI x MAD</a><span>© <span id="year">2026</span> / Built in Tamil Nadu, India</span><a href="#top">Back to top ↑</a></footer>
+
   <aside class="whatsapp-widget" aria-label="WhatsApp contact">
     <div class="wa-panel" id="wa-panel" hidden>
-      <div class="wa-panel-header"><span class="wa-status-dot" aria-hidden="true"></span><span>AI X MAD <small>Let's connect</small></span><button type="button" class="wa-close" aria-label="Dismiss WhatsApp pop-up">×</button></div>
-      <p>Have a website, app or creative idea in mind? Tell me about it.</p>
-      <a class="wa-chat-link" href="https://wa.me/919944754339?text=Hi%20AI%20X%20MAD%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
+      <div class="wa-panel-head"><div><span class="wa-dot"></span><strong>AI x MAD</strong><small>Let's connect</small></div><button class="wa-close" type="button" aria-label="Dismiss WhatsApp pop-up">×</button></div>
+      <p>Have a website, app or AI idea in mind? Tell me about it.</p>
+      <a class="wa-chat-link" href="https://wa.me/919944754339?text=Hi%20AI%20x%20MAD%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Chat on WhatsApp <span>↗</span></a>
     </div>
-    <a class="wa-launcher" href="https://wa.me/919944754339" target="_blank" rel="noopener noreferrer" role="button" aria-expanded="false" aria-controls="wa-panel" aria-label="Open WhatsApp chat preview">
-      <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M16 .8A15 15 0 0 0 3.06 23.38L.9 31.1l7.93-2.08A15.18 15.18 0 0 0 16 30.9 15.05 15.05 0 0 0 31.05 15.85 15.05 15.05 0 0 0 16 .8zm0 27.42a12.3 12.3 0 0 1-6.29-1.72l-.45-.27-4.7 1.23 1.25-4.58-.3-.47A12.34 12.34 0 1 1 16 28.22zm6.8-9.23c-.37-.19-2.2-1.09-2.55-1.21-.34-.12-.58-.19-.83.19-.25.37-.96 1.21-1.18 1.46-.22.25-.43.28-.8.09-.38-.19-1.59-.59-3.02-1.88-1.12-1-1.88-2.23-2.1-2.6-.22-.38-.02-.58.17-.77.17-.17.37-.43.56-.65.18-.22.25-.38.37-.63.12-.25.06-.47-.03-.65-.1-.19-.84-2.02-1.15-2.77-.3-.73-.6-.63-.83-.64h-.7c-.25 0-.65.09-.99.47-.34.37-1.29 1.27-1.29 3.09s1.32 3.58 1.51 3.83c.18.25 2.6 3.97 6.3 5.57.88.38 1.57.61 2.11.78.89.28 1.7.24 2.34.15.71-.11 2.2-.9 2.5-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.44z"/></svg>
-    </a>
+    <a class="wa-launcher" href="https://wa.me/919944754339" target="_blank" rel="noopener noreferrer" role="button" aria-expanded="false" aria-controls="wa-panel" aria-label="Open WhatsApp chat preview">WA</a>
   </aside>
-  <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
