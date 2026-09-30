@@ -17,6 +17,19 @@ try{
   assert.equal(await desktop.locator('.project-card').count(),4);
   assert.equal(await desktop.locator('.contact-form').count(),1);
 
+  await desktop.locator('[data-work-carousel]').scrollIntoViewIfNeeded();
+  await desktop.waitForTimeout(250);
+  const firstWork=await desktop.locator('.project-card.is-active h3').innerText();
+  assert.equal(firstWork,'New Royal Tiles');
+  await desktop.waitForTimeout(2250);
+  const autoWork=await desktop.locator('.project-card.is-active h3').innerText();
+  assert.equal(autoWork,'Sugumar Portfolio','Work carousel should auto-swipe after 2 seconds');
+  await desktop.locator('.work-next').click();
+  assert.equal(await desktop.locator('.project-card.is-active h3').innerText(),'VIP-Hunter');
+  await desktop.locator('.work-prev').click();
+  assert.equal(await desktop.locator('.project-card.is-active h3').innerText(),'Sugumar Portfolio');
+  console.log('2-second selected-work swipe carousel: PASS');
+
   await desktop.locator('.wa-launcher').click();
   assert.equal(await desktop.locator('#wa-panel').isVisible(),true);
   await desktop.locator('.wa-close').click();
