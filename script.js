@@ -1,4 +1,4 @@
-/* AI-MAD Cyber Lab — responsive interactions, no third-party JavaScript. */
+/* AI X MAD — progressive enhancement for the black-and-blue portfolio. */
 (() => {
   'use strict';
   const root = document.documentElement;
@@ -45,7 +45,7 @@
     themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     themeButton.setAttribute('title', dark ? 'Switch to light theme' : 'Switch to dark theme');
     themeButton.querySelector('.theme-glyph').textContent = dark ? '☀' : '◐';
-    $('meta[name="theme-color"]').setAttribute('content', dark ? '#050d15' : '#070b0c');
+    $('meta[name="theme-color"]').setAttribute('content', dark ? '#02050c' : '#060b16');
     try { localStorage.setItem('aimad-theme', dark ? 'dark' : 'light'); } catch (_) { /* private browsing */ }
   }
   try {
@@ -165,19 +165,12 @@
     notify(copied ? 'EMAIL COPIED — LET’S CREATE ✳' : 'SELECT THE EMAIL TO COPY IT');
   });
 
-  // Gentle depth and interactive lighting only for precise pointers.
-  const portrait = $('[data-tilt]');
+  // Subtle pointer light: the opening screen is type-only by design.
   const pointerGlow = $('.pointer-glow');
-  if (finePointer.matches && !reduceMotion.matches) {
-    portrait.addEventListener('pointermove', event => {
-      const bounds = portrait.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - .5;
-      const y = (event.clientY - bounds.top) / bounds.height - .5;
-      portrait.style.transform = 'rotate(3deg) rotateX(' + (-y * 6).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg)';
-    });
-    portrait.addEventListener('pointerleave', () => portrait.style.removeProperty('transform'));
+  if (pointerGlow && finePointer.matches && !reduceMotion.matches) {
     window.addEventListener('pointermove', event => {
-      pointerGlow.style.transform = 'translate3d(' + (event.clientX - 115) + 'px,' + (event.clientY - 115) + 'px,0)';
+      pointerGlow.style.transform = 'translate3d('
+        + (event.clientX - 115) + 'px,' + (event.clientY - 115) + 'px,0)';
     }, { passive: true });
   }
 
