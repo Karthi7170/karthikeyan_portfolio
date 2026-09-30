@@ -44,8 +44,8 @@
 
     if (header) {
       header.style.borderBottomColor = window.scrollY > 12
-        ? "rgba(61,160,255,.30)"
-        : "rgba(61,160,255,.18)";
+        ? "rgba(0,0,0,.12)"
+        : "rgba(0,0,0,.06)";
     }
 
     const marker = window.scrollY + Math.min(window.innerHeight * 0.33, 280);
@@ -142,6 +142,21 @@
     window.open(url, "_blank", "noopener,noreferrer");
     notify("Opening WhatsApp with your enquiry");
   });
+
+  const testimonialTrack = $("[data-testimonial-track]");
+  const testimonialPrev = $("[data-testimonial-prev]");
+  const testimonialNext = $("[data-testimonial-next]");
+
+  function moveTestimonials(direction) {
+    if (!testimonialTrack) return;
+    const card = testimonialTrack.querySelector(".testimonial-card");
+    if (!card) return;
+    const amount = card.getBoundingClientRect().width + 12;
+    testimonialTrack.scrollBy({ left: direction * amount, behavior: "smooth" });
+  }
+
+  testimonialPrev?.addEventListener("click", () => moveTestimonials(-1));
+  testimonialNext?.addEventListener("click", () => moveTestimonials(1));
 
   const year = $("#year");
   if (year) year.textContent = String(new Date().getFullYear());
