@@ -11,7 +11,6 @@
   const navLinks=$$('.nav-link');
   const sections=$$('main section[id]');
   const toast=$('.toast');
-  window.__aimadDebug={stage:'selectors'};
 
   function setMenu(open){
     menu.setAttribute('aria-expanded',String(open));
@@ -42,9 +41,7 @@
   addEventListener('scroll',onScroll,{passive:true});
   addEventListener('resize',onScroll,{passive:true});
   updateScroll();
-  window.__aimadDebug.stage='scroll-ready';
 
-  window.__aimadDebug.stage='before-reveal';
   if('IntersectionObserver' in window){
     const io=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
@@ -58,10 +55,8 @@
 
   // Selected Work carousel: cinematic horizontal swipe every 2 seconds.
   // Autoplay pauses on hover/focus/touch and is disabled for reduced-motion users.
-  window.__aimadDebug.stage='before-carousel';
   const workCarousel=$('[data-work-carousel]');
   if(workCarousel){
-    window.__aimadDebug.stage='carousel-found';
     const viewport=$('.work-viewport',workCarousel);
     const slides=Array.from(workCarousel.querySelectorAll('[data-work-slide]'));
     const dots=Array.from(workCarousel.querySelectorAll('[data-work-dot]'));
@@ -74,7 +69,6 @@
     let scrollTimer=0;
     let programmatic=false;
     const labels=slides.map(slide=>slide.querySelector('h3')?.textContent.trim()||'Project');
-    window.__aimadDebug.stage='carousel-data';
 
     function updateWorkUI(index,{scroll=true,smooth=true,announce=false}={}){
       workIndex=(index+slides.length)%slides.length;
@@ -101,7 +95,7 @@
     function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
     function startAuto(){
       stopAuto();
-      workTimer=setInterval(()=>{workCarousel.dataset.autoTicks=String((Number(workCarousel.dataset.autoTicks)||0)+1);updateWorkUI(workIndex+1,{scroll:true,smooth:true})},2000);
+      workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
     }
     function restartLater(delay=2800){
       stopAuto();clearTimeout(resumeTimer);
@@ -129,10 +123,8 @@
     },{passive:true});
 
 
-    workCarousel.dataset.autoTicks='0';
     updateWorkUI(0,{scroll:false});
     startAuto();
-    window.__aimadDebug.stage='carousel-ready';
   }
 
   if(finePointer.matches&&!reduceMotion.matches){
