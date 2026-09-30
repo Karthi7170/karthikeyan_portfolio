@@ -98,7 +98,7 @@ img{max-width:100%;display:block}
 .hero-footer>span:first-child{display:flex;gap:10px;align-items:center}
 .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#29ba69;box-shadow:0 0 0 4px #29ba6922}
 .hero-footer span[aria-hidden]{color:var(--violet);font-size:18px;margin-left:8px}
-.ticker{background:var(--violet);color:#fff;white-space:nowrap;overflow:hidden;border-block:1px solid #20115f;padding:13px 0;transform:rotate(-1deg) scale(1.02);position:relative;z-index:1}
+.ticker{background:var(--violet);color:#fff;white-space:nowrap;overflow:hidden;border-block:1px solid #20115f;padding:13px 0;transform:none;position:relative;z-index:1}
 .ticker-track{display:flex;width:max-content;animation:marquee 29s linear infinite;font:700 clamp(22px,2.4vw,40px)/1 'Space Grotesk',sans-serif;letter-spacing:-.06em}
 .ticker-track span{display:inline-block;padding-right:12px}
 .section-pad{padding:clamp(90px,10vw,165px) clamp(24px,5vw,90px)}
