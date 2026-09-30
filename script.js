@@ -1,118 +1,141 @@
 (() => {
   "use strict";
 
-  const $=(s,c=document)=>c.querySelector(s);
-  const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  const $ = (s,c=document) => c.querySelector(s);
+  const $$ = (s,c=document) => Array.from(c.querySelectorAll(s));
 
-  document.body.classList.add("tab-view");
+  const menu = $(".menu-btn");
+  const mobileNav = $(".mobile-nav");
+  const navLinks = $$(".nav-link");
+  const sections = $$("main section[id]");
 
-  const menu=$(".menu-btn");
-  const mobile=$(".mobile-nav");
   function setMenu(open){
-    if(!menu||!mobile) return;
-    menu.setAttribute("aria-expanded",String(open));
-    mobile.classList.toggle("open",open);
+    if(!menu || !mobileNav) return;
+    menu.setAttribute("aria-expanded", String(open));
+    mobileNav.classList.toggle("open", open);
   }
-  menu?.addEventListener("click",()=>setMenu(menu.getAttribute("aria-expanded")!=="true"));
-  $$(".mobile-nav a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
-  document.addEventListener("click",e=>{
-    if(menu&&mobile&&!menu.contains(e.target)&&!mobile.contains(e.target)) setMenu(false);
+
+  menu?.addEventListener("click", () => {
+    setMenu(menu.getAttribute("aria-expanded") !== "true");
   });
-  document.addEventListener("keydown",e=>{ if(e.key==="Escape") setMenu(false); });
 
-  const sections=$$(".page-section[id]");
-  const navLinks=$$(".onepage-nav a[href^='#']");
+  $$(".mobile-nav a").forEach(link => {
+    link.addEventListener("click", () => setMenu(false));
+  });
 
-  function validSectionId(raw){
-    const id=(raw||"").replace(/^#/,"");
-    return sections.some(section=>section.id===id) ? id : "home";
-  }
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape") setMenu(false);
+  });
 
-  function activateTab(id, options={}){
-    const target=validSectionId(id);
-    sections.forEach(section=>{
-      const active=section.id===target;
-      section.classList.toggle("is-active",active);
-      section.setAttribute("aria-hidden",String(!active));
+  document.addEventListener("click", e => {
+    if(menu && mobileNav && !menu.contains(e.target) && !mobileNav.contains(e.target)){
+      setMenu(false);
+    }
+  });
+
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+      const id = link.getAttribute("href");
+      if(!id || id === "#") return;
+      const target = $(id);
+      if(!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({top, behavior:"smooth"});
+      history.replaceState(null,"",id);
     });
+  });
 
-    navLinks.forEach(link=>{
-      const active=link.getAttribute("href")==="#"+target;
-      link.classList.toggle("active",active);
-      if(active) link.setAttribute("aria-current","page");
+  function updateActiveNav(){
+    const marker = window.scrollY + 150;
+    let active = "home";
+    for(const section of sections){
+      if(section.offsetTop <= marker) active = section.id;
+      else break;
+    }
+    navLinks.forEach(link => {
+      const isActive = link.getAttribute("href") === "#" + active;
+      link.classList.toggle("active", isActive);
+      if(isActive) link.setAttribute("aria-current","page");
       else link.removeAttribute("aria-current");
     });
+  }
 
-    document.body.dataset.activeTab=target;
-    document.title = target==="home"
-      ? "AI × MAD — Digital Solutions for a Brighter Tomorrow"
-      : target.charAt(0).toUpperCase()+target.slice(1)+" — AI × MAD";
+  window.addEventListener("scroll", updateActiveNav, {passive:true});
+  window.addEventListener("resize", updateActiveNav, {passive:true});
+  updateActiveNav();
 
-    if(options.scroll!==false){
-      window.scrollTo({top:0,left:0,behavior:options.smooth?"smooth":"auto"});
+  if("IntersectionObserver" in window){
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12, rootMargin:"0px 0px -40px 0px"});
+    $$(".reveal").forEach(el => observer.observe(el));
+  } else {
+    $$(".reveal").forEach(el => el.classList.add("visible"));
+  }
+
+  const form = $("#contact-form");
+  const status = $(".form-status");
+
+  form?.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if(!form.checkValidity()){
+      form.reportValidity();
+      if(status){
+        status.textContent = "Please complete all required fields.";
+        status.style.color = "#b42318";
+      }
+      return;
+    }
+
+    const name = $("#name").value.trim();
+    const email = $("#email").value.trim();
+    const phone = $("#phone").value.trim();
+    const service = $("#service").value;
+    const message = $("#message").value.trim();
+
+    const text = [
+      "Hi AI × MAD, I'd like to discuss a project.",
+      "",
+      "Name: " + name,
+      "Email: " + email,
+      "Phone: " + phone,
+      "Service: " + service,
+      "",
+      "Message:",
+      message
+    ].join("\n");
+
+    if(status){
+      status.textContent = "Thanks! Your enquiry is ready in WhatsApp.";
+      status.style.color = "#17733a";
+    }
+
+    window.open(
+      "https://wa.me/919944754339?text=" + encodeURIComponent(text),
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    form.reset();
+  });
+
+  const year = $("#year");
+  if(year) year.textContent = new Date().getFullYear();
+
+  if(location.hash){
+    const target = $(location.hash);
+    if(target){
+      requestAnimationFrame(() => {
+        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({top, behavior:"auto"});
+      });
     }
   }
-
-  function routeFromLocation(){
-    activateTab(validSectionId(location.hash),{scroll:true});
-  }
-
-  $$('a[href^="#"]').forEach(link=>{
-    link.addEventListener("click",e=>{
-      const hash=link.getAttribute("href");
-      if(!hash || hash==="#") return;
-      const id=validSectionId(hash);
-      if(!sections.some(section=>section.id===id)) return;
-      e.preventDefault();
-      if(location.hash!==("#"+id)){
-        history.pushState({tab:id},"","#"+id);
-      }
-      activateTab(id,{scroll:true});
-      setMenu(false);
-    });
-  });
-
-  window.addEventListener("popstate",routeFromLocation);
-  window.addEventListener("hashchange",routeFromLocation);
-
-  const initial=validSectionId(location.hash);
-  if(!location.hash || location.hash==="#"){
-    history.replaceState({tab:"home"},"","#home");
-  }
-  activateTab(initial,{scroll:false});
-
-  const launcher=$(".wa-launcher");
-  const panel=$(".wa-panel");
-  const close=$(".wa-close");
-  function setWA(open){
-    if(!launcher||!panel) return;
-    panel.hidden=!open;
-  }
-  launcher?.addEventListener("click",()=>setWA(panel.hidden));
-  close?.addEventListener("click",()=>setWA(false));
-
-  const year=$("#year");
-  if(year) year.textContent=new Date().getFullYear();
-
-  const form=$("#contact-form");
-  form?.addEventListener("submit",e=>{
-    e.preventDefault();
-    if(!form.reportValidity()) return;
-    const name=$("#contact-name")?.value.trim()||"";
-    const email=$("#contact-email")?.value.trim()||"";
-    const phone=$("#contact-phone")?.value.trim()||"";
-    const service=$("#contact-service")?.value||"";
-    const budget=$("#contact-budget")?.value||"";
-    const message=$("#contact-message")?.value.trim()||"";
-    const text=[
-      "Hi AI x MAD, I want to discuss a project.","",
-      "Name: "+name,
-      "Email: "+email,
-      "Phone: "+phone,
-      "Service: "+service,
-      "Budget: "+budget,"",
-      "Project details:",message
-    ].join("\n");
-    window.open("https://wa.me/919944754339?text="+encodeURIComponent(text),"_blank","noopener,noreferrer");
-  });
 })();
