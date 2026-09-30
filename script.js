@@ -107,8 +107,6 @@
     next?.addEventListener('click',()=>{updateWorkUI(workIndex+1,{announce:true});restartLater()});
     dots.forEach((dot,i)=>dot.addEventListener('click',()=>{updateWorkUI(i,{announce:true});restartLater()}));
 
-    workCarousel.addEventListener('mouseenter',stopAuto);
-    workCarousel.addEventListener('mouseleave',startAuto);
     workCarousel.addEventListener('focusin',stopAuto);
     workCarousel.addEventListener('focusout',e=>{if(!workCarousel.contains(e.relatedTarget))startAuto()});
     viewport.addEventListener('pointerdown',()=>{stopAuto();clearTimeout(resumeTimer)},{passive:true});
