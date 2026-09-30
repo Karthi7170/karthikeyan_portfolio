@@ -95,7 +95,7 @@
     function stopAuto(){if(workTimer){clearInterval(workTimer);workTimer=0}}
     function startAuto(){
       stopAuto();
-      workTimer=setInterval(()=>updateWorkUI(workIndex+1,{scroll:true,smooth:true}),2000);
+      workTimer=setInterval(()=>{workCarousel.dataset.autoTicks=String((Number(workCarousel.dataset.autoTicks)||0)+1);updateWorkUI(workIndex+1,{scroll:true,smooth:true})},2000);
     }
     function restartLater(delay=2800){
       stopAuto();clearTimeout(resumeTimer);
@@ -123,6 +123,7 @@
     },{passive:true});
 
 
+    workCarousel.dataset.autoTicks='0';
     updateWorkUI(0,{scroll:false});
     startAuto();
   }
