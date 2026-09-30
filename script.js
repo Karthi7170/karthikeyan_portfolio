@@ -63,8 +63,8 @@
   if(workCarousel){
     window.__aimadDebug.stage='carousel-found';
     const viewport=$('.work-viewport',workCarousel);
-    const slides=$('[data-work-slide]',workCarousel);
-    const dots=$('[data-work-dot]',workCarousel);
+    const slides=Array.from(workCarousel.querySelectorAll('[data-work-slide]'));
+    const dots=Array.from(workCarousel.querySelectorAll('[data-work-dot]'));
     const prev=$('.work-prev',workCarousel);
     const next=$('.work-next',workCarousel);
     const status=$('#work-carousel-status');
