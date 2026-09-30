@@ -77,3 +77,33 @@ test('Selected work is a user-controllable 3-second swipe carousel',()=>{
   assert.match(js,/reduceMotion\.matches/);
   assert.match(js,/pointerdown',\(\)=>\{stopAuto/);
 });
+
+
+test('Services are presented in one responsive row with tool-logo cubes',()=>{
+  assert.doesNotMatch(html,/class="browser-stage/);
+  assert.equal((html.match(/class="service-card reveal"/g)??[]).length,3);
+  const serviceSections=[...html.matchAll(/<article class="service-card reveal">([\s\S]*?)<\/article>/g)].map(m=>m[1]);
+  assert.equal(serviceSections.length,3);
+  for(const service of serviceSections){
+    assert.ok((service.match(/class="tool-cube"/g)??[]).length>=4,'Every service needs at least four tool cubes');
+  }
+  assert.match(css,/\.services-inline\{[\s\S]*?grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(css,/perspective\(500px\)/);
+});
+
+test('Project cards use thumbnails sourced from their original live sites',()=>{
+  assert.equal((html.match(/class="project-preview site-thumbnail"/g)??[]).length,4);
+  for(const site of ['royaltiles.vercel.app','sugumar-portfolio-beta.vercel.app','vip-hunter.vercel.app','www.deccanmatric.in']){
+    assert.ok(html.includes('image.thum.io/get/width/1600/crop/900/noanimate/https://'+site+'/'),site);
+  }
+  assert.match(css,/\.site-thumbnail img/);
+});
+
+test('Obsidian monochrome theme and WhatsApp icon are present',()=>{
+  assert.match(html,/Space\+Grotesk/);
+  assert.match(html,/IBM\+Plex\+Mono/);
+  assert.match(css,/AI x MAD — Obsidian \/ Chalk editorial system/);
+  assert.match(css,/--bg:#050505/);
+  assert.match(css,/filter:grayscale\(1\)/);
+  assert.match(html,/aria-label="Open WhatsApp chat preview">[\s\S]*?<svg/);
+});
