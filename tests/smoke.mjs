@@ -26,9 +26,10 @@ test('Reference-inspired hero uses Higgsfield motion and original UI overlay',()
 });
 
 test('Professional type and responsive layout are present',()=>{
-  assert.match(html,/Space\+Grotesk/);
-  assert.match(html,/IBM\+Plex\+Mono/);
-  assert.match(css,/"Space Grotesk"/);
+  assert.match(html,/Sora/);
+  assert.match(html,/Manrope/);
+  assert.match(html,/JetBrains\+Mono/);
+  assert.match(css,/"Sora"/);
   for(const bp of ['1100px','900px','650px','390px']) assert.ok(css.includes('@media(max-width:'+bp+')'));
   assert.match(css,/prefers-reduced-motion:reduce/);
   assert.match(css,/\.motion-frame/);
@@ -100,17 +101,17 @@ test('Project cards use thumbnails sourced from their original live sites',()=>{
   assert.match(css,/\.site-thumbnail img/);
 });
 
-test('Midnight Cyber cobalt-blue theme and WhatsApp icon are present',()=>{
-  assert.match(html,/Space\+Grotesk/);
-  assert.match(html,/IBM\+Plex\+Mono/);
-  assert.match(html,/theme-color" content="#03060b"/);
-  assert.match(css,/AI x MAD — Midnight Cyber \/ VS Code Night \/ Cobalt Obsidian \/ Neon Blue Synth/);
-  for(const value of ['#03060b','#070b12','#0b1220','#f7fbff','#8fa3b8','#2f7bff','#245eff','#3fdcff']) assert.ok(css.includes(value),value);
-  assert.match(css,/background:linear-gradient\(90deg,#245eff 0%,#2f7bff 52%,#3fdcff 100%\)/);
-  assert.match(css,/\.site-thumbnail img\{filter:saturate\(1\.05\)/);
-  assert.match(css,/\.service-card:nth-child\(1\)/);
-  assert.match(css,/\.service-card:nth-child\(2\)/);
-  assert.match(css,/\.service-card:nth-child\(3\)/);
-  assert.doesNotMatch(css,/AI x MAD — Spectrum Studio theme/);
+test('Executive Signal professional agency theme and WhatsApp icon are present',()=>{
+  assert.match(html,/Sora/);
+  assert.match(html,/Manrope/);
+  assert.match(html,/JetBrains\+Mono/);
+  assert.match(html,/data-theme="light"/);
+  assert.match(html,/theme-color" content="#f4f6f8"/);
+  assert.match(css,/AI x MAD — Executive Signal/);
+  for(const value of ['#f4f6f8','#ffffff','#111318','#667085','#315efb','#39c8ff','#0d1525']) assert.ok(css.includes(value),value);
+  assert.match(css,/\.executive-hero-grid\{[\s\S]*?border-radius:28px/);
+  assert.match(css,/\.service-card\{[\s\S]*?background:#fff!important/);
+  assert.match(css,/\.work\{[\s\S]*?background:#111318/);
+  assert.match(css,/\.contact\{[\s\S]*?background:#0d1525/);
   assert.match(html,/aria-label="Open WhatsApp chat preview">[\s\S]*?<svg/);
 });
