@@ -54,7 +54,7 @@
   themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
 
   // Scroll progress and active section links, throttled with rAF.
-  const sections = $('main section[id]');
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
   let scrollTicking = false;
   function updateScroll() {
     scrollTicking = false;
