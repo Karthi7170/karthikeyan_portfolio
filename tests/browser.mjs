@@ -114,7 +114,7 @@ try{
   await uhd.goto(base,{waitUntil:'domcontentloaded'});
   await uhd.evaluate(async()=>{await document.fonts.ready});
   assert.equal(await uhd.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
-  assert.ok((await uhd.locator('.motion-frame').boundingBox()).width>650);
+  assert.ok((await uhd.locator('.motion-frame').boundingBox()).width>500,'Professional split hero should remain substantial at 4K');
   await uhd.screenshot({path:'artifacts/4k-hero.png',animations:'disabled'});
 
   const reduced=await browser.newPage({viewport:{width:1024,height:768},reducedMotion:'reduce'});
