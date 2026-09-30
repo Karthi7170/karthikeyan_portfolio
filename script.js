@@ -1,4 +1,4 @@
-/* AI X MAD — progressive enhancement for the black-and-blue portfolio. */
+/* AI X MAD — creative studio interactions, accessible navigation, vector robot. */
 (() => {
   'use strict';
   const root = document.documentElement;
@@ -195,6 +195,30 @@
     });
   }
 
+  // Motion robot: pointer movement adds a subtle 3D pose to an SVG that
+  // renders crisply at any device resolution. No WebGL, video, or heavy assets.
+  const robotStage = $('[data-robot-stage]');
+  if (robotStage && finePointer.matches && !reduceMotion.matches) {
+    let robotFrame = 0;
+    let robotX = 0;
+    let robotY = 0;
+    robotStage.addEventListener('pointermove', event => {
+      const rect = robotStage.getBoundingClientRect();
+      robotX = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
+      robotY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
+      if (robotFrame) return;
+      robotFrame = window.requestAnimationFrame(() => {
+        robotFrame = 0;
+        robotStage.style.setProperty('--rx', (-robotY * 4).toFixed(2) + 'deg');
+        robotStage.style.setProperty('--ry', (robotX * 6).toFixed(2) + 'deg');
+      });
+    }, { passive: true });
+    robotStage.addEventListener('pointerleave', () => {
+      robotStage.style.removeProperty('--rx');
+      robotStage.style.removeProperty('--ry');
+    });
+  }
+
   // WhatsApp contact form: prepare the message; the visitor sends it in WhatsApp.
   // Without JS the GET form still opens WhatsApp with its message field.
   const contactForm = $('#contact-form');
@@ -227,7 +251,7 @@
       const email = $('#contact-email').value.trim();
       const project = $('#contact-project').value;
       const lines = [
-        'Hi Karthikeyan, I found your AI X MAD portfolio.',
+        'Hi AI X MAD, I found your studio website.',
         '',
         'Name: ' + name
       ];
@@ -257,7 +281,7 @@
       whatsappLauncher.setAttribute('aria-expanded', String(open));
       whatsappLauncher.setAttribute('aria-label', open ? 'Close WhatsApp chat preview' : 'Open WhatsApp chat preview');
     }
-    setWhatsappOpen(!compactScreen.matches);
+    setWhatsappOpen(false);
     whatsappLauncher.addEventListener('click', event => {
       event.preventDefault();
       setWhatsappOpen(whatsappPanel.hidden);
@@ -272,7 +296,7 @@
       setWhatsappOpen(false);
       whatsappLauncher.focus();
     });
-    compactScreen.addEventListener('change', event => setWhatsappOpen(!event.matches));
+    compactScreen.addEventListener('change', () => setWhatsappOpen(false));
   }
 
   $('#year').textContent = String(new Date().getFullYear());
