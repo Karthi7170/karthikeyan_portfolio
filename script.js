@@ -60,6 +60,20 @@
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     $('.scroll-progress').style.width = Math.min(100, Math.max(0, 100 * window.scrollY / max)) + '%';
     header.classList.toggle('is-scrolled', window.scrollY > 20);
+    // Select by document position, not observer callback order: the hero
+    // must remain the active section after returning to the top.
+    const viewportMarker = window.scrollY + Math.min(window.innerHeight * .35, 340);
+    let activeId = 'home';
+    for (const section of sections) {
+      if (section.offsetTop <= viewportMarker) activeId = section.id;
+      else break;
+    }
+    navLinks.forEach(link => {
+      const active = link.getAttribute('href') === '#' + activeId;
+      link.classList.toggle('is-current', active);
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
   }
   function onScroll() {
     if (scrollTicking) return;
@@ -72,19 +86,6 @@
 
   const sections = $$('main section[id]');
   if ('IntersectionObserver' in window) {
-    const sectionObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(link => {
-          const active = link.getAttribute('href') === '#' + entry.target.id;
-          link.classList.toggle('is-current', active);
-          if (active) link.setAttribute('aria-current', 'page');
-          else link.removeAttribute('aria-current');
-        });
-      });
-    }, { rootMargin: '-22% 0px -64% 0px' });
-    sections.forEach(section => sectionObserver.observe(section));
-
     const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
