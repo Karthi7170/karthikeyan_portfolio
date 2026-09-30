@@ -74,5 +74,5 @@ test('Selected work is a user-controllable 2-second swipe carousel',()=>{
   assert.match(css,/\.project-card\.is-active/);
   assert.match(js,/setInterval\(\(\)=>updateWorkUI\(workIndex\+1,[\s\S]*?2000\)/);
   assert.match(js,/reduceMotion\.matches/);
-  assert.match(js,/focusin',stopAuto/);
+  assert.match(js,/pointerdown',\(\)=>\{stopAuto/);
 });
