@@ -10,9 +10,12 @@ try {
   const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
   await desktop.goto(base, { waitUntil: 'domcontentloaded' });
-  await desktop.waitForSelector('.hero-photo');
-  assert.equal(await desktop.title(), 'Karthikeyan K | Vibe Coder, Web & App Developer');
-  assert.equal(await desktop.locator('.hero-photo').evaluate(img => img.complete && img.naturalWidth > 0), true, 'Portrait should load');
+  await desktop.waitForSelector('#hero-heading');
+  assert.equal(await desktop.title(), 'Karthikeyan — Vibe coder, Web developer & App developer | AI X MAD');
+  assert.equal(await desktop.locator('#hero-heading').innerText(), 'KARTHIKEYAN');
+  assert.equal(await desktop.locator('.hero-roles').innerText(), 'Vibe coder - web developer - App developer');
+  assert.equal(await desktop.locator('.hero img').count(), 0, 'Homepage must contain no portrait');
+  assert.match(await desktop.locator('.logo').innerText(), /AI X MAD/);
   assert.equal(await desktop.locator('.project:not([hidden])').count(), 4);
   await desktop.locator('[data-filter="app"]').click();
   assert.equal(await desktop.locator('.project:not([hidden])').count(), 1, 'App filter');
@@ -39,12 +42,13 @@ try {
   const desktopOverflow = await desktop.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
   if (desktopOverflow) console.log('DESKTOP OVERFLOW ELEMENTS:', await desktop.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(desktopOverflow, false, 'Desktop must not overflow horizontally');
-  console.log('Desktop portrait, filters, theme persistence, keyboard palette and layout: PASS');
+  console.log('Desktop name-only hero, filters, theme persistence, keyboard palette and layout: PASS');
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', err => errors.push('mobile: ' + err.message));
   await mobile.goto(base, { waitUntil: 'domcontentloaded' });
-  assert.equal(await mobile.locator('.hero-photo').evaluate(img => img.complete && img.naturalWidth > 0), true);
+  assert.equal(await mobile.locator('#hero-heading').innerText(), 'KARTHIKEYAN');
+  assert.equal(await mobile.locator('.hero img').count(), 0);
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'false');
   await mobile.locator('.menu-button').click();
   assert.equal(await mobile.locator('.menu-button').getAttribute('aria-expanded'), 'true', 'Mobile menu opens');
@@ -61,7 +65,7 @@ try {
   const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
   if (mobileOverflow) console.log('MOBILE OVERFLOW ELEMENTS:', await mobile.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(mobileOverflow, false, 'Mobile must not overflow horizontally');
-  console.log('Mobile portrait, menu, anchors and layout at 390px: PASS');
+  console.log('Mobile name-only hero, menu, anchors and layout at 390px: PASS');
 
   await mobile.setViewportSize({ width: 320, height: 760 });
   await mobile.waitForTimeout(100);
