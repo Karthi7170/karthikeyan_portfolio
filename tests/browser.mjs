@@ -52,7 +52,7 @@ try {
   await mobile.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await mobile.waitForTimeout(900);
   await mobile.screenshot({ path: 'artifacts/mobile-hero.png', animations: 'disabled' });
-  for (const item of await mobile.locator('.reveal').all()) { await item.scrollIntoViewIfNeeded(); await mobile.waitForTimeout(18); }
+  for (const item of await mobile.locator('.reveal:visible').all()) { await item.scrollIntoViewIfNeeded({ timeout: 3000 }); await mobile.waitForTimeout(18); }
   await mobile.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await mobile.waitForTimeout(100);
   await mobile.screenshot({ path: 'artifacts/mobile-full.png', fullPage: true, animations: 'disabled' });
