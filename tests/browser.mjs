@@ -31,8 +31,12 @@ try {
   await desktop.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await desktop.waitForTimeout(850);
   await desktop.screenshot({ path: 'artifacts/desktop-hero.png', animations: 'disabled' });
+  for (const item of await desktop.locator('.reveal').all()) { await item.scrollIntoViewIfNeeded(); await desktop.waitForTimeout(18); }
+  await desktop.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await desktop.waitForTimeout(100);
   await desktop.screenshot({ path: 'artifacts/desktop-full.png', fullPage: true, animations: 'disabled' });
   const desktopOverflow = await desktop.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
+  if (desktopOverflow) console.log('DESKTOP OVERFLOW ELEMENTS:', await desktop.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(desktopOverflow, false, 'Desktop must not overflow horizontally');
   console.log('Desktop portrait, filters, theme persistence, keyboard palette and layout: PASS');
 
@@ -48,8 +52,12 @@ try {
   await mobile.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); });
   await mobile.waitForTimeout(900);
   await mobile.screenshot({ path: 'artifacts/mobile-hero.png', animations: 'disabled' });
+  for (const item of await mobile.locator('.reveal').all()) { await item.scrollIntoViewIfNeeded(); await mobile.waitForTimeout(18); }
+  await mobile.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await mobile.waitForTimeout(100);
   await mobile.screenshot({ path: 'artifacts/mobile-full.png', fullPage: true, animations: 'disabled' });
   const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
+  if (mobileOverflow) console.log('MOBILE OVERFLOW ELEMENTS:', await mobile.evaluate(() => Array.from(document.querySelectorAll('*')).filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 12).map(el => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 100) : '', right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))));
   assert.equal(mobileOverflow, false, 'Mobile must not overflow horizontally');
   console.log('Mobile portrait, menu, anchors and layout at 390px: PASS');
 
