@@ -22,6 +22,8 @@ try{
   const firstWork=await desktop.locator('.project-card.is-active h3').innerText();
   assert.equal(firstWork,'New Royal Tiles');
   await desktop.waitForTimeout(2250);
+  console.log('EARLY PAGE ERRORS',JSON.stringify(errors));
+  console.log('AIMAD SCRIPT DEBUG',JSON.stringify(await desktop.evaluate(()=>window.__aimadDebug||null)));
   const carouselDebug=await desktop.locator('[data-work-carousel]').evaluate(el=>({ticks:el.dataset.autoTicks,hidden:document.hidden,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,scroll:el.querySelector('.work-viewport').scrollLeft}));
   console.log('WORK CAROUSEL DEBUG',JSON.stringify(carouselDebug));
   const autoWork=await desktop.locator('.project-card.is-active h3').innerText();
