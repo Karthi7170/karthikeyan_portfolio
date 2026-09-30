@@ -6,23 +6,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"><script src="script.js" defer></script>
-</head><body data-page="home"><header class="site-header">
+</head><body data-page="home">
+<header class="site-header">
   <div class="container nav-wrap">
-    <a class="brand" href="index.html"><span><b>AI</b> × <strong>MAD</strong></span><small>IDEAS • CODE • REALITY</small></a>
-    <nav class="desktop-nav"><a class="active" href="index.html">Home</a><a class="" href="about.html">About</a><a class="" href="services.html">Services</a><a class="" href="projects.html">Projects</a><a class="" href="process.html">Process</a><a class="" href="contact.html">Contact</a></nav>
-    <a class="talk-btn" href="contact.html">Let's Talk <span>→</span></a>
+    <a class="brand" href="#home"><span><b>AI</b> × <strong>MAD</strong></span><small>IDEAS • CODE • REALITY</small></a>
+    <nav class="desktop-nav onepage-nav">
+      <a class="active" href="#home">Home</a><a href="#about">About Me</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Process</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="talk-btn" href="#contact">Let's Talk <span>→</span></a>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-    <nav class="mobile-nav"><a class="active" href="index.html">Home</a><a class="" href="about.html">About</a><a class="" href="services.html">Services</a><a class="" href="projects.html">Projects</a><a class="" href="process.html">Process</a><a class="" href="contact.html">Contact</a></nav>
+    <nav class="mobile-nav onepage-nav">
+      <a class="active" href="#home">Home</a><a href="#about">About Me</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Process</a><a href="#contact">Contact</a>
+    </nav>
   </div>
-</header><main>
-<section class="hero hero-home">
+</header>
+
+<main>
+<section id="home" class="hero hero-home page-section">
   <div class="ambient a1"></div><div class="ambient a2"></div><div class="line-art la1"></div><div class="line-art la2"></div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="hero-chip">✦ TECHNOLOGY &nbsp; × &nbsp; CREATIVITY &nbsp; × &nbsp; REAL IMPACT</span>
       <h1>Digital Solutions<br>Powered by AI<br>for a <em>Brighter Tomorrow</em></h1>
       <p>We build modern websites, powerful applications, intelligent AI solutions and SEO strategies that help businesses grow in the digital world.</p>
-      <div class="hero-actions"><a class="primary-btn" href="contact.html">Start Your Project <span>→</span></a><a class="secondary-btn" href="services.html"><span>▶</span> Our Services</a></div>
+      <div class="hero-actions"><a class="primary-btn" href="#contact">Start Your Project <span>→</span></a><a class="secondary-btn" href="#services"><span>▶</span> Our Services</a></div>
       <div class="stat-row">
         <div><i>⌘</i><strong>3+</strong><span>Real Projects</span></div>
         <div><i>♙</i><strong>100%</strong><span>Client Focus</span></div>
@@ -30,21 +37,14 @@
         <div><i>◷</i><strong>24/7</strong><span>Support</span></div>
       </div>
     </div>
-
     <div class="visual dashboard-visual">
       <div class="orbit o1"></div><div class="orbit o2"></div><div class="glow-ball"></div>
       <div class="dash-card">
-        <div class="dash-sidebar">
-          <div class="mini-brand">AI × <b>MAD</b></div>
-          <span class="sel">⌂ Dashboard</span><span>▣ Projects</span><span>✦ AI Tools</span><span>▥ Analytics</span><span>◌ Messages</span><span>⚙ Settings</span>
-        </div>
+        <div class="dash-sidebar"><div class="mini-brand">AI × <b>MAD</b></div><span class="sel">⌂ Dashboard</span><span>▣ Projects</span><span>✦ AI Tools</span><span>▥ Analytics</span><span>◌ Messages</span><span>⚙ Settings</span></div>
         <div class="dash-main">
           <div class="dash-top"><div><strong>Good Morning 👋</strong><small>Let's turn ideas into real-world impact.</small></div><div class="dash-user">●</div></div>
           <div class="metric-grid"><div><span>Total Projects</span><strong>3</strong><em>+100%</em></div><div><span>Active Clients</span><strong>3</strong><em>+100%</em></div><div><span>AI Solutions</span><strong>5</strong><em>+200%</em></div></div>
-          <div class="dash-bottom">
-            <div class="chart-card"><strong>Growth Overview</strong><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="months">Jan&nbsp;&nbsp; Feb&nbsp;&nbsp; Mar&nbsp;&nbsp; Apr&nbsp;&nbsp; May&nbsp;&nbsp; Jun</div></div>
-            <div class="progress-card"><div><strong>Project Progress</strong><a>View All →</a></div><p>Website Development <b>90%</b></p><i style="--p:90%"></i><p>AI Chatbot Integration <b>70%</b></p><i style="--p:70%"></i><p>Mobile Application <b>50%</b></p><i style="--p:50%"></i><p>SEO Optimization <b>80%</b></p><i style="--p:80%"></i></div>
-          </div>
+          <div class="dash-bottom"><div class="chart-card"><strong>Growth Overview</strong><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="months">Jan&nbsp;&nbsp; Feb&nbsp;&nbsp; Mar&nbsp;&nbsp; Apr&nbsp;&nbsp; May&nbsp;&nbsp; Jun</div></div><div class="progress-card"><div><strong>Project Progress</strong><a>View All →</a></div><p>Website Development <b>90%</b></p><i style="--p:90%"></i><p>AI Chatbot Integration <b>70%</b></p><i style="--p:70%"></i><p>Mobile Application <b>50%</b></p><i style="--p:50%"></i><p>SEO Optimization <b>80%</b></p><i style="--p:80%"></i></div></div>
         </div>
       </div>
       <div class="float-note note-ai"><b>⚙</b><span><strong>AI-Powered<br>Solutions</strong><small>for Real Growth</small></span></div>
@@ -54,48 +54,80 @@
   </div>
 </section>
 
-<section class="home-services">
-  <div class="container section-grid">
-    <div class="section-copy"><span class="eyebrow">WHAT WE DO</span><h2>Our Services</h2><p>End-to-end digital solutions tailored for modern businesses. From idea to impact, we turn your vision into powerful digital products.</p></div>
-    <div class="feature-cards four">
-      <article class="feature-card blue"><div class="icon">▱</div><h3>Website Development</h3><p>Modern, responsive and high-performing websites that represent your brand and convert visitors into customers.</p><a href="services.html">Learn More →</a></article>
-      <article class="feature-card violet"><div class="icon">▯</div><h3>Application Development</h3><p>Scalable web and mobile applications built with modern technologies for real business growth.</p><a href="services.html">Learn More →</a></article>
-      <article class="feature-card mint"><div class="icon">✦</div><h3>AI Solutions</h3><p>Custom AI solutions, automation tools and intelligent systems to make your business smarter and more efficient.</p><a href="services.html">Learn More →</a></article>
-      <article class="feature-card peach"><div class="icon">▥</div><h3>SEO Optimization</h3><p>Data-driven SEO strategies to improve your online visibility, rank higher and attract the right audience.</p><a href="services.html">Learn More →</a></article>
-    </div>
-  </div>
-</section>
-
-<section class="projects-preview wave-section">
+<section id="about" class="page-section onepage-about wave-section">
   <div class="container">
-    <div class="section-heading-row"><div><span class="eyebrow">FEATURED WORK</span><h2>Our Recent Projects</h2><p>Explore some of our latest work. Each project is crafted with purpose, creativity and modern technology.</p></div><a class="outline-btn" href="projects.html">View All Projects →</a></div>
-    <div class="project-grid three">
-      <a class="project-card" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://royaltiles.vercel.app/" alt="Royal Tiles website"><div><strong>Royal Tiles</strong><span>Website Development</span></div></a>
-      <a class="project-card" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://sugumar-portfolio-beta.vercel.app/" alt="Sugumar Portfolio"><div><strong>Sugumar Portfolio</strong><span>Portfolio Website</span></div></a>
-      <a class="project-card" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://vip-hunter.vercel.app/" alt="Job Hunter"><div><strong>Job Hunter</strong><span>Web Application</span></div></a>
+    <div class="section-heading-row">
+      <div><span class="eyebrow">ABOUT ME</span><h2>Karthikeyan K — Vibe Coder</h2><p>I’m the developer behind AI × MAD, focused on turning business ideas into polished digital experiences through websites, applications, AI solutions and SEO.</p></div>
+      <a class="outline-btn" href="#contact">Let's Work Together →</a>
+    </div>
+    <div class="about-front-grid">
+      <article class="about-main-card">
+        <div class="about-photo-front"><img src="assets/portrait.webp" alt="Karthikeyan K"></div>
+        <div>
+          <span class="hero-chip">FOUNDER @ AI × MAD</span>
+          <h3>Building practical digital products with a requirement-first approach.</h3>
+          <p>I’m an MCA graduate and developer who works closely with businesses and individuals to understand their goals, plan the right solution, build it with modern tools and support it after launch.</p>
+          <p>My focus is on responsive websites, web and mobile application experiences, AI-assisted workflows, SEO optimisation, UI/UX and long-term digital support.</p>
+          <div class="about-tags"><span>Web Development</span><span>App Development</span><span>AI Solutions</span><span>SEO</span><span>UI/UX</span><span>Support</span></div>
+        </div>
+      </article>
+      <div class="about-side-cards">
+        <article class="feature-card blue"><div class="icon">◎</div><h3>Requirement First</h3><p>Every project starts from your real business requirement, not a generic template.</p></article>
+        <article class="feature-card violet"><div class="icon">⌘</div><h3>Real Project Experience</h3><p>Hands-on work across portfolios, showroom websites, school websites and job-focused web apps.</p></article>
+        <article class="feature-card mint"><div class="icon">✦</div><h3>Continuous Learning</h3><p>I keep improving development, AI, design and SEO skills to deliver better results.</p></article>
+        <article class="feature-card peach"><div class="icon">♙</div><h3>Long-Term Support</h3><p>From launch to improvements, I stay focused on reliability, usability and growth.</p></article>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="home-process">
-  <div class="container process-preview">
-    <div class="section-copy"><span class="eyebrow">CLIENT PROCESS</span><h2>From Idea to Impact</h2><p>Let's turn a transparent process into a clear path from your vision to launch.</p></div>
-    <div class="mini-steps"><div><i>⌕</i><span>01</span><b>Discover</b><small>Goals & requirements.</small></div><div><i>▤</i><span>02</span><b>Plan</b><small>Strategy & roadmap.</small></div><div><i>&lt;/&gt;</i><span>03</span><b>Develop</b><small>Build, test & refine.</small></div><div><i>↗</i><span>04</span><b>Launch</b><small>Deploy & support.</small></div></div>
+<section id="services" class="page-section home-services">
+  <div class="container section-grid">
+    <div class="section-copy"><span class="eyebrow">OUR SERVICES</span><h2>Everything You Need for Digital Growth</h2><p>End-to-end digital solutions tailored for modern businesses. From idea to impact, we turn your vision into powerful digital products.</p></div>
+    <div class="service-detail-grid">
+      <article class="service-detail blue"><div class="icon">▱</div><i>↗</i><h3>Website Development</h3><p>Modern, responsive and high-performing websites that represent your brand and convert visitors.</p><ul><li>Custom responsive design</li><li>SEO-friendly structure</li><li>Fast secure performance</li><li>Easy content management</li></ul><a href="#contact">Learn More →</a></article>
+      <article class="service-detail violet"><div class="icon">▯</div><i>↗</i><h3>Application Development</h3><p>Scalable web and mobile applications built with modern technologies for business growth.</p><ul><li>Web & mobile apps</li><li>Scalable architecture</li><li>User-focused UI/UX</li><li>Ongoing maintenance</li></ul><a href="#contact">Learn More →</a></article>
+      <article class="service-detail mint"><div class="icon">✦</div><i>↗</i><h3>AI Solutions</h3><p>Custom AI tools, automation and intelligent systems designed around your workflow.</p><ul><li>AI automation</li><li>Custom AI integrations</li><li>Data insights</li><li>Industry-tailored tools</li></ul><a href="#contact">Learn More →</a></article>
+      <article class="service-detail peach"><div class="icon">▥</div><i>↗</i><h3>SEO Optimization</h3><p>Data-driven SEO strategies to improve visibility, rankings and qualified traffic.</p><ul><li>Website audit</li><li>Technical SEO</li><li>Content strategy</li><li>Monitoring & reporting</li></ul><a href="#contact">Learn More →</a></article>
+    </div>
   </div>
 </section>
-</main><footer class="footer">
-  <div class="container footer-row">
-    <a class="brand" href="index.html"><span><b>AI</b> × <strong>MAD</strong></span><small>IDEAS • CODE • REALITY</small></a>
-    <p>© <span id="year">2026</span> AI × MAD. Built by Karthikeyan K — Vibe Coder.</p>
-    <div class="footer-links"><a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer">GitHub</a><a href="contact.html">Contact</a></div>
+
+<section id="projects" class="page-section projects-preview wave-section">
+  <div class="container">
+    <div class="section-heading-row"><div><span class="eyebrow">FEATURED PROJECTS</span><h2>Real Projects. Real Results.</h2><p>Real work built for real businesses, with a focus on clarity, performance and responsive design.</p></div></div>
+    <div class="project-cards-grid front-projects">
+      <a class="project-large" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://royaltiles.vercel.app/" alt="Royal Tiles"><div><span>▱ Website</span><h3>Royal Tiles</h3><p>Modern website for a premium tiles and interior solutions brand.</p><b>View Project →</b></div></a>
+      <a class="project-large" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://sugumar-portfolio-beta.vercel.app/" alt="Sugumar Portfolio"><div><span>▱ Website</span><h3>Sugumar Portfolio</h3><p>Portfolio experience showcasing professional video-editing work.</p><b>View Project →</b></div></a>
+      <a class="project-large" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://vip-hunter.vercel.app/" alt="Job Hunter"><div><span>▯ App</span><h3>Job Hunter</h3><p>Job-focused productivity and application workflow platform.</p><b>View Project →</b></div></a>
+      <a class="project-large" href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer"><img src="https://image.thum.io/get/width/1000/crop/560/noanimate/https://www.deccanmatric.in/" alt="Deccan Matriculation School"><div><span>▱ Website</span><h3>Deccan School</h3><p>Responsive school website for information, admissions and trust.</p><b>View Project →</b></div></a>
+    </div>
   </div>
-</footer>
-<aside class="whatsapp">
-  <div class="wa-panel" hidden>
-    <button class="wa-close" type="button">×</button>
-    <strong>AI × MAD</strong>
-    <p>Have a project idea? Message me directly.</p>
-    <a href="https://wa.me/919944754339?text=Hi%20AI%20x%20MAD%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Chat on WhatsApp →</a>
+</section>
+
+<section id="process" class="page-section structured-process">
+  <div class="container"><span class="eyebrow">OUR PROCESS</span><h2>A Clear Path from Idea to Impact</h2><p>Our process keeps every project transparent, collaborative and focused on quality.</p>
+    <div class="six-steps">
+      <article class="step-card blue"><span>01</span><div class="icon">⌕</div><h3>Discover</h3><p>Understand your goals, audience and requirements.</p><b>Define the Why</b></article>
+      <article class="step-card violet"><span>02</span><div class="icon">▤</div><h3>Strategy & Planning</h3><p>Create a clear strategy, milestones and roadmap.</p><b>Plan for Success</b></article>
+      <article class="step-card mint"><span>03</span><div class="icon">✎</div><h3>Design</h3><p>Create a modern, clear and user-focused experience.</p><b>Design with Purpose</b></article>
+      <article class="step-card violet"><span>04</span><div class="icon">&lt;/&gt;</div><h3>Development</h3><p>Build with modern, scalable and maintainable technology.</p><b>Build for Scale</b></article>
+      <article class="step-card blue"><span>05</span><div class="icon">⚙</div><h3>Testing & Optimization</h3><p>Test responsiveness, performance, usability and quality.</p><b>Perfect Every Detail</b></article>
+      <article class="step-card peach"><span>06</span><div class="icon">↗</div><h3>Launch & Support</h3><p>Deploy, monitor and continue improving after launch.</p><b>Grow Together</b></article>
+    </div>
   </div>
-  <button class="wa-launcher" type="button" aria-label="Open WhatsApp chat"><svg viewBox="0 0 32 32"><path d="M16 .8A15 15 0 0 0 3.06 23.38L.9 31.1l7.93-2.08A15.18 15.18 0 0 0 16 30.9 15.05 15.05 0 0 0 31.05 15.85 15.05 15.05 0 0 0 16 .8zm0 27.42a12.3 12.3 0 0 1-6.29-1.72l-.45-.27-4.7 1.23 1.25-4.58-.3-.47A12.34 12.34 0 1 1 16 28.22zm6.8-9.23c-.37-.19-2.2-1.09-2.55-1.21-.34-.12-.58-.19-.83.19-.25.37-.96 1.21-1.18 1.46-.22.25-.43.28-.8.09-.38-.19-1.59-.59-3.02-1.88-1.12-1-1.88-2.23-2.1-2.6-.22-.38-.02-.58.17-.77.17-.17.37-.43.56-.65.18-.22.25-.38.37-.63.12-.25.06-.47-.03-.65-.1-.19-.84-2.02-1.15-2.77-.3-.73-.6-.63-.83-.64h-.7c-.25 0-.65.09-.99.47-.34.37-1.29 1.27-1.29 3.09s1.32 3.58 1.51 3.83c.18.25 2.6 3.97 6.3 5.57.88.38 1.57.61 2.11.78.89.28 1.7.24 2.34.15.71-.11 2.2-.9 2.5-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.44z"/></svg></button>
-</aside></body></html>
+</section>
+
+<section id="contact" class="page-section contact-hero hero inner-hero">
+  <div class="ambient a1"></div><div class="ambient a2"></div><div class="line-art la1"></div>
+  <div class="container contact-grid">
+    <div class="contact-intro"><span class="hero-chip">✦ LET'S CONNECT</span><h1>Let's Build<br>Something <em>Amazing</em></h1><p>Have a project in mind? Tell me what you want to build and I’ll help shape the right solution for your business.</p><div class="contact-benefits"><div><i>ϟ</i><strong>Fast Response</strong><span>Within 24 hours</span></div><div><i>♙</i><strong>Direct Support</strong><span>Talk to the developer</span></div><div><i>⬡</i><strong>No Obligation</strong><span>Free consultation</span></div></div></div>
+    <form id="contact-form" class="contact-form-card"><div class="form-title"><i>⚙</i><div><h2>Send a Message</h2><p>Fill out the form and I’ll get back to you.</p></div></div><div class="form-grid"><label>Name *<input id="contact-name" required autocomplete="name" placeholder="Your full name"></label><label>Email *<input id="contact-email" type="email" required autocomplete="email" placeholder="your@email.com"></label><label>Service Needed *<select id="contact-service" required><option value="">Select a service</option><option>Website Development</option><option>Application Development</option><option>AI Solutions</option><option>SEO Optimization</option></select></label><label>Project Budget<select id="contact-budget"><option value="">Select a budget range</option><option>Under ₹25,000</option><option>₹25,000 – ₹50,000</option><option>₹50,000 – ₹1,00,000</option><option>₹1,00,000+</option></select></label></div><label>Phone / WhatsApp<input id="contact-phone" type="tel" autocomplete="tel" placeholder="+91..."></label><label>Message *<textarea id="contact-message" rows="5" required placeholder="Tell me about your project, goals and requirements..."></textarea></label><button class="primary-btn full" type="submit">✈ Send Message →</button></form>
+    <aside class="contact-details"><div class="form-title"><i>▢</i><div><h2>Get in Touch</h2><p>Choose the best way to reach me.</p></div></div><div class="contact-line"><i>✉</i><div><strong>Email</strong><a href="mailto:karthikumaran7170@gmail.com">karthikumaran7170@gmail.com</a><span>For project inquiries</span></div></div><div class="contact-line"><i>☎</i><div><strong>Phone</strong><a href="tel:+919944754339">+91 99447 54339</a><span>Mon – Sat, 9AM – 7PM</span></div></div><div class="contact-line"><i>◉</i><div><strong>WhatsApp</strong><a href="https://wa.me/919944754339" target="_blank">+91 99447 54339</a><span>Chat instantly</span></div></div><div class="contact-line"><i>⌖</i><div><strong>Location</strong><span>Tamil Nadu, India</span><small>Remote-friendly</small></div></div></aside>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><div class="container footer-row"><a class="brand" href="#home"><span><b>AI</b> × <strong>MAD</strong></span><small>IDEAS • CODE • REALITY</small></a><p>© <span id="year">2026</span> AI × MAD. Built by Karthikeyan K — Vibe Coder.</p><div class="footer-links"><a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer">GitHub</a><a href="#contact">Contact</a></div></div></footer>
+<aside class="whatsapp"><div class="wa-panel" hidden><button class="wa-close" type="button">×</button><strong>AI × MAD</strong><p>Have a project idea? Message me directly.</p><a href="https://wa.me/919944754339?text=Hi%20AI%20x%20MAD%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Chat on WhatsApp →</a></div><button class="wa-launcher" type="button" aria-label="Open WhatsApp chat"><svg viewBox="0 0 32 32"><path d="M16 .8A15 15 0 0 0 3.06 23.38L.9 31.1l7.93-2.08A15.18 15.18 0 0 0 16 30.9 15.05 15.05 0 0 0 31.05 15.85 15.05 15.05 0 0 0 16 .8zm0 27.42a12.3 12.3 0 0 1-6.29-1.72l-.45-.27-4.7 1.23 1.25-4.58-.3-.47A12.34 12.34 0 1 1 16 28.22zm6.8-9.23c-.37-.19-2.2-1.09-2.55-1.21-.34-.12-.58-.19-.83.19-.25.37-.96 1.21-1.18 1.46-.22.25-.43.28-.8.09-.38-.19-1.59-.59-3.02-1.88-1.12-1-1.88-2.23-2.1-2.6-.22-.38-.02-.58.17-.77.17-.17.37-.43.56-.65.18-.22.25-.38.37-.63.12-.25.06-.47-.03-.65-.1-.19-.84-2.02-1.15-2.77-.3-.73-.6-.63-.83-.64h-.7c-.25 0-.65.09-.99.47-.34.37-1.29 1.27-1.29 3.09s1.32 3.58 1.51 3.83c.18.25 2.6 3.97 6.3 5.57.88.38 1.57.61 2.11.78.89.28 1.7.24 2.34.15.71-.11 2.2-.9 2.5-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.44z"/></svg></button></aside>
+</body></html>
