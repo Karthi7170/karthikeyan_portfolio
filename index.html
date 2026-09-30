@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f4f4f2">
-  <meta name="description" content="AI x MAD — Karthikeyan K, Vibe Coder. Custom websites, applications, AI solutions, SEO and digital product development.">
-  <meta property="og:title" content="AI x MAD — Digital Solutions That Move Businesses Ahead">
-  <meta property="og:description" content="Modern websites, applications and AI solutions built around your business requirements.">
-  <title>AI x MAD — Karthikeyan K | Vibe Coder</title>
+  <meta name="theme-color" content="#020814">
+  <meta name="description" content="AI x MAD — Karthikeyan K. Premium websites, applications, AI solutions and SEO built for business growth.">
+  <meta property="og:title" content="AI x MAD — Digital Solutions Powered by AI">
+  <meta property="og:description" content="Modern websites, powerful applications and AI solutions that help businesses grow, work smarter and stay ahead.">
+  <title>AI x MAD — Digital Solutions Powered by AI</title>
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -20,40 +20,54 @@
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
-    <a class="brand" href="#home" aria-label="AI x MAD home">
-      <span class="brand-line"><strong>AI</strong><span>×</span><b>MAD</b></span>
-      <small>IDEAS • CODE • REALITY</small>
-    </a>
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      <a class="nav-link is-active" href="#home">Home</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#services">Services</a>
-      <a class="nav-link" href="#projects">Projects</a>
-      <a class="nav-link" href="#process">Process</a>
-      <a class="nav-link" href="#contact">Contact</a>
-    </nav>
-    <a class="header-cta" href="#contact">Let's Talk <span>→</span></a>
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-      <span></span><span></span>
-    </button>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-      <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Process</a><a href="#contact">Contact</a>
-    </nav>
+    <div class="nav-shell">
+      <a class="brand" href="#home" aria-label="AI x MAD home">
+        <span class="brand-line"><strong>AI</strong><span>×</span><b>MAD</b></span>
+        <small>IDEAS • CODE • REALITY</small>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a class="nav-link is-active" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#services">Services</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#process">Process</a>
+        <a class="nav-link" href="#testimonials">Testimonials</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <a class="header-cta" href="#contact">Let's Talk <span>→</span></a>
+
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span>
+      </button>
+
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#process">Process</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
     <section id="home" class="hero">
-      <div class="hero-left">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="energy energy-a"></div>
+        <div class="energy energy-b"></div>
+        <div class="energy energy-c"></div>
+        <div class="stars-field"></div>
+        <div class="mountains"></div>
+      </div>
+
+      <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="kicker-row">
-            <span>TECHNOLOGY MEETS POSSIBILITY.</span><i></i>
-          </div>
-          <h1>DIGITAL<br>SOLUTIONS<br><span>THAT MOVE<br>BUSINESSES AHEAD</span></h1>
-          <p>We build modern <strong>websites</strong>, powerful applications and AI solutions that help businesses grow, with performance, design and strategy at the core.</p>
+          <div class="hero-pill">BUILD • AUTOMATE • GROW</div>
+          <h1>Digital Solutions<br>Powered by <span>AI</span></h1>
+          <p>We build modern websites, powerful applications and AI solutions that help businesses grow, work smarter and stay ahead.</p>
           <div class="hero-actions">
-            <a class="btn btn-dark" href="#contact">Start Your Project <span>→</span></a>
-            <a class="btn btn-light" href="#projects"><span class="play-dot">▶</span> View Our Work</a>
+            <a class="btn btn-primary" href="#contact">Start Your Project <span>→</span></a>
+            <a class="btn btn-secondary" href="#projects"><span class="play-button">▶</span> View Our Work</a>
           </div>
+
           <div class="hero-stats">
             <div><strong>3+</strong><span>Real Projects</span></div>
             <div><strong>100%</strong><span>Client Focus</span></div>
@@ -61,249 +75,215 @@
             <div><strong>24/7</strong><span>Support</span></div>
           </div>
         </div>
-      </div>
 
-      <div class="hero-right reveal">
-        <div class="orb orb-a"></div>
-        <div class="orb orb-b"></div>
-        <div class="planet-line"></div>
-        <div class="hero-wordmark">IDEAS<br>CODE<br>REALITY<span></span></div>
-        <div class="laptop-scene" aria-hidden="true">
-          <div class="rock"></div>
-          <div class="laptop">
-            <div class="laptop-screen">
-              <div class="screen-brand">AI <span>×</span> MAD<small>IDEAS • CODE • REALITY</small></div>
-            </div>
-            <div class="laptop-base"></div>
+        <div class="hero-visual reveal" aria-label="AI x MAD digital services visual">
+          <div class="float-card float-web">
+            <div class="float-icon">⌗</div><div><strong>Web Development</strong><span>Modern & Scalable</span></div>
           </div>
-        </div>
-        <div class="story-copy">
-          <p>Modern technology<br>for a brighter<br>tomorrow.</p>
-          <span class="story-play">▶</span>
-          <b>WATCH<br>OUR STORY</b>
+          <div class="float-card float-app">
+            <div class="float-icon">▯</div><div><strong>App Development</strong><span>Powerful Applications</span></div>
+          </div>
+          <div class="float-card float-ai">
+            <div class="float-icon">◉</div><div><strong>AI Solutions</strong><span>Smarter Automation</span></div>
+          </div>
+          <div class="float-card float-seo">
+            <div class="float-icon">▥</div><div><strong>SEO Optimization</strong><span>Higher Rankings</span></div>
+          </div>
+
+          <div class="laptop-stage" aria-hidden="true">
+            <div class="laptop-glow"></div>
+            <div class="laptop">
+              <div class="laptop-screen">
+                <div class="screen-wave"></div>
+                <div class="screen-logo">AI <span>×</span> MAD<small>IDEAS • CODE • REALITY</small></div>
+              </div>
+              <div class="laptop-base"></div>
+            </div>
+          </div>
+
+          <div class="script-note">Ideas<br>Code<br>Reality</div>
         </div>
       </div>
     </section>
 
     <section class="trust-strip" aria-label="Technology ecosystem">
-      <div class="container trust-inner">
-        <div class="trust-label"><span>TRUSTED BY</span><strong>VISIONARY BUSINESSES</strong></div>
-        <div class="trust-brand">Google</div>
-        <div class="trust-brand">▦ Microsoft</div>
-        <div class="trust-brand">∞ Meta</div>
-        <div class="trust-brand">N Notion</div>
+      <div class="container trust-grid">
+        <div class="trust-label"><span>TRUSTED BY</span><strong>GROWING BUSINESSES</strong></div>
+        <div class="trust-brand">stripe</div>
         <div class="trust-brand">▲ vercel</div>
-        <div class="trust-brand">Figma</div>
-        <div class="trust-brand">◼ shopify</div>
+        <div class="trust-brand">◉ OpenAI</div>
+        <div class="trust-brand">✣ Figma</div>
+        <div class="trust-brand">☁ Google Cloud</div>
+        <div class="trust-brand">N Notion</div>
+        <div class="happy-clients"><div class="client-stack"><span>RK</span><span>PS</span><span>AK</span><b>50+</b></div><p>Happy Clients<br>Worldwide</p></div>
       </div>
     </section>
 
-    <section id="services" class="services section-white page-section">
-      <div class="container">
-        <div class="section-intro split-head reveal">
-          <div>
-            <span class="section-label">OUR SERVICES</span>
-            <h2>Everything You Need<br>to Build and Grow Online.</h2>
-          </div>
-          <div class="section-side-copy">
-            <p>From modern websites to intelligent AI solutions, we deliver end-to-end digital services tailored to your business goals.</p>
-            <a class="outline-link" href="#contact">Explore All Services <span>→</span></a>
-          </div>
+    <section id="services" class="services page-section">
+      <div class="container section-layout">
+        <div class="section-copy reveal">
+          <span class="eyebrow">OUR SERVICES</span>
+          <h2>Everything You Need<br>for Digital Growth</h2>
+          <p>From modern websites to AI-powered solutions, we help businesses build, automate and scale with the right technology.</p>
         </div>
 
         <div class="service-grid">
           <article class="service-card reveal">
-            <div class="service-icon">◎</div>
-            <div><h3>Website Development</h3><p>Modern, responsive and high-performance websites.</p></div>
+            <div class="card-icon">▱</div>
+            <h3>Website Development</h3>
+            <p>Modern, responsive and high-performing websites tailored to your business.</p>
             <a href="#contact" aria-label="Discuss Website Development">→</a>
           </article>
           <article class="service-card reveal">
-            <div class="service-icon">◇</div>
-            <div><h3>Application Development</h3><p>Scalable web and mobile applications for your business.</p></div>
+            <div class="card-icon">▯</div>
+            <h3>Application Development</h3>
+            <p>Scalable web & mobile applications that turn ideas into powerful products.</p>
             <a href="#contact" aria-label="Discuss Application Development">→</a>
           </article>
           <article class="service-card reveal">
-            <div class="service-icon">✦</div>
-            <div><h3>AI Solutions</h3><p>Custom AI tools and automation to boost productivity.</p></div>
+            <div class="card-icon">◉</div>
+            <h3>AI Solutions</h3>
+            <p>Custom AI tools, automation and integrations to make your business smarter.</p>
             <a href="#contact" aria-label="Discuss AI Solutions">→</a>
           </article>
           <article class="service-card reveal">
-            <div class="service-icon">▥</div>
-            <div><h3>SEO Optimisation</h3><p>Get higher rankings and more organic traffic.</p></div>
-            <a href="#contact" aria-label="Discuss SEO Optimisation">→</a>
+            <div class="card-icon">▥</div>
+            <span class="mini-link">View All Services →</span>
+            <h3>SEO Optimization</h3>
+            <p>Data-driven SEO strategies to boost visibility and bring real growth.</p>
+            <a href="#contact" aria-label="Discuss SEO Optimization">→</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="projects section-dark page-section">
-      <div class="container">
-        <div class="section-intro split-head project-head reveal">
-          <div>
-            <span class="section-label light">FEATURED PROJECTS</span>
-            <h2>Real Ideas. Real Results.</h2>
-          </div>
-          <div class="section-side-copy light-copy">
-            <p>A selection of recent work, built with passion and a focus on useful real-world results.</p>
-            <a class="outline-link light-outline" href="#about">View All Projects <span>→</span></a>
-          </div>
+    <section id="projects" class="projects page-section">
+      <div class="container section-layout">
+        <div class="section-copy reveal">
+          <span class="eyebrow">FEATURED PROJECTS</span>
+          <h2>Real Projects.<br>Real Results.</h2>
+          <p>A glimpse of recent work — modern solutions built for real businesses.</p>
+          <a class="small-pill" href="#about">View All Projects <span>→</span></a>
         </div>
 
         <div class="project-grid">
           <a class="project-card reveal" href="https://sugumar-portfolio-beta.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <div class="project-shot">
-              <img src="https://image.thum.io/get/width/1200/crop/675/noanimate/https://sugumar-portfolio-beta.vercel.app/" alt="Sugumar Portfolio preview" loading="lazy">
-              <span class="project-arrow">→</span>
-            </div>
-            <div class="project-caption"><h3>Sugumar Portfolio</h3><div><span>Portfolio</span><span>UI/UX</span><span>Responsive</span></div></div>
+            <div class="project-shot"><img src="https://image.thum.io/get/width/1000/crop/550/noanimate/https://sugumar-portfolio-beta.vercel.app/" alt="Sugumar Portfolio preview" loading="lazy"></div>
+            <span class="project-type">Portfolio</span>
+            <h3>Sugumar Portfolio</h3>
+            <p>Premium video editor portfolio experience.</p>
+            <b>→</b>
           </a>
-
-          <a class="project-card light-card reveal" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <div class="project-shot">
-              <img src="https://image.thum.io/get/width/1200/crop/675/noanimate/https://royaltiles.vercel.app/" alt="New Royal Tiles preview" loading="lazy">
-              <span class="project-arrow">→</span>
-            </div>
-            <div class="project-caption"><h3>New Royal Tiles</h3><div><span>Website</span><span>SEO</span><span>Business</span></div></div>
+          <a class="project-card reveal" href="https://royaltiles.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <div class="project-shot"><img src="https://image.thum.io/get/width/1000/crop/550/noanimate/https://royaltiles.vercel.app/" alt="New Royal Tiles preview" loading="lazy"></div>
+            <span class="project-type">Website</span>
+            <h3>New Royal Tiles</h3>
+            <p>Corporate showroom website for a growing business.</p>
+            <b>→</b>
           </a>
-
           <a class="project-card reveal" href="https://vip-hunter.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <div class="project-shot">
-              <img src="https://image.thum.io/get/width/1200/crop/675/noanimate/https://vip-hunter.vercel.app/" alt="Job Hunter preview" loading="lazy">
-              <span class="project-arrow">→</span>
-            </div>
-            <div class="project-caption"><h3>Job Hunter</h3><div><span>Web App</span><span>Automation</span><span>Productivity</span></div></div>
+            <div class="project-shot"><img src="https://image.thum.io/get/width/1000/crop/550/noanimate/https://vip-hunter.vercel.app/" alt="Job Hunter preview" loading="lazy"></div>
+            <span class="project-type">Web App</span>
+            <h3>Job Hunter</h3>
+            <p>Job-focused productivity and automation experience.</p>
+            <b>→</b>
+          </a>
+          <a class="project-card reveal" href="https://www.deccanmatric.in/" target="_blank" rel="noopener noreferrer">
+            <div class="project-shot"><img src="https://image.thum.io/get/width/1000/crop/550/noanimate/https://www.deccanmatric.in/" alt="Deccan Matriculation School preview" loading="lazy"></div>
+            <span class="project-type">Education</span>
+            <h3>Deccan School</h3>
+            <p>Modern school website with a responsive experience.</p>
+            <b>→</b>
           </a>
         </div>
       </div>
     </section>
 
-    <section id="process" class="process section-white page-section">
-      <div class="container">
-        <div class="section-intro split-head reveal">
-          <div>
-            <span class="section-label">OUR PROCESS</span>
-            <h2>A Clear Path to Your Success.</h2>
-          </div>
-          <div class="section-side-copy"><p>A streamlined process designed to deliver high-quality results, on time and with purpose.</p></div>
+    <section id="about" class="about page-section">
+      <div class="container about-shell reveal">
+        <div>
+          <span class="eyebrow">ABOUT AI × MAD</span>
+          <h2>Built Around Your Idea.<br>Designed for Growth.</h2>
         </div>
-
-        <div class="process-row">
-          <article class="process-step reveal"><span class="step-no">01</span><div class="step-icon">♙</div><div><h3>Discover</h3><p>We understand your goals and requirements.</p></div><b>→</b></article>
-          <article class="process-step reveal"><span class="step-no">02</span><div class="step-icon">◇</div><div><h3>Plan</h3><p>We create a tailored strategy and roadmap.</p></div><b>→</b></article>
-          <article class="process-step reveal"><span class="step-no">03</span><div class="step-icon">▧</div><div><h3>Design & Develop</h3><p>We build, test and refine with precision.</p></div><b>→</b></article>
-          <article class="process-step reveal"><span class="step-no">04</span><div class="step-icon">♡</div><div><h3>Launch & Grow</h3><p>We deploy and support your continued growth.</p></div></article>
+        <div class="about-copy">
+          <p>AI × MAD is led by Karthikeyan K, an MCA graduate and developer focused on practical, custom digital solutions. Every project begins with your real business requirement — then the design, development, AI and optimisation are shaped around that goal.</p>
+          <div class="about-points"><span>Custom development</span><span>Responsive-first</span><span>AI-assisted workflows</span><span>Long-term support</span></div>
         </div>
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials section-soft page-section">
-      <div class="container">
-        <div class="testimonial-head reveal">
-          <div>
-            <span class="section-label">CLIENT TESTIMONIALS</span>
-            <h2>What Our Clients Say</h2>
-          </div>
-          <p>Real feedback from businesses I’ve had the privilege to work with.</p>
-          <div class="testimonial-controls" aria-label="Testimonial controls">
-            <button type="button" data-testimonial-prev aria-label="Previous testimonials">←</button>
-            <button type="button" data-testimonial-next aria-label="Next testimonials">→</button>
-          </div>
+    <section id="process" class="process page-section">
+      <div class="container section-layout">
+        <div class="section-copy reveal">
+          <span class="eyebrow">OUR PROCESS</span>
+          <h2>From Idea to Impact</h2>
+          <p>A simple, transparent process to turn your vision into a powerful digital solution.</p>
         </div>
 
-        <div class="testimonial-track" data-testimonial-track>
+        <div class="process-grid">
+          <article class="process-step reveal"><div class="process-icon">⌕</div><span>01</span><h3>Discover</h3><p>Understand your goals and requirements</p><b>→</b></article>
+          <article class="process-step reveal"><div class="process-icon">▤</div><span>02</span><h3>Plan</h3><p>Create a strategy and roadmap</p><b>→</b></article>
+          <article class="process-step reveal"><div class="process-icon">&lt;/&gt;</div><span>03</span><h3>Build</h3><p>Develop with modern technologies</p><b>→</b></article>
+          <article class="process-step reveal"><div class="process-icon">↗</div><span>04</span><h3>Launch</h3><p>Deliver, optimize and support</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials page-section">
+      <div class="container section-layout testimonials-layout">
+        <div class="section-copy reveal">
+          <span class="eyebrow">CLIENT FEEDBACK</span>
+          <h2>What Our Clients Say</h2>
+          <p>Trusted by founders, businesses and creators across the globe.</p>
+        </div>
+
+        <div class="testimonial-grid">
           <article class="testimonial-card reveal">
-            <div class="avatar avatar-one">RM</div>
-            <div class="testimonial-body">
-              <p>“AI × MAD delivered an exceptional website for our brand. The design, speed and support were outstanding.”</p>
-              <strong>Rohan Mehta</strong><span>Founder, GrowthLabs</span>
-            </div>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <div class="quote">“</div>
+            <p>Add your verified client feedback here. This card is ready for a real testimonial from one of your website clients.</p>
+            <div class="testimonial-person"><div class="avatar">01</div><div><strong>Verified Client</strong><span>Business Website</span></div><b>★★★★★</b></div>
           </article>
           <article class="testimonial-card reveal">
-            <div class="avatar avatar-two">PS</div>
-            <div class="testimonial-body">
-              <p>“The AI solutions helped us automate our workflow and save hours every week. Highly recommended.”</p>
-              <strong>Priya Sharma</strong><span>COO, Neoa Digital</span>
-            </div>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <div class="quote">“</div>
+            <p>Add a verified comment about your AI, automation or app development work here.</p>
+            <div class="testimonial-person"><div class="avatar">02</div><div><strong>Verified Client</strong><span>AI / App Project</span></div><b>★★★★★</b></div>
           </article>
           <article class="testimonial-card reveal">
-            <div class="avatar avatar-three">AK</div>
-            <div class="testimonial-body">
-              <p>“Professional, creative and reliable. They understood our vision and turned it into a polished digital product.”</p>
-              <strong>Arjun Kapoor</strong><span>Founder, Fitrack</span>
-            </div>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <div class="quote">“</div>
+            <p>Add a verified comment about your delivery, communication and long-term support here.</p>
+            <div class="testimonial-person"><div class="avatar">03</div><div><strong>Verified Client</strong><span>Digital Product</span></div><b>★★★★★</b></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="about section-soft page-section">
-      <div class="container">
-        <div class="section-intro split-head reveal">
-          <div>
-            <span class="section-label">ABOUT ME</span>
-            <h2>Developer. Builder.<br>Vibe Coder.</h2>
-          </div>
-          <div class="section-side-copy">
-            <p>I combine technology, design and a requirement-first approach to build digital products that feel useful, modern and easy to use.</p>
-          </div>
+    <section id="contact" class="cta-section page-section">
+      <div class="container cta-card reveal">
+        <div class="cta-energy" aria-hidden="true"></div>
+        <div class="cta-copy">
+          <span>LET'S BUILD TOGETHER</span>
+          <h2>Ready to Build Your Next Project?</h2>
+          <p>Let's turn your ideas into powerful digital products with the right mix of design, development and AI.</p>
         </div>
-
-        <div class="about-grid">
-          <div class="about-profile reveal">
-            <div class="about-photo"><img src="assets/portrait.webp" alt="Karthikeyan K" loading="lazy"></div>
-            <div class="about-profile-copy">
-              <span class="mini-kicker">KARTHIKEYAN K</span>
-              <h3>Founder @ AI × MAD</h3>
-              <p>I’m an MCA graduate and developer focused on creating practical digital solutions for real businesses. I work across websites, applications, AI-assisted workflows, SEO optimisation and ongoing web support.</p>
-              <p>My approach is simple: understand the requirement, design the right experience, develop with modern tools, test across devices and continue supporting the product after launch.</p>
-              <div class="about-tags"><span>Web Development</span><span>App Development</span><span>AI Solutions</span><span>SEO</span><span>UI/UX</span></div>
-            </div>
-          </div>
-
-          <div class="about-details">
-            <article class="detail-card reveal"><span>01</span><h4>Requirement First</h4><p>Every project starts from the client’s actual business need, not from a generic template.</p></article>
-            <article class="detail-card reveal"><span>02</span><h4>Real Project Experience</h4><p>Hands-on work across portfolios, showroom websites and job-focused web applications.</p></article>
-            <article class="detail-card reveal"><span>03</span><h4>Continuous Learning</h4><p>I keep improving my development, AI, design and SEO skills to deliver better results with every project.</p></article>
-            <article class="detail-card reveal"><span>04</span><h4>Long-Term Support</h4><p>From launch to updates and optimisation, I stay focused on reliability and growth.</p></article>
-          </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://wa.me/919944754339?text=Hi%20AI%20x%20MAD%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Let's Talk <span>→</span></a>
+          <a class="btn btn-secondary" href="mailto:karthikumaran7170@gmail.com"><span class="chat-icon">▢</span> Get a Free Quote</a>
         </div>
       </div>
-    </section>
 
-    <section id="contact" class="contact section-dark page-section">
-      <div class="container contact-wrap">
-        <div class="contact-copy reveal">
-          <span class="section-label light">LET'S BUILD TOGETHER</span>
-          <h2>Have an idea?<br>Let's turn it into<br>something real.</h2>
-          <p>Tell me what you want to build. I’ll help shape the right digital solution for your business.</p>
-          <div class="contact-mini">
-            <a href="tel:+919944754339">+91 99447 54339</a>
-            <a href="mailto:karthikumaran7170@gmail.com">karthikumaran7170@gmail.com</a>
-          </div>
-        </div>
-
-        <form id="contact-form" class="contact-form reveal">
-          <div class="form-grid">
-            <label><span>Name</span><input id="contact-name" type="text" placeholder="Your name" autocomplete="name" required></label>
-            <label><span>Email</span><input id="contact-email" type="email" placeholder="you@example.com" autocomplete="email" required></label>
-            <label><span>Phone</span><input id="contact-phone" type="tel" placeholder="+91..." autocomplete="tel" required></label>
-            <label><span>Service</span><select id="contact-service" required><option value="">Choose a service</option><option>Website Development</option><option>Application Development</option><option>AI Solutions</option><option>SEO Optimisation</option><option>UI/UX Design</option><option>Web Support & Maintenance</option></select></label>
-          </div>
-          <label><span>Project Details</span><textarea id="contact-message" rows="5" placeholder="Tell me about your idea..." required></textarea></label>
-          <button class="btn btn-white" type="submit">Send Enquiry <span>→</span></button>
-        </form>
+      <div class="container contact-info">
+        <div><strong>AI × MAD</strong><span>Ideas • Code • Reality</span></div>
+        <a href="tel:+919944754339">+91 99447 54339</a>
+        <a href="mailto:karthikumaran7170@gmail.com">karthikumaran7170@gmail.com</a>
+        <a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="brand footer-brand" href="#home"><span class="brand-line"><strong>AI</strong><span>×</span><b>MAD</b></span><small>IDEAS • CODE • REALITY</small></a>
-      <p>© <span id="year">2026</span> AI × MAD. Built by Karthikeyan K — Vibe Coder.</p>
-      <div class="footer-links"><a href="https://github.com/Karthi7170" target="_blank" rel="noopener noreferrer">GitHub</a><a href="#contact">Contact</a></div>
+      <span>© <span id="year">2026</span> AI × MAD. All rights reserved.</span>
+      <span>Built by Karthikeyan K • Vibe Coder</span>
     </div>
   </footer>
 
