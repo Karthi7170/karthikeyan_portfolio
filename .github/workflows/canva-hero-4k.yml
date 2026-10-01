@@ -14,19 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch Canva hero source
+      - name: Fetch Canva resized design image
         env:
-          CANVA_URL: "https://media.canva.com/v2/image-resize/format:JPG/height:2160/quality:90/uri:ifs%3A%2F%2FM%2F98afac2c-492b-4bc8-b661-6d2f90f819af/watermark:F/width:3840?csig=AAAAAAAAAAAAAAAAAAAAAMnvKpTKFOuvkC4sWgjQljnX4sNhEQKm8xqLlyFfKufp&exp=1790854440&osig=AAAAAAAAAAAAAAAAAAAAAKX-JfldIYST4JXStnVVHPFwH-4d7sRAqCHnuHC5OZYx&signer=media-rpc&x-canva-quality=thumbnail"
+          CANVA_URL: "https://s3.amazonaws.com/document-export.canva.com/Jqpek/DAHWvuJqpek/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHTDF2ZFFQ%2F20260930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260930T100351Z&X-Amz-Expires=79033&X-Amz-Signature=460f304a97333c6bfa7f1a33c608b25462accf56f794800fe67d88b6c747dfba&X-Amz-SignedHeaders=host&response-expires=Thu%2C%2001%20Oct%202026%2008%3A01%3A04%20GMT"
         run: |
-          curl --fail --location --retry 3 "$CANVA_URL" --output /tmp/hero.jpg
-          ls -lh /tmp/hero.jpg
+          curl --fail --location --retry 3 "$CANVA_URL" --output /tmp/hero.png
+          ls -lh /tmp/hero.png
 
       - name: Convert and verify 4K hero
         run: |
           python -m pip install --quiet pillow
           python - <<'PY'
           from PIL import Image, ImageFilter
-          img = Image.open("/tmp/hero.jpg").convert("RGB")
+          img = Image.open("/tmp/hero.png").convert("RGB")
           print("Fetched Canva image:", img.size)
           if img.size != (3840, 2160):
               img = img.resize((3840, 2160), Image.Resampling.LANCZOS)
