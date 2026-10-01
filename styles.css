@@ -697,3 +697,39 @@ button{cursor:pointer}
 @media(max-width:1100px){.hero-laptop-image{max-width:940px}.project-slide{flex-basis:calc((100% - 18px)/2)}}
 @media(max-width:640px){.hero-picture{width:100%}.hero-laptop-image{width:100%;max-width:none}.project-slide{flex-basis:100%}.project-slider-controls{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){.hero-picture{animation:none!important}.project-track{transition:none!important}.service-icon img,.socials a{transition:none!important}}
+
+
+/* Final hero seamless blend — keep this block last so it wins the cascade */
+.hero-art{
+  background:transparent!important;
+  overflow:visible;
+}
+.hero-picture{
+  width:112%!important;
+  max-width:none!important;
+  margin-inline:-6%!important;
+  background:transparent!important;
+}
+.hero-laptop-image{
+  width:100%!important;
+  max-width:940px!important;
+  height:auto!important;
+  display:block!important;
+  object-fit:contain!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  mix-blend-mode:multiply!important;
+  filter:contrast(1.035) saturate(1.05)!important;
+  -webkit-mask-image:radial-gradient(ellipse 108% 104% at 50% 50%,#000 0 76%,rgba(0,0,0,.98) 84%,rgba(0,0,0,.64) 93%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 108% 104% at 50% 50%,#000 0 76%,rgba(0,0,0,.98) 84%,rgba(0,0,0,.64) 93%,transparent 100%)!important;
+}
+@media(max-width:1100px){
+  .hero-picture{width:104%!important;margin-inline:-2%!important}
+  .hero-laptop-image{max-width:980px!important}
+}
+@media(max-width:640px){
+  .hero-picture{width:110%!important;margin-inline:-5%!important}
+  .hero-laptop-image{max-width:none!important}
+}
