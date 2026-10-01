@@ -249,7 +249,8 @@
       if(!reducedMotion && !paused) timer = setInterval(nextSlide,3000);
     }
 
-    track.addEventListener("transitionend",() => {
+    track.addEventListener("transitionend",e => {
+      if(e.target !== track || e.propertyName !== "transform") return;
       if(index === count + 1){
         index = 1;
         render(false);
