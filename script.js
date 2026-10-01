@@ -144,7 +144,7 @@
   }
   // Projects cinematic auto-slider
   const sliders = $$(".project-slider[data-project-slider]");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;\n  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   sliders.forEach(slider => {
     const track = $(".project-track", slider);
@@ -270,14 +270,24 @@
       start();
     });
 
-    slider.addEventListener("mouseenter",() => {
-      paused = true;
-      stop();
-    });
+    if(canHover){
+      slider.addEventListener("mouseenter",() => {
+        paused = true;
+        stop();
+      });
 
-    slider.addEventListener("mouseleave",() => {
-      paused = false;
-      start();
+      slider.addEventListener("mouseleave",() => {
+        paused = false;
+        start();
+      });
+    }
+
+    document.addEventListener("visibilitychange",() => {
+      if(document.hidden){
+        stop();
+      } else if(!paused){
+        start();
+      }
     });
 
     viewport.addEventListener("touchstart",e => {
