@@ -217,13 +217,17 @@
     }
 
     function render(animate = true){
-      const card = track.querySelector(".project-slide");
-      const cardWidth = card ? card.getBoundingClientRect().width : viewport.clientWidth;
-      const centerOffset = Math.max(0,(viewport.clientWidth - cardWidth) / 2);
+      const target = track.children[index];
+      if(!target) return;
+
+      const targetCenter = target.offsetLeft + (target.offsetWidth / 2);
+      const viewportCenter = viewport.clientWidth / 2;
+      const translateX = viewportCenter - targetCenter;
+
       track.style.transition = animate && !reducedMotion
         ? "transform .78s cubic-bezier(.22,.78,.22,1)"
         : "none";
-      track.style.transform = "translate3d(" + (centerOffset - index * step()) + "px,0,0)";
+      track.style.transform = "translate3d(" + translateX + "px,0,0)";
       updateDots();
       updateSlideStates();
     }
