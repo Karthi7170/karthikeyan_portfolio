@@ -733,3 +733,92 @@ button{cursor:pointer}
   .hero-picture{width:110%!important;margin-inline:-5%!important}
   .hero-laptop-image{max-width:none!important}
 }
+
+
+/* Cinematic project carousel — centered focus with side previews */
+.project-slider{
+  position:relative;
+  overflow:visible;
+  padding:4px 0 2px;
+}
+.project-viewport{
+  width:100%;
+  overflow:hidden;
+  touch-action:pan-y;
+  padding:26px 0 18px;
+}
+.project-track{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  will-change:transform;
+}
+.project-slide{
+  flex:0 0 78%;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  opacity:.48;
+  transform:scale(.91);
+  transform-origin:center center;
+  filter:saturate(.72) brightness(.9);
+  transition:
+    transform .78s cubic-bezier(.22,.78,.22,1),
+    opacity .78s ease,
+    filter .78s ease,
+    box-shadow .78s ease;
+}
+.project-slide.is-near{
+  opacity:.66;
+  transform:scale(.94);
+  filter:saturate(.84) brightness(.96);
+}
+.project-slide.is-active{
+  opacity:1;
+  transform:scale(1);
+  filter:none;
+  z-index:3;
+}
+.project-slide.is-active .project-card,
+.project-slide.is-active{
+  box-shadow:0 24px 52px rgba(22,51,92,.18);
+}
+.project-slide .project-live-preview{
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 14px 34px rgba(20,48,86,.12);
+}
+.project-slide.is-active .project-live-preview{
+  box-shadow:0 20px 42px rgba(20,48,86,.2);
+}
+.project-slide .project-live-preview img{
+  transition:transform 3.2s ease,filter .78s ease;
+}
+.project-slide.is-active .project-live-preview img{
+  transform:scale(1.025);
+}
+.project-slider-controls{
+  margin-top:14px;
+}
+.project-dot{
+  transition:width .3s ease,background .3s ease,transform .3s ease;
+}
+.project-dot.active{
+  transform:scale(1.05);
+}
+
+@media(max-width:1100px){
+  .project-slide{flex-basis:82%}
+}
+@media(max-width:640px){
+  .project-viewport{padding:16px 0 10px}
+  .project-track{gap:14px}
+  .project-slide{flex-basis:88%;transform:scale(.94)}
+  .project-slide.is-near{transform:scale(.96)}
+  .project-slide.is-active{transform:scale(1)}
+  .project-slide .project-live-preview{border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .project-slide,
+  .project-slide .project-live-preview img{transition:none!important}
+}
