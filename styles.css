@@ -596,6 +596,61 @@ button{cursor:pointer}
 }
 
 
+
+/* Hero image visibility + seamless background blend */
+.hero{
+  background:
+    radial-gradient(circle at 78% 22%,rgba(87,157,255,.18),transparent 30%),
+    radial-gradient(circle at 15% 12%,rgba(93,196,255,.12),transparent 24%),
+    linear-gradient(180deg,#f7fbff 0%,#edf6ff 100%);
+}
+.hero-art{
+  isolation:auto;
+}
+.hero-art::before{
+  content:"";
+  position:absolute;
+  inset:8% 2% 4%;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(29,118,255,.12),rgba(52,167,255,.055) 46%,transparent 74%);
+  filter:blur(26px);
+}
+.hero-picture{
+  display:block;
+  width:112%;
+  max-width:none;
+  line-height:0;
+  margin-inline:-6%;
+  animation:heroLaptopFloat 7s ease-in-out infinite;
+  will-change:transform;
+}
+.hero-laptop-image{
+  display:block;
+  width:100%;
+  max-width:940px;
+  height:auto;
+  object-fit:contain;
+  margin-inline:auto;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:contrast(1.035) saturate(1.05)!important;
+  mix-blend-mode:multiply;
+  image-rendering:auto;
+  -webkit-mask-image:radial-gradient(ellipse 108% 104% at 50% 50%,#000 0 78%,rgba(0,0,0,.98) 86%,rgba(0,0,0,.72) 94%,transparent 100%);
+  mask-image:radial-gradient(ellipse 108% 104% at 50% 50%,#000 0 78%,rgba(0,0,0,.98) 86%,rgba(0,0,0,.72) 94%,transparent 100%);
+}
+@media(max-width:1100px){
+  .hero-picture{width:104%;margin-inline:-2%}
+  .hero-laptop-image{max-width:980px}
+}
+@media(max-width:640px){
+  .hero-picture{width:110%;margin-inline:-5%}
+  .hero-laptop-image{width:100%;max-width:none}
+}
+
 /* Four requested visual updates */
 .hero-picture{display:block;width:100%;line-height:0;animation:heroLaptopFloat 7s ease-in-out infinite;will-change:transform}
 .hero-laptop-image{
