@@ -320,3 +320,131 @@
   });
 
 })();
+
+/* Connected-edge white background remover for the homepage hero */
+(() => {
+  const hero = document.querySelector(".hero-laptop-image");
+  if (!hero || hero.dataset.transparentProcessed === "1") return;
+
+  hero.dataset.transparentProcessed = "1";
+  let fallbackTimer = window.setTimeout(() => {
+    hero.classList.add("hero-transparent-fallback");
+  }, 3000);
+
+  const fail = () => {
+    window.clearTimeout(fallbackTimer);
+    hero.classList.remove("hero-transparent-ready");
+    hero.classList.add("hero-transparent-fallback");
+  };
+
+  const processHero = () => {
+    try {
+      const w = hero.naturalWidth;
+      const h = hero.naturalHeight;
+      if (!w || !h) return fail();
+
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx) return fail();
+
+      ctx.drawImage(hero, 0, 0, w, h);
+      const frame = ctx.getImageData(0, 0, w, h);
+      const px = frame.data;
+      const total = w * h;
+      const state = new Uint8Array(total);
+      const queue = new Int32Array(total);
+      let head = 0;
+      let tail = 0;
+
+      const nearWhite = (p, limitSq = 1024) => {
+        const o = p * 4;
+        if (px[o + 3] === 0) return true;
+        const dr = 255 - px[o];
+        const dg = 255 - px[o + 1];
+        const db = 255 - px[o + 2];
+        return (dr * dr + dg * dg + db * db) <= limitSq;
+      };
+
+      const addSeed = p => {
+        if (state[p] || !nearWhite(p)) return;
+        state[p] = 1;
+        queue[tail++] = p;
+      };
+
+      for (let x = 0; x < w; x++) {
+        addSeed(x);
+        addSeed((h - 1) * w + x);
+      }
+      for (let y = 0; y < h; y++) {
+        addSeed(y * w);
+        addSeed(y * w + (w - 1));
+      }
+
+      while (head < tail) {
+        const p = queue[head++];
+        const x = p % w;
+        const y = (p / w) | 0;
+
+        if (x > 0) addSeed(p - 1);
+        if (x + 1 < w) addSeed(p + 1);
+        if (y > 0) addSeed(p - w);
+        if (y + 1 < h) addSeed(p + w);
+      }
+
+      for (let i = 0; i < total; i++) {
+        if (state[i] === 1) px[i * 4 + 3] = 0;
+      }
+
+      // Feather three pixels into the white matte without crossing deep into the white service cards.
+      const alphaByRing = [0, 44, 108, 184];
+      for (let ring = 1; ring <= 3; ring++) {
+        const nextState = ring + 1;
+        const sourceState = ring;
+        for (let y = 1; y < h - 1; y++) {
+          const row = y * w;
+          for (let x = 1; x < w - 1; x++) {
+            const p = row + x;
+            if (state[p] !== 0 || !nearWhite(p, 3600)) continue;
+            if (
+              state[p - 1] === sourceState ||
+              state[p + 1] === sourceState ||
+              state[p - w] === sourceState ||
+              state[p + w] === sourceState
+            ) {
+              state[p] = nextState;
+            }
+          }
+        }
+        for (let i = 0; i < total; i++) {
+          if (state[i] === nextState) {
+            px[i * 4 + 3] = Math.min(px[i * 4 + 3], alphaByRing[ring]);
+          }
+        }
+      }
+
+      ctx.putImageData(frame, 0, 0);
+
+      canvas.toBlob(blob => {
+        if (!blob) return fail();
+        const url = URL.createObjectURL(blob);
+
+        hero.addEventListener("load", () => {
+          window.clearTimeout(fallbackTimer);
+          hero.classList.remove("hero-transparent-fallback");
+          hero.classList.add("hero-transparent-ready");
+          URL.revokeObjectURL(url);
+        }, { once: true });
+
+        hero.src = url;
+        hero.removeAttribute("srcset");
+      }, "image/png");
+    } catch (error) {
+      fail();
+    }
+  };
+
+  if (hero.complete && hero.naturalWidth) processHero();
+  else hero.addEventListener("load", processHero, { once: true });
+})();

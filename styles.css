@@ -892,3 +892,37 @@ button{cursor:pointer}
   .hero-picture{width:110%!important;margin-inline:-5%!important}
   .hero-laptop-image{max-width:none!important}
 }
+
+/* Native transparent hero rendering — final */
+.hero-art,
+.hero-picture{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.hero-laptop-image{
+  opacity:0!important;
+  visibility:hidden;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  mix-blend-mode:normal!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  filter:none!important;
+  animation:none!important;
+  transition:opacity .22s ease!important;
+}
+.hero-laptop-image.hero-transparent-ready{
+  opacity:1!important;
+  visibility:visible!important;
+}
+.hero-laptop-image.hero-transparent-fallback{
+  opacity:1!important;
+  visibility:visible!important;
+  mix-blend-mode:multiply!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-laptop-image{transition:none!important}
+}
