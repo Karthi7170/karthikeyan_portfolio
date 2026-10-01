@@ -22,7 +22,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/hero-laptop-960.webp assets/hero-laptop-1600.webp assets/hero-laptop-3840.webp assets/hero-laptop.png assets/royal-tiles.webp assets/royal-tiles.jpg assets/sugumar-portfolio.webp assets/sugumar-portfolio.jpg assets/vip-hunter.webp assets/vip-hunter.jpg assets/deccan-school.webp assets/deccan-school.jpg
+          git add assets/hero-laptop-960.webp assets/hero-laptop-1600.webp assets/hero-laptop-3840.webp assets/hero-laptop.png assets/royal-tiles.webp assets/royal-tiles.jpg assets/sugumar-portfolio.webp assets/sugumar-portfolio.jpg assets/vip-hunter.webp assets/vip-hunter.jpg assets/deccan-school.webp assets/deccan-school.jpg assets/profile-formal.webp
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update hero image, 3D icons, projects slider and footer icons"
           git push origin HEAD:main
