@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(root, 'dist');
 const pages = ['index.html', 'about.html', 'services.html', 'projects.html', 'process.html', 'contact.html'];
-const files = [...pages, 'styles.css', 'script.js'];
+const files = [...pages, 'styles.css', 'script.js', 'robots.txt', 'sitemap.xml'];
 
 function validateReference(reference, source) {
   reference = reference.trim();
