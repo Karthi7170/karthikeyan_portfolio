@@ -1179,3 +1179,10 @@ button{cursor:pointer}
   .expanded-services .custom-service{grid-column:auto}
   .expanded-services .service-card{min-height:0}
 }
+
+
+/* AI × MAD logo visibility fix — 2026-10-07 */
+.site-header .brand-logo img{width:150px!important;height:auto!important;min-width:150px!important;opacity:1!important;visibility:visible!important;object-fit:contain!important;}
+.footer-brand.brand-logo img{width:170px!important;height:auto!important;opacity:1!important;visibility:visible!important;}
+@media(max-width:820px){.site-header .brand-logo img{width:118px!important;min-width:118px!important}.footer-brand.brand-logo img{width:145px!important}}
+@media(max-width:560px){.site-header .brand-logo img{width:105px!important;min-width:105px!important}.footer-brand.brand-logo img{width:130px!important}}
