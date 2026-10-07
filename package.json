@@ -1,0 +1,11 @@
+{
+  "name": "karthikeyan-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test:header": "node tests/header.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

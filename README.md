@@ -57,6 +57,27 @@ python -m http.server 8000
 
 Then open http://localhost:8000.
 
+## Production build
+
+With Node.js 18 or later, run:
+
+```sh
+npm run build
+python -m http.server 8000 --directory dist
+```
+
+The dependency-free build validates local HTML/CSS file references and creates `dist/` with the six public pages, stylesheet, JavaScript and assets. Deploy the contents of `dist/`; development scripts, tests and generated screenshots are excluded.
+
+To verify the transparent logo, image fallback and navigation at desktop and mobile widths, install the same browser runner used by CI:
+
+```sh
+npm install --no-save playwright@1.55.1
+npx playwright install chromium
+python -m http.server 4173 --bind 127.0.0.1 --directory dist
+```
+
+With that server running, use `npm run test:header` in another terminal. Set `PORTFOLIO_BASE_URL` for a different server URL, or `CHROMIUM_PATH` to use a system Chromium executable. Screenshots are written to `artifacts/`.
+
 ## Quality checks
 
 GitHub Actions validates:

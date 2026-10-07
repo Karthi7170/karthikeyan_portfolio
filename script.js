@@ -4,6 +4,18 @@
   const $ = (s,c=document) => c.querySelector(s);
   const $$ = (s,c=document) => Array.from(c.querySelectorAll(s));
 
+  $$(".brand-logo img[data-fallback-src]").forEach(img => {
+    function useLogoFallback(){
+      const fallback = img.dataset.fallbackSrc;
+      if(!fallback) return;
+      delete img.dataset.fallbackSrc;
+      img.src = fallback;
+    }
+    img.addEventListener("error", useLogoFallback, {once:true});
+    // A cached decode failure can occur before this deferred script runs.
+    if(img.complete) img.decode().catch(useLogoFallback);
+  });
+
   const menu = $(".menu-btn");
   const mobileNav = $(".mobile-nav");
   const navLinks = $$(".nav-link");
