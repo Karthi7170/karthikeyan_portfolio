@@ -57,14 +57,15 @@ try {
     mobile.on('pageerror', e => errors.push(width + 'px: ' + e.message));
     const response = await mobile.goto(new URL('index.html', base).href, { waitUntil: 'domcontentloaded' });
     assert.equal(response?.status(), 200);
-    const menu = mobile.locator('.menu-btn');
-    assert.equal(await menu.getAttribute('aria-expanded'), 'false');
-    await menu.click();
-    assert.equal(await menu.getAttribute('aria-expanded'), 'true');
-    assert.equal(await mobile.locator('.mobile-nav').isVisible(), true);
-    await mobile.locator('.mobile-nav a[href="services.html"]').click();
+    // The current design intentionally keeps the desktop-style navigation
+    // available as a horizontally scrollable row on narrow screens.
+    const nav = mobile.locator('.site-header .desktop-nav');
+    assert.equal(await nav.isVisible(), true, 'Mobile nav row is displayed');
+    assert.equal(await nav.locator('a').count(), 6, 'All navigation destinations remain available');
+    const services = nav.locator('a[href="services.html"]');
+    await services.scrollIntoViewIfNeeded();
+    await services.click();
     await mobile.waitForURL(new URL('services.html', base).href);
-    assert.equal(await mobile.locator('.menu-btn').getAttribute('aria-expanded'), 'false');
     await mobile.screenshot({ path: 'artifacts/mobile-services-' + width + '.png', animations: 'disabled' });
     await mobile.close();
   }
