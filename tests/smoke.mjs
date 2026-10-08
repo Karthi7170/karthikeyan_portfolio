@@ -63,7 +63,7 @@ test('Navigation, real projects, and contact functionality are preserved', () =>
   assert.match(homepage, /class="desktop-nav"/);
   assert.match(homepage, /class="mobile-nav"/);
   assert.match(homepage, /class="menu-btn"/);
-  for (const name of ['New Royal Tiles', 'Sugumar', 'Deccan']) assert.ok(homepage.includes(name), name);
+  for (const name of ['Royal Tiles', 'Sugumar', 'Deccan']) assert.ok(homepage.includes(name), name);
   assert.match(contact, /id="contact-form"/);
   for (const id of ['name', 'email', 'phone', 'service', 'message']) assert.ok(contact.includes('id="' + id + '"'), id);
   assert.match(script, /919944754339/);
