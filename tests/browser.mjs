@@ -2,129 +2,80 @@ import assert from 'node:assert/strict';
 import { mkdirSync } from 'node:fs';
 import { chromium } from 'playwright';
 
-const base='http://127.0.0.1:4173';
-const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-const errors=[];mkdirSync('artifacts',{recursive:true});
-try{
-  const desktop=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'no-preference'});
-  desktop.on('pageerror',e=>errors.push('desktop: '+e.message));
-  await desktop.goto(base,{waitUntil:'domcontentloaded'});
-  await desktop.waitForSelector('.hero-grid');
-  assert.equal(await desktop.title(),'AI x MAD — Web, App & AI Studio');
-  assert.match(await desktop.locator('.hero h1').innerText(),/AI x MAD/);
-  assert.match(await desktop.locator('.hero h1').innerText(),/blueprint/i);
-  assert.equal(await desktop.locator('#hero-motion-video').count(),1);
-  assert.equal(await desktop.locator('.project-card').count(),4);
-  assert.equal(await desktop.locator('.contact-form').count(),1);
-  assert.equal(await desktop.locator('.browser-stage').count(),0,'Oversized browser mockup should be removed');
-  assert.equal(await desktop.locator('.service-card').count(),3);
-  const serviceBoxes=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>({top:c.getBoundingClientRect().top,left:c.getBoundingClientRect().left,width:c.getBoundingClientRect().width,tools:c.querySelectorAll('.tool-cube').length})));
-  assert.ok(serviceBoxes.every(x=>x.tools>=4),'Each service should show at least four tool logos');
-  assert.ok(Math.max(...serviceBoxes.map(x=>x.top))-Math.min(...serviceBoxes.map(x=>x.top))<8,'Desktop services should share one row');
-  assert.equal(await desktop.locator('.site-thumbnail img').count(),4,'Every project should use a live-site thumbnail');
-  assert.equal(await desktop.locator('.wa-launcher svg').count(),1,'WhatsApp launcher should use the icon');
-  assert.equal(await desktop.locator('meta[name="theme-color"]').getAttribute('content'),'#f4f6f8');
-  const heroSurface=await desktop.locator('.executive-hero-grid').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,radius:getComputedStyle(el).borderRadius}));
-  assert.equal(heroSurface.bg,'rgb(255, 255, 255)','Hero should use a clean white business surface');
-  assert.equal(heroSurface.radius,'28px','Hero should use the executive rounded shell');
-  const serviceBackgrounds=await desktop.locator('.service-card').evaluateAll(cards=>cards.map(c=>getComputedStyle(c).backgroundColor));
-  assert.ok(serviceBackgrounds.every(v=>v==='rgb(255, 255, 255)'),'Services should use consistent professional white cards');
-  const activeThumbFilter=await desktop.locator('.project-card.is-active .site-thumbnail img').evaluate(el=>getComputedStyle(el).filter);
-  assert.equal(/grayscale\(1\)/.test(activeThumbFilter),false,'Active project thumbnail should retain color');
-  const primaryButtonBg=await desktop.locator('.button-primary').evaluate(el=>getComputedStyle(el).backgroundColor);
-  assert.equal(primaryButtonBg,'rgb(49, 94, 251)','Primary CTA should use the cobalt business accent');
-  const workBg=await desktop.locator('#work').evaluate(el=>getComputedStyle(el).backgroundColor);
-  assert.equal(workBg,'rgb(17, 19, 24)','Work section should use the dark editorial band');
-  const heroFont=await desktop.locator('.hero h1').evaluate(el=>getComputedStyle(el).fontFamily);
-  assert.match(heroFont,/Sora/,'Hero typography should use the new professional display font');
+const base = process.env.PORTFOLIO_BASE_URL || 'http://127.0.0.1:4173';
+const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+const errors = [];
+mkdirSync('artifacts', { recursive: true });
 
+try {
+  const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  desktop.on('pageerror', e => errors.push('desktop: ' + e.message));
 
-  await desktop.locator('[data-work-carousel]').scrollIntoViewIfNeeded();
-  await desktop.waitForTimeout(250);
-  const firstWork=await desktop.locator('.project-card.is-active h3').innerText();
-  assert.equal(firstWork,'New Royal Tiles');
-  const activeCardWidth=(await desktop.locator('.project-card.is-active').boundingBox()).width;
-  assert.ok(activeCardWidth>=480&&activeCardWidth<=700,'Active project card should stay medium-sized on desktop');
-  await desktop.waitForTimeout(3250);
-  const autoWork=await desktop.locator('.project-card.is-active h3').innerText();
-  assert.equal(autoWork,'Sugumar Portfolio','Work carousel should auto-swipe after 3 seconds');
-  await desktop.locator('.work-next').click();
-  assert.equal(await desktop.locator('.project-card.is-active h3').innerText(),'VIP-Hunter');
-  await desktop.locator('.work-prev').click();
-  assert.equal(await desktop.locator('.project-card.is-active h3').innerText(),'Sugumar Portfolio');
-  console.log('3-second medium selected-work swipe carousel: PASS');
+  const pages = ['index.html', 'about.html', 'services.html', 'projects.html', 'process.html', 'contact.html', 'website-development-chennai.html'];
+  for (const path of pages) {
+    const response = await desktop.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
+    assert.equal(response?.status(), 200, path + ' responds with HTTP 200');
+    assert.ok((await desktop.title()).length > 15, path + ' has a title');
+    assert.ok(await desktop.locator('h1').count() >= 1, path + ' has a heading');
+    assert.equal(await desktop.locator('meta[name="description"]').count(), 1, path + ' has a description');
+    assert.equal(await desktop.locator('link[rel="canonical"]').getAttribute('href'),
+      path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path,
+      path + ' canonical matches the page');
+  }
+  await desktop.goto(new URL('index.html', base).href, { waitUntil: 'domcontentloaded' });
+  assert.match(await desktop.title(), /Website Developers in Chennai/);
+  assert.match(await desktop.locator('.hero h1').innerText(), /Chennai/);
+  assert.match(await desktop.locator('.hero h1').innerText(), /Worldwide/);
+  assert.ok(await desktop.locator('.service-card').count() >= 10, 'Full service offerings retained');
+  assert.equal(await desktop.locator('.brand-logo img').first().count(), 1);
+  assert.equal(await desktop.locator('.desktop-nav a').count(), 6);
+  await desktop.screenshot({ path: 'artifacts/desktop-seo-home.png', animations: 'disabled' });
 
-  await desktop.locator('.wa-launcher').click();
-  assert.equal(await desktop.locator('#wa-panel').isVisible(),true);
-  await desktop.locator('.wa-close').click();
-  assert.equal(await desktop.locator('#wa-panel').isVisible(),false);
+  await desktop.goto(new URL('website-development-chennai.html', base).href, { waitUntil: 'domcontentloaded' });
+  assert.match(await desktop.locator('h1').innerText(), /Website Development in Chennai/);
+  assert.ok(await desktop.locator('a[href="contact.html"]').count() >= 1);
+  await desktop.screenshot({ path: 'artifacts/desktop-chennai-landing.png', animations: 'disabled' });
 
-  await desktop.locator('#contact-name').fill('Alex Example');
-  await desktop.locator('#contact-email').fill('alex@example.com');
-  await desktop.locator('#contact-project').selectOption('Website development');
-  await desktop.locator('#contact-message').fill('I need a premium responsive website for my company.');
-  await desktop.evaluate(()=>{
-    window.__wa='';
-    const old=HTMLAnchorElement.prototype.click;
-    HTMLAnchorElement.prototype.click=function(){
-      if(this.href.startsWith('https://wa.me/919944754339?text=')){window.__wa=this.href;return}
-      return old.call(this);
-    };
+  await desktop.goto(new URL('contact.html', base).href, { waitUntil: 'domcontentloaded' });
+  await desktop.locator('#name').fill('Test Client');
+  await desktop.locator('#email').fill('test@example.com');
+  await desktop.locator('#phone').fill('+91 9000000000');
+  await desktop.locator('#service').selectOption({ label: 'Business Websites' });
+  await desktop.locator('#message').fill('Please share details about a new website.');
+  await desktop.evaluate(() => {
+    window.__testedWhatsApp = '';
+    window.open = url => { window.__testedWhatsApp = url; return null; };
   });
-  await desktop.locator('.contact-form button[type="submit"]').click();
-  const wa=await desktop.evaluate(()=>window.__wa);
-  assert.ok(wa.startsWith('https://wa.me/919944754339?text='));
-  const msg=new URL(wa).searchParams.get('text');
-  assert.ok(msg.includes('Alex Example')&&msg.includes('Website development'));
+  await desktop.locator('#contact-form button[type="submit"]').click();
+  const whatsapp = await desktop.evaluate(() => window.__testedWhatsApp);
+  assert.ok(whatsapp.startsWith('https://wa.me/919944754339?text='), 'Contact form opens WhatsApp');
+  const message = new URL(whatsapp).searchParams.get('text');
+  assert.ok(message.includes('Test Client') && message.includes('Business Websites'));
 
-  await desktop.evaluate(async()=>{await document.fonts.ready;window.scrollTo(0,0)});
-  await desktop.waitForTimeout(500);
-  await desktop.screenshot({path:'artifacts/desktop-hero.png',animations:'disabled'});
-  for(const el of await desktop.locator('.reveal').all()){if(await el.isVisible())await el.scrollIntoViewIfNeeded()}
-  await desktop.evaluate(()=>window.scrollTo(0,0));
-  await desktop.waitForTimeout(120);
-  await desktop.screenshot({path:'artifacts/desktop-full.png',fullPage:true,animations:'disabled'});
-  assert.equal(await desktop.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
-
-  const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'no-preference'});
-  mobile.on('pageerror',e=>errors.push('mobile: '+e.message));
-  await mobile.goto(base,{waitUntil:'domcontentloaded'});
-  assert.equal(await mobile.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
-  assert.equal(await mobile.locator('.service-card').count(),3);
-  assert.equal(await mobile.locator('.tool-cube').count()>=12,true);
-  await mobile.locator('.menu-toggle').click();
-  assert.equal(await mobile.locator('.mobile-nav').isVisible(),true);
-  await mobile.locator('.mobile-nav a[href="#work"]').click();
-  assert.equal(await mobile.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
-  await mobile.evaluate(async()=>{await document.fonts.ready;window.scrollTo(0,0)});
-  await mobile.waitForTimeout(450);
-  await mobile.screenshot({path:'artifacts/mobile-hero.png',animations:'disabled'});
-  for(const el of await mobile.locator('.reveal').all()){if(await el.isVisible())await el.scrollIntoViewIfNeeded()}
-  await mobile.evaluate(()=>window.scrollTo(0,0));
-  await mobile.waitForTimeout(100);
-  await mobile.screenshot({path:'artifacts/mobile-full.png',fullPage:true,animations:'disabled'});
-  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
-
-  await mobile.setViewportSize({width:320,height:760});
-  await mobile.waitForTimeout(80);
-  assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
-
-  const uhd=await browser.newPage({viewport:{width:3840,height:2160},reducedMotion:'no-preference'});
-  uhd.on('pageerror',e=>errors.push('uhd: '+e.message));
-  await uhd.goto(base,{waitUntil:'domcontentloaded'});
-  await uhd.evaluate(async()=>{await document.fonts.ready});
-  assert.equal(await uhd.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
-  assert.ok((await uhd.locator('.motion-frame').boundingBox()).width>500,'Professional split hero should remain substantial at 4K');
-  await uhd.screenshot({path:'artifacts/4k-hero.png',animations:'disabled'});
-
-  const reduced=await browser.newPage({viewport:{width:1024,height:768},reducedMotion:'reduce'});
-  await reduced.goto(base,{waitUntil:'domcontentloaded'});
-  assert.ok(parseFloat(await reduced.locator('.reveal').first().evaluate(el=>getComputedStyle(el).transitionDuration)) <= 0.00002);
-  await reduced.close();
-
-  assert.deepEqual(errors,[]);
-  console.log('Desktop template, contact workflow and motion hero: PASS');
-  console.log('Mobile 390px and 320px responsive layout: PASS');
-  console.log('4K 3840x2160 layout: PASS');
-  console.log('Browser smoke suite: ALL PASSED');
-}finally{await browser.close()}
+  for (const width of [390, 320]) {
+    const mobile = await browser.newPage({ viewport: { width, height: 840 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+    mobile.on('pageerror', e => errors.push(width + 'px: ' + e.message));
+    const response = await mobile.goto(new URL('index.html', base).href, { waitUntil: 'domcontentloaded' });
+    assert.equal(response?.status(), 200);
+    const menu = mobile.locator('.menu-btn');
+    assert.equal(await menu.getAttribute('aria-expanded'), 'false');
+    await menu.click();
+    assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+    assert.equal(await mobile.locator('.mobile-nav').isVisible(), true);
+    await mobile.locator('.mobile-nav a[href="services.html"]').click();
+    await mobile.waitForURL(new URL('services.html', base).href);
+    assert.equal(await mobile.locator('.menu-btn').getAttribute('aria-expanded'), 'false');
+    await mobile.screenshot({ path: 'artifacts/mobile-services-' + width + '.png', animations: 'disabled' });
+    await mobile.close();
+  }
+  const map = await desktop.request.get(new URL('sitemap.xml', base).href);
+  assert.equal(map.status(), 200);
+  assert.ok((await map.text()).includes('website-development-chennai.html'));
+  const robots = await desktop.request.get(new URL('robots.txt', base).href);
+  assert.equal(robots.status(), 200);
+  assert.ok((await robots.text()).includes('sitemap.xml'));
+  assert.deepEqual(errors, [], 'No uncaught JavaScript errors during site checks');
+  console.log('PASS: 7 pages, on-page SEO, Chennai landing, WhatsApp form, mobile navigation and sitemap.');
+} finally {
+  await browser.close();
+}
