@@ -3,115 +3,76 @@ import { readFileSync } from 'node:fs';
 import { Script } from 'node:vm';
 import test from 'node:test';
 
-const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
-const css=readFileSync(new URL('../styles.css',import.meta.url),'utf8');
-const js=readFileSync(new URL('../script.js',import.meta.url),'utf8');
+const read = name => readFileSync(new URL('../' + name, import.meta.url), 'utf8');
+const homepage = read('index.html');
+const localPage = read('website-development-chennai.html');
+const contact = read('contact.html');
+const script = read('script.js');
+const sitemap = read('sitemap.xml');
+const robots = read('robots.txt');
+const pages = ['index.html', 'about.html', 'services.html', 'projects.html', 'process.html', 'contact.html', 'website-development-chennai.html'];
 
-test('AI x MAD brand-first structure and navigation',()=>{
-  for(const id of ['home','services','work','process','contact']) assert.match(html,new RegExp('id="'+id+'"'));
-  assert.match(html,/AI x MAD/);
-  assert.match(html,/Creative technology studio/);
-  assert.match(html,/href="#work"/);
-  assert.match(html,/href="#contact"/);
-});
-
-test('Reference-inspired hero uses Higgsfield motion and original UI overlay',()=>{
-  const hero=html.match(/<section id="home"[\s\S]*?<\/section>/)?.[0]??'';
-  assert.match(hero,/id="hero-motion-video"/);
-  assert.match(hero,/class="motion-ui"/);
-  assert.match(hero,/class="ui-orbit/);
-  assert.match(hero,/Motion generated for AI x MAD with Higgsfield/);
-  assert.doesNotMatch(hero,/portrait\.webp/i);
-  assert.doesNotMatch(hero,/HIGGSFIELD_MOTION_URL/);
-});
-
-test('Professional type and responsive layout are present',()=>{
-  assert.match(html,/Sora/);
-  assert.match(html,/Manrope/);
-  assert.match(html,/JetBrains\+Mono/);
-  assert.match(css,/"Sora"/);
-  for(const bp of ['1100px','900px','650px','390px']) assert.ok(css.includes('@media(max-width:'+bp+')'));
-  assert.match(css,/prefers-reduced-motion:reduce/);
-  assert.match(css,/\.motion-frame/);
-});
-
-test('All existing portfolio destinations are preserved',()=>{
-  for(const url of ['https://royaltiles.vercel.app/','https://sugumar-portfolio-beta.vercel.app/','https://vip-hunter.vercel.app/','https://www.deccanmatric.in/']) assert.ok(html.includes(url),url);
-  assert.equal((html.match(/data-work-slide/g)??[]).length,4);
-});
-
-test('Contact and WhatsApp workflow remains functional',()=>{
-  assert.match(html,/id="contact-form"/);
-  assert.match(html,/name="phone" value="919944754339"/);
-  assert.match(html,/https:\/\/wa\.me\/919944754339/);
-  assert.match(html,/karthikumaran7170@gmail\.com/);
-  assert.match(js,/encodeURIComponent\(lines\.join\('\\n'\)\)/);
-  assert.match(js,/https:\/\/wa\.me\/919944754339\?text=/);
-});
-
-test('JavaScript parses and interactive behavior is wired',()=>{
-  new Script(js,{filename:'script.js'});
-  assert.match(js,/IntersectionObserver/);
-  assert.match(js,/menu\.addEventListener/);
-  assert.match(js,/video\.play\(\)/);
-  assert.match(js,/\.motion-frame/);
-  assert.match(js,/navigator\.clipboard/);
-});
-
-test('External project links are protected',()=>{
-  const targets=html.match(/target="_blank"/g)??[];
-  const rels=html.match(/target="_blank" rel="noopener noreferrer"/g)??[];
-  assert.equal(targets.length,rels.length);
-  assert.doesNotMatch(html,/href="#"/);
-});
-
-
-test('Selected work is a user-controllable 3-second swipe carousel',()=>{
-  assert.match(html,/data-work-carousel/);
-  assert.equal((html.match(/data-work-slide/g)??[]).length,4);
-  assert.equal((html.match(/data-work-dot=/g)??[]).length,4);
-  assert.match(html,/class="[^"]*work-prev[^"]*"/);
-  assert.match(html,/class="[^"]*work-next[^"]*"/);
-  assert.match(css,/scroll-snap-type:x mandatory/);
-  assert.match(css,/\.project-card\.is-active/);
-  assert.match(css,/\.project-card\.is-active\{flex-basis:clamp\(480px,42vw,680px\)/);
-  assert.match(js,/setInterval\([\s\S]*?updateWorkUI\(workIndex\+1,[\s\S]*?3000\)/);
-  assert.match(js,/reduceMotion\.matches/);
-  assert.match(js,/pointerdown',\(\)=>\{stopAuto/);
-});
-
-
-test('Services are presented in one responsive row with tool-logo cubes',()=>{
-  assert.doesNotMatch(html,/class="browser-stage/);
-  assert.equal((html.match(/class="service-card reveal"/g)??[]).length,3);
-  const serviceSections=[...html.matchAll(/<article class="service-card reveal">([\s\S]*?)<\/article>/g)].map(m=>m[1]);
-  assert.equal(serviceSections.length,3);
-  for(const service of serviceSections){
-    assert.ok((service.match(/class="tool-cube"/g)??[]).length>=4,'Every service needs at least four tool cubes');
+test('All seven production pages have titles, descriptions, canonical URLs and main content', () => {
+  for (const path of pages) {
+    const html = read(path);
+    const url = path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path;
+    assert.match(html, /<title>[^<]+<\/title>/i, path + ' title');
+    assert.match(html, /<meta name="description" content="[^"]+"/i, path + ' description');
+    assert.ok(html.includes('<link rel="canonical" href="' + url + '">'), path + ' canonical');
+    assert.match(html, /<main\b/i, path + ' main landmark');
+    assert.match(html, /<h1\b/i, path + ' h1');
   }
-  assert.match(css,/\.services-inline\{[\s\S]*?grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-  assert.match(css,/perspective\(500px\)/);
 });
 
-test('Project cards use thumbnails sourced from their original live sites',()=>{
-  assert.equal((html.match(/class="project-preview site-thumbnail"/g)??[]).length,4);
-  for(const site of ['royaltiles.vercel.app','sugumar-portfolio-beta.vercel.app','vip-hunter.vercel.app','www.deccanmatric.in']){
-    assert.ok(html.includes('image.thum.io/get/width/1600/crop/900/noanimate/https://'+site+'/'),site);
+test('Homepage targets Chennai while clearly offering services worldwide', () => {
+  assert.match(homepage, /<title>Website Developers in Chennai \| AI x MAD Studio<\/title>/);
+  assert.match(homepage, /<h1>Website &amp; App Development in Chennai/);
+  assert.match(homepage, /Serving Clients Worldwide/);
+  assert.match(homepage, /href="website-development-chennai\.html"/);
+  assert.match(homepage, /Business Websites/);
+  assert.match(homepage, /E-commerce Websites/);
+  assert.match(homepage, /Mobile Applications/);
+  assert.match(homepage, /SEO &amp; Performance Optimization/);
+  const jsonld = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(jsonld, 'homepage structured data exists');
+  const organization = JSON.parse(jsonld)['@graph'].find(x => x['@type'] === 'Organization');
+  assert.equal(organization.name, 'AI x MAD Studio');
+  assert.ok(organization.areaServed.some(x => x.name === 'Chennai'));
+});
+
+test('Chennai landing page contains original service content and enquiry actions', () => {
+  assert.match(localPage, /<h1>Website Development in Chennai<\/h1>/);
+  assert.match(localPage, /clients worldwide/i);
+  assert.match(localPage, /<h3>Business Websites<\/h3>/);
+  assert.match(localPage, /<h3>Online Stores<\/h3>/);
+  assert.match(localPage, /<h3>Custom Web Applications<\/h3>/);
+  assert.match(localPage, /href="contact\.html"/);
+  assert.match(localPage, /<script type="application\/ld\+json">/);
+});
+
+test('Sitemap, robots rules and metadata cover the Chennai service page', () => {
+  assert.match(robots, /User-agent:\s*\*/);
+  assert.match(robots, /Sitemap:\s*https:\/\/aimadstudio\.in\/sitemap\.xml/);
+  for (const path of pages) {
+    const url = path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path;
+    assert.ok(sitemap.includes('<loc>' + url + '</loc>'), 'Missing ' + url);
   }
-  assert.match(css,/\.site-thumbnail img/);
 });
 
-test('Executive Signal professional agency theme and WhatsApp icon are present',()=>{
-  assert.match(html,/Sora/);
-  assert.match(html,/Manrope/);
-  assert.match(html,/JetBrains\+Mono/);
-  assert.match(html,/data-theme="light"/);
-  assert.match(html,/theme-color" content="#f4f6f8"/);
-  assert.match(css,/AI x MAD — Executive Signal/);
-  for(const value of ['#f4f6f8','#ffffff','#111318','#667085','#315efb','#39c8ff','#0d1525']) assert.ok(css.includes(value),value);
-  assert.match(css,/\.executive-hero-grid\{[\s\S]*?border-radius:28px/);
-  assert.match(css,/\.service-card\{[\s\S]*?background:#fff!important/);
-  assert.match(css,/\.work\{[\s\S]*?background:#111318/);
-  assert.match(css,/\.contact\{[\s\S]*?background:#0d1525/);
-  assert.match(html,/aria-label="Open WhatsApp chat preview">[\s\S]*?<svg/);
+test('Navigation, real projects, and contact functionality are preserved', () => {
+  assert.match(homepage, /class="desktop-nav"/);
+  assert.match(homepage, /class="mobile-nav"/);
+  assert.match(homepage, /class="menu-btn"/);
+  for (const name of ['New Royal Tiles', 'Sugumar', 'Deccan']) assert.ok(homepage.includes(name), name);
+  assert.match(contact, /id="contact-form"/);
+  for (const id of ['name', 'email', 'phone', 'service', 'message']) assert.ok(contact.includes('id="' + id + '"'), id);
+  assert.match(script, /919944754339/);
+  assert.match(script, /encodeURIComponent\(text\)/);
+});
+
+test('Production JavaScript parses and supports mobile navigation', () => {
+  new Script(script, { filename: 'script.js' });
+  assert.match(script, /menu\?\.addEventListener\("click"/);
+  assert.match(script, /IntersectionObserver/);
+  assert.match(script, /setInterval\(nextSlide,3000\)/);
 });
