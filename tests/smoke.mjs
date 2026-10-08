@@ -27,7 +27,7 @@ test('All seven production pages have titles, descriptions, canonical URLs and m
 });
 
 test('Homepage targets Chennai while clearly offering services worldwide', () => {
-  assert.match(homepage, /<title>Website Developers in Chennai \| AI x MAD Studio<\/title>/);
+  assert.match(homepage, /<title>AI x MAD Studio \| Website Developers in Chennai<\/title>/);
   assert.match(homepage, /<h1>Website &amp; App Development in Chennai/);
   assert.match(homepage, /Serving Clients Worldwide/);
   assert.match(homepage, /href="website-development-chennai\.html"/);
@@ -40,6 +40,11 @@ test('Homepage targets Chennai while clearly offering services worldwide', () =>
   const organization = JSON.parse(jsonld)['@graph'].find(x => x['@type'] === 'Organization');
   assert.equal(organization.name, 'AI x MAD Studio');
   assert.ok(organization.areaServed.some(x => x.name === 'Chennai'));
+  const webSite = JSON.parse(jsonld)['@graph'].find(x => x['@type'] === 'WebSite');
+  assert.equal(webSite.name, 'AI x MAD Studio');
+  assert.ok(webSite.alternateName.includes('aimadstudio.in'));
+  assert.ok(webSite.alternateName.includes('aimadstudio'));
+  assert.ok(homepage.includes('Official website: <a href="https://aimadstudio.in/"'), 'Visible official domain');
 });
 
 test('Chennai landing page contains original service content and enquiry actions', () => {
