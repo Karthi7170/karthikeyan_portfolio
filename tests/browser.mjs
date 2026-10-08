@@ -22,6 +22,16 @@ try {
       path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path,
       path + ' canonical matches the page');
   }
+  await desktop.goto(new URL('about.html', base).href, { waitUntil: 'domcontentloaded' });
+  const officialAbout = desktop.locator('.official-social-card a.official-social-action');
+  assert.equal(await officialAbout.count(), 1, 'About has official Instagram CTA');
+  assert.equal(await officialAbout.getAttribute('href'), 'https://www.instagram.com/aimadstudio.in/');
+  assert.equal(await officialAbout.getAttribute('target'), '_blank');
+  await desktop.goto(new URL('contact.html', base).href, { waitUntil: 'domcontentloaded' });
+  const officialContact = desktop.locator('.contact-details a[aria-label^="Official AI x MAD Studio Instagram"]');
+  assert.equal(await officialContact.count(), 1, 'Contact has explicitly labeled official Instagram link');
+  assert.equal(await officialContact.getAttribute('href'), 'https://www.instagram.com/aimadstudio.in/');
+
   await desktop.goto(new URL('index.html', base).href, { waitUntil: 'domcontentloaded' });
   assert.match(await desktop.title(), /Website Developers in Chennai/);
   assert.match(await desktop.locator('.hero h1').innerText(), /Chennai/);
