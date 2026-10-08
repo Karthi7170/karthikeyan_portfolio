@@ -5,16 +5,15 @@ import test from 'node:test';
 
 const read = name => readFileSync(new URL('../' + name, import.meta.url), 'utf8');
 const homepage = read('index.html');
-const localPage = read('website-development-chennai.html');
 const contact = read('contact.html');
 const about = read('about.html');
 const css = read('styles.css');
 const script = read('script.js');
 const sitemap = read('sitemap.xml');
 const robots = read('robots.txt');
-const pages = ['index.html', 'about.html', 'services.html', 'projects.html', 'process.html', 'contact.html', 'website-development-chennai.html'];
+const pages = ['index.html', 'about.html', 'services.html', 'projects.html', 'process.html', 'contact.html'];
 
-test('All seven production pages have titles, descriptions, canonical URLs and main content', () => {
+test('All six production pages have titles, descriptions, canonical URLs and main content', () => {
   for (const path of pages) {
     const html = read(path);
     const url = path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path;
@@ -26,44 +25,33 @@ test('All seven production pages have titles, descriptions, canonical URLs and m
   }
 });
 
-test('Homepage targets Chennai while clearly offering services worldwide', () => {
-  assert.match(homepage, /<title>AI x MAD Studio \| Website Developers in Chennai<\/title>/);
-  assert.match(homepage, /<h1>Website &amp; App Development in Chennai/);
-  assert.match(homepage, /Serving Clients Worldwide/);
-  assert.match(homepage, /href="website-development-chennai\.html"/);
-  assert.match(homepage, /Business Websites/);
-  assert.match(homepage, /E-commerce Websites/);
-  assert.match(homepage, /Mobile Applications/);
-  assert.match(homepage, /SEO &amp; Performance Optimization/);
+test('Original AI x MAD Studio homepage and brand identity are restored', () => {
+  assert.match(homepage, /<title>AI x MAD Studio \| Web, App, AI & SEO Solutions<\/title>/);
+  assert.match(homepage, /Transforming Ideas<br>Into <span>Digital Reality<\/span>/);
+  assert.doesNotMatch(homepage, /Chennai/i);
+  for (const offering of ['Business Websites', 'E-commerce Websites', 'Mobile Applications', 'SEO &amp; Performance Optimization']) {
+    assert.ok(homepage.includes(offering), offering);
+  }
   const jsonld = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
   assert.ok(jsonld, 'homepage structured data exists');
-  const organization = JSON.parse(jsonld)['@graph'].find(x => x['@type'] === 'Organization');
+  const nodes = JSON.parse(jsonld)['@graph'];
+  const organization = nodes.find(x => x['@type'] === 'Organization');
+  const website = nodes.find(x => x['@type'] === 'WebSite');
   assert.equal(organization.name, 'AI x MAD Studio');
-  assert.ok(organization.areaServed.some(x => x.name === 'Chennai'));
-  const webSite = JSON.parse(jsonld)['@graph'].find(x => x['@type'] === 'WebSite');
-  assert.equal(webSite.name, 'AI x MAD Studio');
-  assert.ok(webSite.alternateName.includes('aimadstudio.in'));
-  assert.ok(webSite.alternateName.includes('aimadstudio'));
-  assert.ok(homepage.includes('Official website: <a href="https://aimadstudio.in/"'), 'Visible official domain');
+  assert.equal(website.name, 'AI x MAD Studio');
+  assert.ok(website.alternateName.includes('aimadstudio'));
+  assert.ok(website.alternateName.includes('aimadstudio.in'));
+  assert.ok(organization.sameAs.includes('https://www.instagram.com/aimadstudio.in/'));
 });
 
-test('Chennai landing page contains original service content and enquiry actions', () => {
-  assert.match(localPage, /<h1>Website Development in Chennai<\/h1>/);
-  assert.match(localPage, /clients worldwide/i);
-  assert.match(localPage, /<h3>Business Websites<\/h3>/);
-  assert.match(localPage, /<h3>Online Stores<\/h3>/);
-  assert.match(localPage, /<h3>Custom Web Applications<\/h3>/);
-  assert.match(localPage, /href="contact\.html"/);
-  assert.match(localPage, /<script type="application\/ld\+json">/);
-});
-
-test('Sitemap, robots rules and metadata cover the Chennai service page', () => {
+test('Sitemap and robots list the six original site pages', () => {
   assert.match(robots, /User-agent:\s*\*/);
   assert.match(robots, /Sitemap:\s*https:\/\/aimadstudio\.in\/sitemap\.xml/);
   for (const path of pages) {
     const url = path === 'index.html' ? 'https://aimadstudio.in/' : 'https://aimadstudio.in/' + path;
     assert.ok(sitemap.includes('<loc>' + url + '</loc>'), 'Missing ' + url);
   }
+  assert.doesNotMatch(sitemap, /website-development-chennai/);
 });
 
 test('Navigation, real projects, and contact functionality are preserved', () => {
