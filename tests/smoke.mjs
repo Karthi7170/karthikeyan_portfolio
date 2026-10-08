@@ -7,6 +7,8 @@ const read = name => readFileSync(new URL('../' + name, import.meta.url), 'utf8'
 const homepage = read('index.html');
 const localPage = read('website-development-chennai.html');
 const contact = read('contact.html');
+const about = read('about.html');
+const css = read('styles.css');
 const script = read('script.js');
 const sitemap = read('sitemap.xml');
 const robots = read('robots.txt');
@@ -75,4 +77,19 @@ test('Production JavaScript parses and supports mobile navigation', () => {
   assert.match(script, /menu\?\.addEventListener\("click"/);
   assert.match(script, /IntersectionObserver/);
   assert.match(script, /setInterval\(nextSlide,3000\)/);
+});
+
+test('Official Instagram account is clearly attributed on About and Contact pages', () => {
+  const instagram = 'https://www.instagram.com/aimadstudio.in/';
+  for (const [name, html] of [['About', about], ['Contact', contact]]) {
+    assert.ok(html.includes(instagram), name + ' official Instagram link');
+    assert.ok(html.includes('@aimadstudio.in'), name + ' official Instagram handle');
+    assert.match(html, /Official Instagram|OFFICIAL SOCIAL PROFILE/, name + ' official identity label');
+  }
+  assert.match(about, /class="official-social-card reveal"/, 'prominent About profile section');
+  assert.match(contact, /aria-label="Official AI x MAD Studio Instagram profile @aimadstudio.in"/);
+  assert.match(css, /\.official-social-card\{/);
+  const json = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  const org = JSON.parse(json)['@graph'].find(x => x['@type'] === 'Organization');
+  assert.ok(org.sameAs.includes(instagram), 'structured data agrees with visible Instagram links');
 });
