@@ -4,7 +4,12 @@
   "redirects": [
     {
       "source": "/website-development-chennai.html",
-      "destination": "/services.html",
+      "destination": "https://www.aimadstudio.in/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://www.aimadstudio.in/",
       "permanent": true
     }
   ]
