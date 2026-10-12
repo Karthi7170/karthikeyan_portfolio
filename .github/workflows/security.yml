@@ -53,8 +53,21 @@ jobs:
           PY
       - name: Validate production build
         run: npm run build
-      - name: Run header tests
-        run: npm run test:header
+      - name: Install browser test tooling
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Run header tests against local production build
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/aimad-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:header
       - name: Check dependency vulnerabilities when lockfile exists
         shell: bash
         run: |
