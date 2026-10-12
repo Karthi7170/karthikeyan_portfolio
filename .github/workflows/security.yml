@@ -1,0 +1,65 @@
+name: Security and build checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check tracked files for common credential patterns
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, subprocess, sys
+          files = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          patterns = [
+              re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"),
+              re.compile(r"gh[pousr]_[A-Za-z0-9_]{30,}"),
+              re.compile(r"sk_(?:live|test)_[A-Za-z0-9]{20,}"),
+              re.compile(r"AKIA[0-9A-Z]{16}"),
+          ]
+          hits = []
+          for file in filter(None, files):
+              path = pathlib.Path(file)
+              if not path.is_file() or path.stat().st_size > 1_000_000:
+                  continue
+              try:
+                  data = path.read_text(encoding="utf-8")
+              except (UnicodeError, OSError):
+                  continue
+              if any(pattern.search(data) for pattern in patterns):
+                  hits.append(file)
+          if hits:
+              print("Potential credentials detected in tracked files:", ", ".join(hits))
+              sys.exit(1)
+          print("No matching credential patterns detected.")
+          PY
+      - name: Validate production build
+        run: npm run build
+      - name: Run header tests
+        run: npm run test:header
+      - name: Check dependency vulnerabilities when lockfile exists
+        shell: bash
+        run: |
+          if [ -f package-lock.json ]; then
+            npm audit --audit-level=high
+          else
+            echo "No package-lock.json; npm audit skipped."
+          fi
