@@ -369,7 +369,7 @@ button{cursor:pointer}
 .whatsapp-float svg{width:28px;fill:#fff}
 
 /* reveal */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal{opacity:1;transform:none;transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:none}
 
 /* Responsive */
