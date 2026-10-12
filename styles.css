@@ -901,8 +901,8 @@ button{cursor:pointer}
   box-shadow:none!important;
 }
 .hero-laptop-image{
-  opacity:0!important;
-  visibility:hidden;
+  opacity:1!important;
+  visibility:visible!important;
   background:transparent!important;
   border:0!important;
   border-radius:0!important;
