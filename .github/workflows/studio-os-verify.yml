@@ -1,0 +1,28 @@
+name: Studio OS portable app build
+on:
+  push:
+    branches:
+      - feature/studio-os-vercel-migration
+    paths:
+      - 'apps/studio-os/**'
+      - '.github/workflows/studio-os-verify.yml'
+  pull_request:
+    paths:
+      - 'apps/studio-os/**'
+      - '.github/workflows/studio-os-verify.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Install dependencies
+        working-directory: apps/studio-os
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Typecheck and build
+        working-directory: apps/studio-os
+        run: npm run build
