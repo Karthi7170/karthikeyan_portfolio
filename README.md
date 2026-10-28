@@ -42,7 +42,7 @@ It also keeps:
 - three-step project process
 - WhatsApp project inquiry form
 - WhatsApp number: +91 99447 54339
-- email: karthikumaran7170@gmail.com
+- email: aimadstudio06@gmail.com
 - GitHub: https://github.com/Karthi7170
 
 ## Contact behavior
